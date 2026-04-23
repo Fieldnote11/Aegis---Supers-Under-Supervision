@@ -1192,7 +1192,8 @@
     const notices = applyEffects(clone(action.effects || []));
     notices.push(...advanceClock(action.timeMinutes || 15, action.label, {
       fatigue: Object.prototype.hasOwnProperty.call(action, "fatigue") ? action.fatigue : 0.5,
-      rest: Boolean(action.rest)
+      rest: Boolean(action.rest),
+      recovery: Boolean(action.recovery)
     }));
     if (action.completeAssignment && state.hub && state.hub.assignmentId) {
       state.hub.completedAssignments[state.hub.assignmentId] = true;
@@ -2084,7 +2085,10 @@
       state.clock.hardWarning = false;
       state.status.condition = "Recovered";
       state.status.stress = "Low";
-      if (beforeFatigue >= FATIGUE_WARNING) notices.push("Rest clears the fatigue penalty. Your control checks are back to normal.");
+      if (options.recovery) {
+        if (beforeFatigue >= FATIGUE_WARNING) notices.push("Treatment clears the fatigue penalty. Your control checks are back to normal.");
+        else notices.push("Treatment gets you medically cleared before the bruise becomes policy.");
+      } else if (beforeFatigue >= FATIGUE_WARNING) notices.push("Rest clears the fatigue penalty. Your control checks are back to normal.");
       else notices.push("You bank real rest before the file can turn it into another liability.");
       return notices;
     }

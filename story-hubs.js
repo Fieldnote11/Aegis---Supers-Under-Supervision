@@ -1472,8 +1472,52 @@
           "The promenade keeps being beautiful in ways that do not ask permission."
         ],
         lockedText: "The city opens later.",
-        exits: ["transit_platform", "east_dock", "rusty_anchor"],
+        exits: ["transit_platform", "east_dock", "rusty_anchor", "blackwater_infirmary"],
         actions: []
+      },
+
+      blackwater_infirmary: {
+        name: "Blackwater Infirmary",
+        region: "Blackwater",
+        background: "city",
+        conditions: [{ type: "chapterAtLeast", value: 5 }],
+        description: [
+          "Blackwater Infirmary sits between the promenade clinics and the emergency routes heroes try not to need. The sign is small. The reinforced doors are not.",
+          "Inside, nurses, med-techs, and a licensed tissue specialist move with the calm of people who have seen powers turn bones into punctuation."
+        ],
+        returnDescription: [
+          "The infirmary keeps its waiting room ordinary on purpose: coffee, forms, magazines, reinforced glass."
+        ],
+        lockedText: "Off-campus medical access opens later.",
+        exits: ["blackwater_promenade", "transit_platform", "east_dock"],
+        actions: [
+          {
+            id: "blackwater-infirmary-treatment",
+            label: "Use the Blackwater infirmary",
+            detail: "Get off-campus treatment before bruises become personality traits.",
+            repeatLimit: 4,
+            timeMinutes: 60,
+            fatigue: -7,
+            rest: true,
+            recovery: true,
+            text: [
+              "The Blackwater staff treat power injuries like weather damage: serious, familiar, and nobody's favorite paperwork.",
+              "By the time you leave, the worst of the ache has been translated into instructions, salve, and an appointment card you are absolutely expected to ignore at your peril."
+            ],
+            variants: [
+              {
+                conditions: [{ type: "matureContent" }],
+                text: [
+                  "A healer sets two fingers against the bad spot and tells you not to look heroic for thirty seconds. Heat crawls under the bruise; torn fibers knit with an unpleasant internal tug, and the sharp edge of pain drops from threat to memory."
+                ]
+              }
+            ],
+            effects: [
+              { type: "status", key: "energy", value: "Medically cleared" },
+              { type: "status", key: "lastFight", value: "Treated at Blackwater Infirmary" }
+            ]
+          }
+        ]
       },
 
       east_dock: {
@@ -1805,8 +1849,11 @@
   addExits("observation_hall", ["briefing_room", "airbase_hangar"]);
   addExits("training_wing", ["briefing_room"]);
   addExits("medical", ["briefing_room", "airbase_hangar"]);
-  addExits("transit_platform", ["airbase_hangar"]);
+  addExits("transit_platform", ["airbase_hangar", "blackwater_infirmary"]);
   addExits("blackwater_promenade", [{ location: "event_horizon", hidden: true, conditions: [{ type: "chapterAtLeast", value: 6 }] }]);
+  addExits("east_dock", ["blackwater_infirmary"]);
+  addExits("rusty_anchor", ["blackwater_infirmary"]);
+  addExits("blackwater_infirmary", ["blackwater_promenade", "transit_platform", "east_dock"]);
   addExits("event_horizon", ["blackwater_promenade", "transit_platform"]);
   addExits("residence_wing", ["graduation_hall"]);
 
@@ -2300,6 +2347,157 @@
       ]
     };
   }
+
+  function addVariants(sceneId, variants) {
+    const scene = scenes[sceneId];
+    if (!scene) return;
+    scene.variants = scene.variants || [];
+    scene.variants.push(...variants);
+  }
+
+  function addChoiceEffects(sceneId, choiceText, effects) {
+    const scene = scenes[sceneId];
+    if (!scene || !scene.choices) return;
+    const choice = scene.choices.find((item) => item.text === choiceText || item.text.startsWith(choiceText));
+    if (!choice) return;
+    choice.effects = choice.effects || [];
+    choice.effects.push(...effects);
+  }
+
+  addVariants("c04_camille_test", [
+    {
+      conditions: [{ type: "matureContent" }],
+      text: ["Aegis training does not pretend pain is symbolic. A resident two bays over gets folded wrong by a force wall, swears through a broken wrist, and is walking again twenty minutes later after a medic in blue gloves talks the bone back into line."]
+    }
+  ]);
+
+  addVariants("c05_after_flight", [
+    {
+      conditions: [
+        { type: "matureContent" },
+        { type: "flag", key: "scorchedDock" }
+      ],
+      text: ["Your ribs complain when you breathe too deep, and the scorched strip across your jacket has the ugly sweet smell of fabric that got too close to real heat. Aegis medics call it superficial. Your nerves file a dissenting report."]
+    },
+    {
+      conditions: [
+        { type: "matureContent" },
+        { type: "flag", key: "baySplashdown" }
+      ],
+      text: ["The water takes the worst of the impact and still hits like concrete. Your shoulder blooms hot, then numb, then hot again. The dock medic checks your pupils and tells you the bruise will look dramatic enough to impress nobody useful."]
+    }
+  ]);
+
+  addVariants("c07_grapple", [
+    {
+      conditions: [{ type: "matureContent" }],
+      text: ["Close contact strips the fight of comic-book distance. Rhea's bones shift under your grip as her physiology adapts around pressure; your own joints grind hard enough that the pain arrives white and clean. Somewhere behind you, a medic says standby like that word can hold a spine together."]
+    },
+    {
+      conditions: [
+        { type: "matureContent" },
+        { type: "flag", key: "lethalCharge" }
+      ],
+      text: ["The charge inside you is not dramatic. It is surgical and horrible: heat, nerve, muscle, the exact amount of force required to make a body stop being a problem."]
+    },
+    {
+      conditions: [
+        { type: "matureContent" },
+        { type: "flag", key: "triedContainment" }
+      ],
+      text: ["Containment is not gentle just because it is merciful. Rhea fights the hold until tendons stand out in her throat and your forearm shakes from keeping the pressure below the line where restraint becomes damage."]
+    }
+  ]);
+
+  addVariants("c07_afteraction_erased", [
+    {
+      conditions: [{ type: "matureContent" }],
+      text: ["The dome smells like ozone and pulverized flooring. There is no body to work on, which somehow makes the medics move faster: checking your hands, your pulse, your eyes, the hairline burns where released power backwashed across your skin."]
+    }
+  ]);
+
+  addVariants("c07_afteraction_contained", [
+    {
+      conditions: [{ type: "matureContent" }],
+      text: ["The containment team carries Rhea out alive and fighting sedation, one arm bent at an angle that keeps trying to correct itself. Your own hand has locked around the shape of the hold; the medic has to pry your fingers open one at a time."]
+    }
+  ]);
+
+  addVariants("c07_afteraction_escaped", [
+    {
+      conditions: [{ type: "matureContent" }],
+      text: ["The breach leaves practical damage: torn gloves, blood in someone's teeth, a medic pressing sealant into a cut before adrenaline can lie about how deep it is. Rhea escaped, but the dome still looks like she signed it."]
+    }
+  ]);
+
+  addVariants("c08_mach5", [
+    {
+      conditions: [
+        { type: "matureContent" },
+        { type: "flag", key: "machFive" }
+      ],
+      text: ["Mach Five turns safety math into violence with better paperwork. The catch drives a shock through your skeleton so hard your teeth click shut. Piper skids out laughing, then limps three steps before the speed-healing catches up and the medics descend anyway."]
+    },
+    {
+      conditions: [
+        { type: "matureContent" },
+        { type: "flag", key: "machThree" }
+      ],
+      text: ["Mach Three is the restrained version, which only means nobody loses consciousness. The impact still bruises deep enough that the airbase medic checks your ribs twice and tells Piper to stop grinning until her ankle finishes reknitting."]
+    }
+  ]);
+
+  addChoiceEffects("c05_flight", "Use a warm air column to slow the fall and touch down clean.", [
+    { type: "status", key: "condition", value: "Stable after landing" },
+    { type: "status", key: "lastFight", value: "Dock flight: clean landing" }
+  ]);
+
+  addChoiceEffects("c05_flight", "Burst again, overcorrect, and skid back in with style points and scorch marks.", [
+    { type: "status", key: "condition", value: "Scorched and bruised" },
+    { type: "status", key: "lastFight", value: "Dock flight: scorched skid" }
+  ]);
+
+  addChoiceEffects("c05_flight", "Let the water catch you, absorb the impact, and climb out drenched.", [
+    { type: "status", key: "condition", value: "Drenched, shoulder bruised" },
+    { type: "status", key: "lastFight", value: "Dock flight: hard water landing" }
+  ]);
+
+  addChoiceEffects("c07_grapple", "Immobilize her completely, then finish it with lightning.", [
+    { type: "status", key: "condition", value: "Power-burned and drained" }
+  ]);
+
+  addChoiceEffects("c07_grapple", "Maintain containment and call Camille to lock the field with you.", [
+    { type: "status", key: "condition", value: "Hand trauma, severe strain" }
+  ]);
+
+  addChoiceEffects("c07_grapple", "Trust Piper to break the contact window while Theo calls the safest branch.", [
+    { type: "status", key: "condition", value: "Bruised, supported" }
+  ]);
+
+  addChoiceEffects("c07_grapple", "Try to hold everyone safe at once, even if it means losing her.", [
+    { type: "status", key: "condition", value: "Banged up, furious" }
+  ]);
+
+  addChoiceEffects("c08_airbase", "Start at Mach 2. Prove the baseline before getting stupid.", [
+    { type: "status", key: "condition", value: "Stable, impact sore" },
+    { type: "status", key: "lastFight", value: "Mach 2 catch" }
+  ]);
+
+  addChoiceEffects("c08_airbase", "\"Mach 3, Lane. Make it count.\"", [
+    { type: "status", key: "condition", value: "Bruised by Mach 3 catch" },
+    { type: "status", key: "lastFight", value: "Mach 3 catch" }
+  ]);
+
+  addChoiceEffects("c08_airbase", "Set Mach 3 as the hard bracket and make it a clean data run.", [
+    { type: "status", key: "condition", value: "Bruised by Mach 3 catch" },
+    { type: "status", key: "lastFight", value: "Mach 3 catch" }
+  ]);
+
+  addChoiceEffects("c08_airbase", "Whisper \"Mach 5\" and warn the observers not to get blown away.", [
+    { type: "status", key: "condition", value: "Rattled from Mach 5 catch" },
+    { type: "status", key: "stress", value: "Adrenaline crash pending" },
+    { type: "status", key: "lastFight", value: "Mach 5 catch" }
+  ]);
 
   [
     ["c03_hub_return_common", 3, "Common Lounge After Baseline", "Common Lounge", "aegis", "c03_review_gallery", "common_lounge", "The lounge is trying to become normal again. It is failing in useful ways: softer voices, more side glances, nobody quite sure whether to congratulate you or step back."],
@@ -2968,7 +3166,34 @@
   addActions("medical", [
     onceChapterAction("c03-ben-medical-followup", 3, "Check on Ben outside Medical", "He looks fine in the way people use to avoid being checked on.", "c03_chat_ben_medical_followup"),
     onceChapterAction("c07-piper-medical-quiet", 7, "Sit with Piper in Medical", "She is not hurt, which has not stopped Medical from becoming a cage with soft lighting.", "c07_chat_piper_medical"),
-    onceChapterAction("c08-theo-medical-probability", 8, "Talk with Theo near the monitors", "He is reading numbers like they might absolve somebody if he looks away.", "c08_chat_theo_medical")
+    onceChapterAction("c08-theo-medical-probability", 8, "Talk with Theo near the monitors", "He is reading numbers like they might absolve somebody if he looks away.", "c08_chat_theo_medical"),
+    {
+      id: "aegis-medical-treatment",
+      label: "Get patched up at Aegis Medical",
+      detail: "Let Medical clear damage instead of pretending the status panel is therapy.",
+      repeatLimit: 6,
+      conditions: [{ type: "chapterAtLeast", value: 2 }],
+      timeMinutes: 45,
+      fatigue: -7,
+      rest: true,
+      recovery: true,
+      text: [
+        "Medical turns pain into a process: scan, question, treatment, warning, paperwork.",
+        "The medic clears you for movement with the grave tone of someone who knows you will interpret that too generously."
+      ],
+      variants: [
+        {
+          conditions: [{ type: "matureContent" }],
+          text: [
+            "The scan catches the honest version of the damage: swollen joints, angry muscle fiber, one old stress line lighting up in yellow. A healer talks while the treatment burns cold under your skin, knitting the bad places back toward useful."
+          ]
+        }
+      ],
+      effects: [
+        { type: "status", key: "energy", value: "Medically cleared" },
+        { type: "status", key: "lastFight", value: "Treated at Aegis Medical" }
+      ]
+    }
   ]);
 
   addActions("training_wing", [

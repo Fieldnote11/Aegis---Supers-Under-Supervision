@@ -133,6 +133,8 @@ Common conditions:
 - `{ type: "powerLevelAtLeast", value: 4 }`
 - `{ type: "matureContent" }`
 
+`matureContent` gates optional mature presentation, not core plot access. Use it for closed-door romance implication, stronger combat/injury detail, and medical treatment detail; the non-mature route should still explain what happened without graphic body damage.
+
 Use `any` when more than one route should unlock the same choice:
 
 ```js
@@ -157,6 +159,8 @@ Common effects:
 - `{ type: "powerXp", amount: 2 }`
 - `{ type: "status", key: "stress", value: "High" }`
 - `{ type: "memory", key: "Piper", text: "You defended her in front of Camille." }`
+
+Use `status.condition` for the player's current physical state, such as `Stable`, `Banged up`, `Bruised by Mach 3 catch`, or `Recovered`. Use `status.lastFight` for the last significant fight/training impact. Healing actions should usually spend time, reduce fatigue, include `rest: true` and `recovery: true`, and set the player back to a clear recovered state.
 
 Choices can also set `timeMinutes`. If omitted, the engine assigns 15 or 30 in-game minutes. Chapter transitions default to 30 minutes.
 
