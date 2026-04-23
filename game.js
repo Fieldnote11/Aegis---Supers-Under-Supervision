@@ -119,7 +119,7 @@
       id: "energy",
       name: "Energy Absorption",
       codename: "Energy Sink",
-      summary: "Absorb force, heat, light, electricity, and eventually impossible event-scale output.",
+      summary: "Take in force, heat, light, and electricity, then release stored pressure with training.",
       terms: {
         adjective: "energy",
         force: "energy",
@@ -136,7 +136,7 @@
       id: "gravity",
       name: "Gravity Dominion",
       codename: "Mass Driver",
-      summary: "Alter weight, inertia, vectors, and eventually fold battlefields into singularity math.",
+      summary: "Change weight, inertia, and vectors, turning movement and impact into things you can negotiate.",
       terms: {
         adjective: "gravitic",
         force: "mass",
@@ -153,7 +153,7 @@
       id: "chronal",
       name: "Chronal Control",
       codename: "Secondhand",
-      summary: "Steal, lend, freeze, and accelerate time until moments become editable weapons.",
+      summary: "Sense timing, borrow fractions of a second, and learn how pressure changes when moments stretch.",
       terms: {
         adjective: "chronal",
         force: "time-pressure",
@@ -170,7 +170,7 @@
       id: "bio",
       name: "Biokinetic Evolution",
       codename: "Living System",
-      summary: "Control healing, adaptation, pain, bodies, and eventually rewrite survival itself.",
+      summary: "Guide healing, adaptation, pain response, and body-state changes under careful supervision.",
       terms: {
         adjective: "biokinetic",
         force: "metabolic surge",
@@ -187,7 +187,7 @@
       id: "tech",
       name: "Technopathic Command",
       codename: "Root Access",
-      summary: "Speak to machines, override systems, command networks, and eventually make cities answer.",
+      summary: "Read, influence, and coordinate machines and networks as if infrastructure has a nervous system.",
       terms: {
         adjective: "technopathic",
         force: "signal",
@@ -204,7 +204,7 @@
       id: "space",
       name: "Spatial Folding",
       codename: "Mapbreaker",
-      summary: "Compress distance, open folds, cut angles, and eventually make location optional.",
+      summary: "Shorten distance, bend angles, and create controlled folds where position stops behaving normally.",
       terms: {
         adjective: "spatial",
         force: "distance",
