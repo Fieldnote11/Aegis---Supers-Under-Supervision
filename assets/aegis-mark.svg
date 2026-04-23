@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Aegis mark">
+  <rect width="120" height="120" fill="#fffaf0"/>
+  <path d="M60 8 104 26v31c0 27-17 46-44 55C33 103 16 84 16 57V26L60 8Z" fill="#10a6b5" stroke="#171414" stroke-width="8"/>
+  <path d="M60 23 86 34v22c0 17-9 30-26 38-17-8-26-21-26-38V34l26-11Z" fill="#f1c232" stroke="#171414" stroke-width="6"/>
+  <path d="M43 73 59 34l18 39H65l-4-10H49l-4 10H43Zm10-21h8l-4-11-4 11Z" fill="#d9362b" stroke="#171414" stroke-width="3"/>
+</svg>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#151922">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Aegis: Supers Under Supervision</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="stylesheet" href="style.css">
+    <script src="story.js" defer></script>
+    <script src="story-expansion.js" defer></script>
+    <script src="story-deepening.js" defer></script>
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img src="assets/aegis-mark.svg" alt="" class="brand-mark">
+          <div>
+            <h1>Aegis</h1>
+            <p>Supers Under Supervision</p>
+          </div>
+        </div>
+        <div id="autosaveStatus" class="autosave-status" aria-live="polite">Autosave ready</div>
+        <nav class="toolstrip" aria-label="Game controls">
+          <button id="newGameBtn" class="icon-btn" type="button" aria-label="New game" title="New game">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 8.7 6.7h-2.2A7 7 0 1 1 12 5c1.8 0 3.4.7 4.7 1.8L14 9.5h7V2.6l-2.9 2.8A9 9 0 0 0 12 3Z"/></svg>
+          </button>
+          <button id="restartChapterBtn" class="icon-btn" type="button" aria-label="Restart chapter" title="Restart chapter">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v3h-2V6H8v12h8v-1h2v3H6V4Zm11.2 5.2L22 14l-4.8 4.8v-3.3H11v-3h6.2V9.2Z"/></svg>
+          </button>
+          <button id="saveLoadBtn" class="icon-btn" type="button" aria-label="Pause menu" title="Pause menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7V4Zm6 0h4v16h-4V4Z"/></svg>
+          </button>
+          <button id="statusBtn" class="icon-btn" type="button" aria-label="Toggle status panel" title="Toggle status panel">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16v18H4V3Zm2 2v14h12V5H6Zm2 3h8v2H8V8Zm0 4h8v2H8v-2Zm0 4h5v2H8v-2Z"/></svg>
+          </button>
+        </nav>
+      </header>
+
+      <main class="game-grid">
+        <section class="story-panel" aria-live="polite">
+          <div class="scene-banner">
+            <img id="sceneArt" src="assets/backgrounds/aegis-point.svg" alt="" class="scene-art">
+            <div class="scene-ink">
+              <span id="chapterKicker">Chapter 1</span>
+              <h2 id="sceneHeading">Pressure Cooker</h2>
+              <p id="sceneLocation">Aegis Point</p>
+            </div>
+          </div>
+
+          <div id="transcript" class="transcript" aria-label="Story transcript"></div>
+
+          <div class="choice-deck" aria-label="Available choices">
+            <div id="choices" class="choices"></div>
+          </div>
+        </section>
+
+        <aside id="dossier" class="dossier" aria-label="Status panel">
+          <section class="portrait-panel">
+            <img id="portrait" src="assets/avatars/male-1.png" alt="" class="portrait">
+            <div>
+              <h2 id="focusName">Seth Cormac</h2>
+              <p id="focusRole">Absorption Variant</p>
+            </div>
+          </section>
+
+          <section class="status-panel">
+            <h2>Player Status</h2>
+            <div id="powerPanel" class="power-panel"></div>
+            <div id="statWheel" class="stat-wheel" aria-label="Player stats"></div>
+            <dl id="statusList"></dl>
+          </section>
+
+          <section class="relationship-panel">
+            <h2>Bonds</h2>
+            <div id="relationshipList" class="signals"></div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <dialog id="startDialog" class="start-dialog">
+      <div id="openGameView" class="start-view">
+        <div class="dialog-head">
+          <div>
+            <h2>Open Game</h2>
+            <p class="dialog-subtitle">Continue a save or begin a new Aegis intake file.</p>
+          </div>
+        </div>
+
+        <div class="open-grid">
+          <section class="pause-section autosave-card">
+            <h3>Autosave</h3>
+            <p id="startAutosaveDetails">No autosave yet.</p>
+            <button id="startAutosaveBtn" type="button" class="text-btn">Continue Autosave</button>
+          </section>
+
+          <section class="pause-section new-file-card">
+            <h3>New File</h3>
+            <p>Create a trainee, choose a power, and start from Chapter 1.</p>
+            <button id="showCreatorBtn" type="button" class="text-btn danger">New Game</button>
+          </section>
+
+          <section class="pause-section saves-card">
+            <h3>Manual Saves</h3>
+            <div id="startSaveSlots" class="save-slots"></div>
+          </section>
+        </div>
+      </div>
+
+      <div id="creatorView" class="start-view hidden">
+        <div class="dialog-head">
+          <div>
+            <h2>Create Trainee</h2>
+            <p class="dialog-subtitle">Name, presentation, icon, and power can shape how the story reads.</p>
+          </div>
+          <button id="backToOpenBtn" class="icon-btn small" type="button" aria-label="Back" title="Back">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 5 1.4 1.4L7.8 10H20v2H7.8l3.6 3.6L10 17l-6-6 6-6Z"/></svg>
+          </button>
+        </div>
+
+        <div class="creator-grid">
+          <section class="pause-section identity-card">
+            <h3>Identity</h3>
+            <label class="field-label" for="playerNameInput">Name</label>
+            <input id="playerNameInput" class="text-input" type="text" maxlength="28" placeholder="Enter your name" required>
+            <div class="field-label">Gender</div>
+            <div id="genderChoices" class="segmented"></div>
+            <div class="field-label">Pronouns</div>
+            <div id="pronounChoices" class="segmented"></div>
+            <label class="theme-toggle content-toggle">
+              <input id="creatorMatureToggle" type="checkbox">
+              <span>Optional mature scenes</span>
+            </label>
+          </section>
+
+          <section class="pause-section avatar-card">
+            <h3>Icon</h3>
+            <div id="avatarChoices" class="avatar-grid"></div>
+          </section>
+
+          <section class="pause-section powers-card">
+            <h3>Power</h3>
+            <div id="powerChoices" class="power-choice-grid"></div>
+          </section>
+        </div>
+
+        <div class="creator-actions">
+          <button id="beginGameBtn" type="button" class="text-btn danger">Begin Intake</button>
+        </div>
+      </div>
+    </dialog>
+
+    <dialog id="pauseDialog" class="pause-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2>Pause</h2>
+          <button class="icon-btn small" value="close" aria-label="Close" title="Close">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4 6.4 5Z"/></svg>
+          </button>
+        </div>
+
+        <div class="pause-grid">
+          <section class="pause-section autosave-card">
+            <h3>Autosave</h3>
+            <p id="autosaveDetails">No autosave yet.</p>
+            <button id="loadAutosaveBtn" type="button" class="text-btn">Load Autosave</button>
+          </section>
+
+          <section class="pause-section display-card">
+            <h3>Display</h3>
+            <label class="theme-toggle">
+              <input id="darkModeToggle" type="checkbox">
+              <span>Dark mode</span>
+            </label>
+            <label class="theme-toggle content-toggle">
+              <input id="pauseMatureToggle" type="checkbox">
+              <span>Optional mature scenes</span>
+            </label>
+          </section>
+
+          <section class="pause-section saves-card">
+            <h3>Save Slots</h3>
+            <div id="saveSlots" class="save-slots"></div>
+          </section>
+
+          <section class="pause-section tasks-card">
+            <h3>Free Time</h3>
+            <p id="taskStatus">Training is unavailable until a file is open.</p>
+            <div id="taskList" class="task-list"></div>
+          </section>
+
+          <section class="pause-section progress-card">
+            <h3>Story Progress</h3>
+            <ol id="progressList" class="progress-list"></ol>
+            <div id="progressDetails" class="progress-details"></div>
+          </section>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="confirmDialog" class="confirm-dialog">
+      <form method="dialog">
+        <h2 id="confirmTitle">Confirm</h2>
+        <p id="confirmBody"></p>
+        <div class="dialog-actions">
+          <button value="cancel" class="text-btn">Cancel</button>
+          <button id="confirmAction" value="confirm" class="text-btn danger">Confirm</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

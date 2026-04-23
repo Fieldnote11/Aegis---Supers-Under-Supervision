@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="male avatar 4 portrait">
+  <defs>
+    <linearGradient id="back" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#27303f"/>
+      <stop offset=".58" stop-color="#151922"/>
+      <stop offset="1" stop-color="#0b0d13"/>
+    </linearGradient>
+    <pattern id="scan" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M0 9h10" stroke="#ffffff" stroke-opacity=".08" stroke-width="1"/>
+      <circle cx="2" cy="2" r="1" fill="#ffffff" opacity=".08"/>
+    </pattern>
+    <clipPath id="frameClip">
+      <rect x="13" y="13" width="194" height="194" rx="4"/>
+    </clipPath>
+  </defs>
+  <rect width="220" height="220" fill="#07090f"/>
+  <rect x="8" y="8" width="204" height="204" rx="4" fill="#222a36" stroke="#090b10" stroke-width="8"/>
+  <g clip-path="url(#frameClip)">
+    <rect x="13" y="13" width="194" height="194" fill="url(#back)"/>
+    <rect x="13" y="13" width="194" height="194" fill="url(#scan)"/>
+    <path d="M-14 190 234 99v114H-14Z" fill="#ff594f" opacity=".22"/>
+    <path d="M13 13h194v30H13Z" fill="#ff594f"/>
+    <path d="M13 43h194" stroke="#090b10" stroke-width="6"/>
+    <path d="M13 184h194v23H13Z" fill="#11151f"/>
+    <path d="M28 195h70" stroke="#ff594f" stroke-width="7" stroke-linecap="round"/>
+    
+    <path d="M168 54l18-22-5 25 17-3-27 36 7-28-20 6Z" fill="#ff594f" stroke="#090b10" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="190" cy="166" r="15" fill="#ff594f" opacity=".78" stroke="#090b10" stroke-width="4"/>
+    <path d="M181 166h18M190 157v18" stroke="#f7f3da" stroke-width="4" stroke-linecap="round"/>
+  
+    <path d="M38 205c8-43 34-69 72-69s64 26 72 69H38Z" fill="#7652b8" stroke="#090b10" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M73 149h74l-37 42-37-42Z" fill="#f3edda" stroke="#090b10" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M48 89c0-35 24-64 61-64 32 0 56 19 62 48-15-8-23-5-34-19-8 15-23 8-36 22-13-13-27 1-53 13Z" fill="#744225" stroke="#090b10" stroke-width="8" stroke-linejoin="round"/>
+    <ellipse cx="110" cy="106" rx="48" ry="53" fill="#ce916d" stroke="#090b10" stroke-width="8"/>
+    <path d="M70 86c18-19 61-24 88 0" fill="none" stroke="#744225" stroke-width="19" stroke-linecap="round"/>
+    <path d="M77 101h16" fill="none" stroke="#090b10" stroke-width="7" stroke-linecap="round"/>
+    <path d="M127 99l17 5" fill="none" stroke="#090b10" stroke-width="7" stroke-linecap="round"/>
+    <path d="M109 105c-2 11-5 20-10 27 7 4 15 4 22 0" fill="none" stroke="#090b10" stroke-width="4" stroke-linecap="round"/>
+    <path d="M91 128c17 12 32 5 45-4" fill="none" stroke="#090b10" stroke-width="5" stroke-linecap="round"/>
+    <path d="M48 16h39M144 16h48M31 31h20" stroke="#f7f3da" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+  </g>
+</svg>

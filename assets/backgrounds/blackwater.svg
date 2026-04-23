@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice">
+  <rect width="1200" height="520" fill="#f8f2dc"/>
+  <path d="M0 336h1200v184H0z" fill="#171414"/>
+  <path d="M70 168h120v252H70zM226 110h168v310H226zM430 188h112v232H430zM586 70h190v350H586zM820 146h132v274H820zM986 96h154v324H986z" fill="#2b2524" stroke="#171414" stroke-width="7"/>
+  <g fill="#f1c232">
+    <rect x="96" y="206" width="24" height="18"/><rect x="140" y="248" width="24" height="18"/>
+    <rect x="258" y="152" width="26" height="20"/><rect x="314" y="208" width="26" height="20"/><rect x="350" y="310" width="26" height="20"/>
+    <rect x="625" y="112" width="30" height="22"/><rect x="704" y="176" width="30" height="22"/><rect x="650" y="286" width="30" height="22"/>
+    <rect x="1018" y="142" width="28" height="20"/><rect x="1084" y="232" width="28" height="20"/>
+  </g>
+  <path d="M0 392c140-44 296-42 464 6 136 38 286 35 452-10 100-27 194-25 284 6v126H0V392Z" fill="#10a6b5" opacity=".9"/>
+  <path d="M0 0h1200v520H0z" fill="none" stroke="#171414" stroke-width="18"/>
+</svg>
