@@ -2,6 +2,7 @@
   "use strict";
 
   const STORY = window.AEGIS_STORY;
+  const HUBS = window.AEGIS_HUBS || { assignments: {}, locations: {} };
   const SAVE_PREFIX = "aegis-choice-game";
   const AUTO_KEY = `${SAVE_PREFIX}:autosave`;
   const THEME_KEY = `${SAVE_PREFIX}:theme`;
@@ -363,6 +364,7 @@
 
   const els = {};
   let state;
+  let actionsOpen = true;
   let creatorSelection = {
     gender: "male",
     pronouns: "he",
@@ -397,6 +399,7 @@
       sceneLocation: document.getElementById("sceneLocation"),
       sceneArt: document.getElementById("sceneArt"),
       transcript: document.getElementById("transcript"),
+      assignmentPanel: document.getElementById("assignmentPanel"),
       choices: document.getElementById("choices"),
       portrait: document.getElementById("portrait"),
       focusName: document.getElementById("focusName"),
@@ -439,12 +442,15 @@
       confirmAction: document.getElementById("confirmAction"),
       newGameBtn: document.getElementById("newGameBtn"),
       restartChapterBtn: document.getElementById("restartChapterBtn"),
+      actionsBtn: document.getElementById("actionsBtn"),
       saveLoadBtn: document.getElementById("saveLoadBtn"),
       statusBtn: document.getElementById("statusBtn")
     });
   }
 
   function bindEvents() {
+    setActionsPanel(true);
+
     els.newGameBtn.addEventListener("click", () => {
       confirmAction("New game", "Start a new intake file? Current autosave progress will be replaced once the new game begins.", () => {
         showCreatorView();
@@ -460,6 +466,7 @@
     });
 
     els.saveLoadBtn.addEventListener("click", openPauseDialog);
+    els.actionsBtn.addEventListener("click", () => toggleActionsPanel());
     els.showCreatorBtn.addEventListener("click", showCreatorView);
     els.backToOpenBtn.addEventListener("click", showOpenGameView);
     els.beginGameBtn.addEventListener("click", () => {
@@ -657,6 +664,7 @@
       status: clone(STORY.defaultStatus),
       clock: defaultClock(),
       tasks: {},
+      hub: defaultHubState(),
       history: [],
       chapterSnapshots: {},
       startedAt: Date.now(),
@@ -667,6 +675,11 @@
   function enterScene(sceneId, options = {}) {
     const scene = getScene(sceneId);
     state.currentScene = sceneId;
+    if (scene.hub) {
+      activateHub(scene.hub);
+    } else {
+      deactivateHub();
+    }
     state.history.push({
       type: "scene",
       sceneId,
@@ -703,7 +716,6 @@
     const choices = getVisibleChoices(scene);
     const choice = choices[choiceIndex];
     if (!choice) return;
-
     state.history.push({
       type: "choice",
       text: choice.text,
@@ -733,11 +745,16 @@
     const scene = getScene(state.currentScene);
     const chapter = getChapter(scene.chapter);
     const focus = getFocus(scene.focus);
-    const background = STORY.backgrounds[scene.background] || STORY.backgrounds.aegis;
+    const hubLocation = currentHubLocation();
+    const assignment = currentAssignment();
+    const backgroundKey = (hubLocation && hubLocation.background) || scene.background;
+    const background = STORY.backgrounds[backgroundKey] || STORY.backgrounds.aegis;
 
     els.chapterKicker.textContent = `Chapter ${chapter.id}`;
-    els.sceneHeading.textContent = scene.title;
-    els.sceneLocation.textContent = scene.location || "";
+    els.sceneHeading.textContent = hubLocation ? hubLocation.name : scene.title;
+    els.sceneLocation.textContent = hubLocation
+      ? `${hubLocation.region || scene.location || "Aegis Point"}${assignment ? ` | ${assignment.title}` : ""}`
+      : scene.location || "";
     els.sceneArt.src = background;
     els.portrait.src = focus.portrait;
     els.focusName.textContent = focus.name || scene.focus || state.profile.name;
@@ -752,9 +769,24 @@
 
     if (options.scroll) {
       requestAnimationFrame(() => {
-        els.transcript.scrollTop = els.transcript.scrollHeight;
+        scrollTranscriptToLatestEntry();
       });
     }
+  }
+
+  function scrollTranscriptToLatestEntry() {
+    const latestEntry = els.transcript.lastElementChild;
+    if (!latestEntry) return;
+    const hasInternalScroll = els.transcript.scrollHeight > els.transcript.clientHeight + 8;
+    if (hasInternalScroll) {
+      els.transcript.scrollTop = els.transcript.scrollHeight;
+      return;
+    }
+    latestEntry.scrollIntoView({
+      block: "start",
+      inline: "nearest",
+      behavior: "auto"
+    });
   }
 
   function renderTranscript() {
@@ -794,6 +826,11 @@
         title.textContent = entry.title || "Free Time";
         node.appendChild(title);
         node.appendChild(paragraphNode(entry.text));
+      } else if (entry.type === "location" || entry.type === "hubAction") {
+        const title = document.createElement("h3");
+        title.textContent = entry.title || (entry.type === "location" ? "Location" : "Action");
+        node.appendChild(title);
+        (entry.text || []).forEach((line) => node.appendChild(paragraphNode(line)));
       } else if (entry.type === "status") {
         const title = document.createElement("h3");
         title.textContent = entry.title;
@@ -822,6 +859,14 @@
 
   function renderChoices(scene) {
     els.choices.innerHTML = "";
+    if (isHubActive()) {
+      renderHubControls();
+      return;
+    }
+    if (els.assignmentPanel) {
+      els.assignmentPanel.classList.add("hidden");
+      els.assignmentPanel.innerHTML = "";
+    }
     const choices = getVisibleChoices(scene);
 
     if (!choices.length) {
@@ -841,6 +886,7 @@
       });
       wrapper.append(restart, fresh);
       els.choices.appendChild(wrapper);
+      updateActionsToggle(0);
       return;
     }
 
@@ -860,6 +906,399 @@
       button.append(badge, text);
       els.choices.appendChild(button);
     });
+    updateActionsToggle(choices.length);
+  }
+
+  function renderHubControls() {
+    const location = currentHubLocation();
+    const assignment = currentAssignment();
+    els.choices.innerHTML = "";
+    renderAssignmentPanel(assignment);
+    updateActionsToggle(availableActionCount());
+
+    if (!location) {
+      const fallback = document.createElement("div");
+      fallback.className = "no-choices";
+      const resume = document.createElement("button");
+      resume.type = "button";
+      resume.className = "text-btn";
+      resume.textContent = "Return To Story";
+      resume.addEventListener("click", () => {
+        deactivateHub();
+        render({ scroll: true });
+      });
+      fallback.appendChild(resume);
+      els.choices.appendChild(fallback);
+      return;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "hub-controls";
+
+    const locationCard = document.createElement("section");
+    locationCard.className = "hub-card location-card";
+    const locationTitle = document.createElement("h3");
+    locationTitle.textContent = `${location.name} | ${formatClock()}`;
+    locationCard.appendChild(locationTitle);
+    getHubLocationLines(location).forEach((line) => {
+      locationCard.appendChild(paragraphNode(line));
+    });
+    wrapper.appendChild(locationCard);
+
+    const actions = visibleHubActions(location);
+    const actionsSection = document.createElement("section");
+    actionsSection.className = "hub-section";
+    const actionsTitle = document.createElement("h3");
+    actionsTitle.textContent = "Available Actions";
+    actionsSection.appendChild(actionsTitle);
+    const actionGrid = document.createElement("div");
+    actionGrid.className = "hub-grid";
+    if (actions.length) {
+      actions.forEach(({ action, available, reason }) => {
+        actionGrid.appendChild(hubButton({
+          label: action.label,
+          detail: action.detail,
+          meta: hubActionMeta(action),
+          disabled: !available,
+          disabledReason: reason,
+          primary: assignment && action.id === assignment.targetAction,
+          onClick: () => performHubAction(action.id)
+        }));
+      });
+    } else {
+      const empty = document.createElement("p");
+      empty.className = "hub-empty";
+      empty.textContent = "No special interactions here right now.";
+      actionGrid.appendChild(empty);
+    }
+    actionsSection.appendChild(actionGrid);
+    wrapper.appendChild(actionsSection);
+
+    const exits = visibleHubExits(location);
+    const exitsSection = document.createElement("section");
+    exitsSection.className = "hub-section";
+    const exitsTitle = document.createElement("h3");
+    exitsTitle.textContent = "Exits";
+    exitsSection.appendChild(exitsTitle);
+    const exitGrid = document.createElement("div");
+    exitGrid.className = "hub-grid exits";
+    exits.forEach(({ exit, target, available, reason }) => {
+      exitGrid.appendChild(hubButton({
+        label: target.name,
+        detail: target.region || "Aegis Point",
+        meta: `${exit.timeMinutes || 15} min`,
+        disabled: !available,
+        disabledReason: reason,
+        onClick: () => moveHubLocation(exit.location)
+      }));
+    });
+    exitsSection.appendChild(exitGrid);
+    wrapper.appendChild(exitsSection);
+
+    els.choices.appendChild(wrapper);
+  }
+
+  function renderAssignmentPanel(assignment) {
+    if (!els.assignmentPanel) return;
+    els.assignmentPanel.classList.remove("hidden");
+    els.assignmentPanel.innerHTML = "";
+    const title = document.createElement("h3");
+    title.textContent = assignment ? assignment.title : "Current Assignment";
+    const detail = document.createElement("p");
+    detail.textContent = assignment ? assignment.detail : "Explore until the next assignment appears.";
+    const meta = document.createElement("div");
+    meta.className = "assignment-meta";
+    const location = currentHubLocation();
+    [
+      location ? `Location: ${location.name}` : "Location: Unknown",
+      `Time: ${formatClock()}`,
+      `Fatigue: ${fatigueLabel()}`
+    ].forEach((item) => {
+      const pill = document.createElement("span");
+      pill.textContent = item;
+      meta.appendChild(pill);
+    });
+    els.assignmentPanel.append(title, detail, meta);
+  }
+
+  function hubButton(options) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `hub-btn${options.primary ? " primary" : ""}`;
+    button.disabled = Boolean(options.disabled);
+    if (!options.disabled) button.addEventListener("click", options.onClick);
+
+    const head = document.createElement("span");
+    head.className = "hub-btn-head";
+    const label = document.createElement("strong");
+    label.textContent = options.label;
+    const meta = document.createElement("span");
+    meta.textContent = options.disabled && options.disabledReason ? options.disabledReason : options.meta || "";
+    head.append(label, meta);
+
+    const detail = document.createElement("span");
+    detail.className = "hub-btn-detail";
+    detail.textContent = options.detail || "";
+
+    button.append(head, detail);
+    return button;
+  }
+
+  function hubActionMeta(action) {
+    const parts = [];
+    const assignment = currentAssignment();
+    if (assignment && action.id === assignment.targetAction) parts.push("Assignment");
+    if (action.timeMinutes) parts.push(`${action.timeMinutes} min`);
+    if (action.rest) parts.push("Rest");
+    else if (typeof action.fatigue === "number" && action.fatigue > 0) parts.push(`fatigue +${action.fatigue}`);
+    const count = hubActionCount(action.id);
+    if (action.repeatLimit) parts.push(`${count}/${action.repeatLimit}`);
+    return parts.join(" | ");
+  }
+
+  function visibleHubActions(location) {
+    return (location.actions || []).reduce((acc, action) => {
+      if (action.assignmentId && action.assignmentId !== (state.hub && state.hub.assignmentId)) return acc;
+      const count = hubActionCount(action.id);
+      if ((action.once && hubActionDone(action.id)) || (action.repeatLimit && count >= action.repeatLimit)) return acc;
+      const available = checkConditions(action.conditions || []);
+      if (!available && action.hidden) return acc;
+      acc.push({
+        action,
+        available,
+        reason: available ? "" : action.lockedText || "Unavailable"
+      });
+      return acc;
+    }, []);
+  }
+
+  function visibleHubExits(location) {
+    return (location.exits || []).reduce((acc, item) => {
+      const exit = typeof item === "string" ? { location: item } : item;
+      const target = HUBS.locations[exit.location];
+      if (!target) return acc;
+      const exitOpen = checkConditions(exit.conditions || []);
+      const targetOpen = isHubLocationOpen(target);
+      const hidden = exit.hidden || (target.hidden && !targetOpen);
+      if (hidden && (!exitOpen || !targetOpen)) return acc;
+      acc.push({
+        exit,
+        target,
+        available: exitOpen && targetOpen,
+        reason: exit.lockedText || target.lockedText || "Locked"
+      });
+      return acc;
+    }, []);
+  }
+
+  function toggleActionsPanel() {
+    setActionsPanel(!actionsOpen);
+    if (actionsOpen) {
+      requestAnimationFrame(() => {
+        const deck = els.choices && els.choices.closest(".choice-deck");
+        if (deck) deck.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "auto" });
+      });
+    }
+  }
+
+  function setActionsPanel(open) {
+    actionsOpen = Boolean(open);
+    document.body.classList.toggle("actions-collapsed", !actionsOpen);
+    if (!els.actionsBtn) return;
+    els.actionsBtn.classList.toggle("active", actionsOpen);
+    els.actionsBtn.setAttribute("aria-expanded", String(actionsOpen));
+  }
+
+  function updateActionsToggle(count = availableActionCount()) {
+    if (!els.actionsBtn) return;
+    const actionCount = Math.max(0, Number(count) || 0);
+    const hasActions = actionCount > 0;
+    els.actionsBtn.disabled = !hasActions;
+    els.actionsBtn.classList.toggle("has-actions", hasActions);
+    els.actionsBtn.dataset.count = hasActions ? String(Math.min(99, actionCount)) : "";
+    els.actionsBtn.title = hasActions ? `Actions (${actionCount})` : "No actions available";
+    els.actionsBtn.setAttribute("aria-label", hasActions ? `Toggle actions, ${actionCount} available` : "No actions available");
+    els.actionsBtn.setAttribute("aria-expanded", String(actionsOpen));
+  }
+
+  function availableActionCount() {
+    if (isHubActive()) {
+      const location = currentHubLocation();
+      if (!location) return 0;
+      const actions = visibleHubActions(location).filter((item) => item.available).length;
+      const exits = visibleHubExits(location).filter((item) => item.available).length;
+      return actions + exits;
+    }
+    const scene = state ? getScene(state.currentScene) : null;
+    return scene ? getVisibleChoices(scene).length : 0;
+  }
+
+  function moveHubLocation(locationId) {
+    const current = currentHubLocation();
+    const exit = (current && (current.exits || []).map((item) => typeof item === "string" ? { location: item } : item).find((item) => item.location === locationId)) || { location: locationId };
+    const target = HUBS.locations[locationId];
+    if (!target || !checkConditions(exit.conditions || []) || !isHubLocationOpen(target)) {
+      render({ scroll: false });
+      return;
+    }
+
+    state.history.push({
+      type: "choice",
+      text: `Go to ${target.name}.`,
+      at: Date.now()
+    });
+    const notices = advanceClock(exit.timeMinutes || 15, `Moving to ${target.name}`, {
+      fatigue: typeof exit.fatigue === "number" ? exit.fatigue : 0.2
+    });
+    setHubLocation(locationId, { recordVisit: true });
+    state.history.push({
+      type: "location",
+      title: target.name,
+      text: getHubLocationLines(target),
+      at: Date.now()
+    });
+    pushNotices(notices);
+    state.updatedAt = Date.now();
+    save(AUTO_KEY);
+    render({ scroll: true });
+  }
+
+  function performHubAction(actionId) {
+    const location = currentHubLocation();
+    const action = location && (location.actions || []).find((item) => item.id === actionId);
+    const actionState = action && visibleHubActions(location).find((item) => item.action.id === actionId);
+    if (!action || !actionState || !actionState.available) {
+      render({ scroll: false });
+      return;
+    }
+
+    markHubAction(action);
+    state.history.push({
+      type: "choice",
+      text: action.label,
+      at: Date.now()
+    });
+
+    const lines = resolveHubText(action);
+    if (lines.length) {
+      state.history.push({
+        type: "hubAction",
+        title: action.label,
+        text: lines,
+        at: Date.now()
+      });
+    }
+
+    const notices = applyEffects(clone(action.effects || []));
+    notices.push(...advanceClock(action.timeMinutes || 15, action.label, {
+      fatigue: Object.prototype.hasOwnProperty.call(action, "fatigue") ? action.fatigue : 0.5,
+      rest: Boolean(action.rest)
+    }));
+    if (action.completeAssignment && state.hub && state.hub.assignmentId) {
+      state.hub.completedAssignments[state.hub.assignmentId] = true;
+    }
+    if (action.nextAssignment && state.hub) {
+      state.hub.assignmentId = action.nextAssignment;
+    }
+    pushNotices(notices);
+
+    if (action.nextScene) {
+      enterScene(action.nextScene);
+      return;
+    }
+
+    state.updatedAt = Date.now();
+    save(AUTO_KEY);
+    render({ scroll: true });
+  }
+
+  function pushNotices(notices) {
+    notices.forEach((notice) => {
+      state.history.push({
+        type: "notice",
+        text: notice,
+        at: Date.now()
+      });
+    });
+  }
+
+  function resolveHubText(item) {
+    const lines = [];
+    (item.variants || []).forEach((variant) => {
+      if (checkConditions(variant.conditions || [])) lines.push(...asLines(variant.text));
+    });
+    lines.push(...asLines(typeof item.text === "function" ? item.text(state) : item.text));
+    return lines;
+  }
+
+  function getHubLocationLines(location) {
+    const count = hubLocationVisitCount(state.hub && state.hub.locationId);
+    const source = count > 1 && location.returnDescription ? location.returnDescription : location.description;
+    return resolveHubText({ text: source, variants: location.variants || [] });
+  }
+
+  function asLines(value) {
+    if (!value) return [];
+    return Array.isArray(value) ? value : [String(value)];
+  }
+
+  function activateHub(config) {
+    if (!state.hub) state.hub = defaultHubState();
+    state.hub.active = config.active !== false;
+    state.hub.assignmentId = config.assignmentId || state.hub.assignmentId || "";
+    setHubLocation(config.locationId || state.hub.locationId || Object.keys(HUBS.locations)[0], { recordVisit: true });
+  }
+
+  function deactivateHub() {
+    if (!state.hub) state.hub = defaultHubState();
+    state.hub.active = false;
+  }
+
+  function setHubLocation(locationId, options = {}) {
+    if (!state.hub) state.hub = defaultHubState();
+    if (!HUBS.locations[locationId]) return;
+    state.hub.locationId = locationId;
+    if (options.recordVisit) {
+      state.hub.visitedLocations[locationId] = hubLocationVisitCount(locationId) + 1;
+    }
+  }
+
+  function markHubAction(action) {
+    if (!state.hub) state.hub = defaultHubState();
+    state.hub.actionCounts[action.id] = hubActionCount(action.id) + 1;
+    if (action.once || action.repeatLimit) {
+      state.hub.completedActions[action.id] = true;
+    }
+  }
+
+  function currentHubLocation() {
+    if (!isHubActive()) return null;
+    return HUBS.locations[state.hub.locationId] || null;
+  }
+
+  function currentAssignment() {
+    if (!state.hub || !state.hub.assignmentId) return null;
+    return HUBS.assignments[state.hub.assignmentId] || null;
+  }
+
+  function isHubActive() {
+    return Boolean(state && state.hub && state.hub.active && HUBS.locations[state.hub.locationId]);
+  }
+
+  function isHubLocationOpen(location) {
+    return checkConditions(location.conditions || []);
+  }
+
+  function hubActionDone(actionId) {
+    return Boolean(state.hub && state.hub.completedActions && state.hub.completedActions[actionId]);
+  }
+
+  function hubActionCount(actionId) {
+    return Math.max(0, Number(state.hub && state.hub.actionCounts && state.hub.actionCounts[actionId]) || 0);
+  }
+
+  function hubLocationVisitCount(locationId) {
+    return Math.max(0, Number(state.hub && state.hub.visitedLocations && state.hub.visitedLocations[locationId]) || 0);
   }
 
   function renderStatus() {
@@ -1109,6 +1548,10 @@
     addProgressPill(`Power level: ${(state.power && state.power.level) || 1}`);
     addProgressPill(`Time: ${formatClock()}`);
     addProgressPill(`Fatigue: ${fatigueLabel()}`);
+    const assignment = currentAssignment();
+    const location = currentHubLocation();
+    if (assignment) addProgressPill(`Assignment: ${assignment.title}`);
+    if (location) addProgressPill(`Location: ${location.name}`);
     const taskLimit = chapterTaskLimit(currentScene);
     const bucket = taskBucket(currentChapter);
     addProgressPill(taskLimit > 0 ? `Free time: ${bucket.used || 0}/${taskLimit}` : "Free time: closed");
@@ -1231,7 +1674,8 @@
   }
 
   function chapterTaskLimit(scene) {
-    if (!scene || scene.ending || scene.chapter >= 10 || !getVisibleChoices(scene).length) return 0;
+    if (!scene || scene.ending || scene.chapter >= 10) return 0;
+    if (!getVisibleChoices(scene).length && !(scene.hub && isHubActive())) return 0;
     if (scene.chapter === 1) return 4;
     if (scene.chapter >= 7) return 6;
     return 7;
@@ -1304,7 +1748,10 @@
     const chapter = getChapter(scene.chapter);
     const when = new Date(savedState.updatedAt || Date.now()).toLocaleString();
     const profile = savedState.profile || defaultProfile();
-    return `${profile.name} - ${chapter.title}: ${scene.title}. ${when}`;
+    const location = savedState.hub && savedState.hub.active && HUBS.locations[savedState.hub.locationId]
+      ? HUBS.locations[savedState.hub.locationId].name
+      : scene.title;
+    return `${profile.name} - ${chapter.title}: ${location}. ${when}`;
   }
 
   function save(key) {
@@ -1339,6 +1786,7 @@
       status: { ...STORY.defaultStatus, ...(loaded.status || {}) },
       clock: normalizeClock(loaded.clock),
       tasks: normalizeTasks(loaded.tasks),
+      hub: normalizeHubState(loaded.hub, loaded.currentScene || STORY.initialScene),
       flags: loaded.flags || {},
       history: loaded.history || [],
       chapterSnapshots: loaded.chapterSnapshots || {}
@@ -1380,6 +1828,18 @@
       fatigue: 0,
       fatigueWarning: false,
       hardWarning: false
+    };
+  }
+
+  function defaultHubState() {
+    return {
+      active: false,
+      locationId: "",
+      assignmentId: "",
+      visitedLocations: {},
+      completedActions: {},
+      actionCounts: {},
+      completedAssignments: {}
     };
   }
 
@@ -1439,6 +1899,39 @@
       };
       return acc;
     }, {});
+  }
+
+  function normalizeHubState(loadedHub, currentSceneId) {
+    const base = defaultHubState();
+    const loaded = loadedHub && typeof loadedHub === "object" ? loadedHub : {};
+    const hub = {
+      ...base,
+      ...loaded,
+      visitedLocations: { ...(loaded.visitedLocations || {}) },
+      completedActions: { ...(loaded.completedActions || {}) },
+      actionCounts: { ...(loaded.actionCounts || {}) },
+      completedAssignments: { ...(loaded.completedAssignments || {}) }
+    };
+    Object.keys(hub.visitedLocations).forEach((key) => {
+      hub.visitedLocations[key] = Math.max(0, Number(hub.visitedLocations[key]) || 0);
+    });
+    Object.keys(hub.actionCounts).forEach((key) => {
+      hub.actionCounts[key] = Math.max(0, Number(hub.actionCounts[key]) || 0);
+    });
+
+    const scene = STORY.scenes[currentSceneId] || STORY.scenes[STORY.initialScene];
+    if (scene && scene.hub) {
+      hub.active = scene.hub.active !== false;
+      hub.locationId = HUBS.locations[hub.locationId] ? hub.locationId : scene.hub.locationId || "";
+      hub.assignmentId = hub.assignmentId || scene.hub.assignmentId || "";
+      if (hub.locationId && !hub.visitedLocations[hub.locationId]) hub.visitedLocations[hub.locationId] = 1;
+      return hub;
+    }
+
+    hub.active = false;
+    if (hub.locationId && !HUBS.locations[hub.locationId]) hub.locationId = "";
+    if (hub.assignmentId && !HUBS.assignments[hub.assignmentId]) hub.assignmentId = "";
+    return hub;
   }
 
   function defaultNpcStates() {
@@ -1513,6 +2006,7 @@
       status: clone(state.status),
       clock: clone(state.clock || defaultClock()),
       tasks: clone(state.tasks || {}),
+      hub: clone(state.hub || defaultHubState()),
       history: clone(state.history),
       startedAt: state.startedAt,
       updatedAt: Date.now()
@@ -1595,7 +2089,8 @@
       return notices;
     }
 
-    state.clock.fatigue = clamp(state.clock.fatigue + (options.fatigue || 0.5), 0, 14);
+    const fatigueDelta = Object.prototype.hasOwnProperty.call(options, "fatigue") ? options.fatigue : 0.5;
+    state.clock.fatigue = clamp(state.clock.fatigue + fatigueDelta, 0, 14);
     if (state.clock.fatigue >= FATIGUE_WARNING) {
       state.status.condition = "Fatigued";
       state.status.stress = "High";
@@ -1835,6 +2330,13 @@
       if (condition.type === "npcAtLeast") return (ensureNpcState(condition.key)[condition.dimension] || 0) >= condition.value;
       if (condition.type === "relationshipAtLeast") return (state.relationships[condition.key] || 0) >= condition.value;
       if (condition.type === "relationshipBelow") return (state.relationships[condition.key] || 0) < condition.value;
+      if (condition.type === "chapterAtLeast") return getScene(state.currentScene).chapter >= condition.value;
+      if (condition.type === "chapterBefore") return getScene(state.currentScene).chapter < condition.value;
+      if (condition.type === "assignmentIs") return Boolean(state.hub && state.hub.assignmentId === condition.value);
+      if (condition.type === "locationVisited") return hubLocationVisitCount(condition.key || condition.value) > 0;
+      if (condition.type === "actionDone") return hubActionDone(condition.key || condition.value);
+      if (condition.type === "notActionDone") return !hubActionDone(condition.key || condition.value);
+      if (condition.type === "actionCountAtLeast") return hubActionCount(condition.key || condition.value) >= condition.count;
       return true;
     });
   }
@@ -2135,7 +2637,8 @@
       hour: "numeric",
       minute: "2-digit"
     });
-    els.autosaveStatus.textContent = `Autosaved ${time} - ${scene.title}`;
+    const location = currentHubLocation();
+    els.autosaveStatus.textContent = `Autosaved ${time} - ${location ? location.name : scene.title}`;
   }
 
   function labelize(key) {

@@ -52,7 +52,7 @@ async function main() {
     results.forEach((result) => {
       console.log(`${result.name}: viewport ${result.layout.width}x${result.layout.height}, overflow ${result.layout.overflow.length}, dark overflow ${result.dark.layout.overflow.length}, screenshot ${path.relative(root, result.screenshot)}`);
     });
-    console.log("Browser smoke: old save normalization, autosave, manual save, training, and rest checks passed.");
+    console.log("Browser smoke: hub vertical slice, old save normalization, autosave, manual save, training, and rest checks passed.");
   } finally {
     chrome.kill();
     staticServer.close();
@@ -224,6 +224,8 @@ async function exerciseCreator(cdp) {
 }
 
 async function exerciseOldSaveAndTasks(cdp) {
+  await exerciseHubVerticalSlice(cdp);
+
   const oldSave = {
     version: "old-save",
     currentScene: "c01_arrival",
@@ -336,6 +338,92 @@ async function exerciseOldSaveAndTasks(cdp) {
   fs.writeFileSync(path.join(buildDir, "browser-mobile-play.png"), Buffer.from(capture.data, "base64"));
 }
 
+async function exerciseHubVerticalSlice(cdp) {
+  await evalValue(cdp, "localStorage.clear(); true");
+  await navigate(cdp, pageUrl);
+  await delay(300);
+  await evalValue(cdp, `document.querySelector("#showCreatorBtn").click(); document.querySelector("#playerNameInput").value = "Smoke"; document.querySelector("#beginGameBtn").click(); true`);
+  await delay(250);
+  for (let index = 0; index < 5; index += 1) {
+    await evalValue(cdp, `document.querySelector("#choices .choice-btn").click(); true`);
+    await delay(120);
+  }
+
+  const hub = await evalValue(cdp, `(() => ({
+    assignmentVisible: !document.querySelector("#assignmentPanel").classList.contains("hidden"),
+    assignmentText: document.querySelector("#assignmentPanel").textContent,
+    hubButtons: document.querySelectorAll(".hub-btn").length,
+    scene: JSON.parse(localStorage.getItem(${JSON.stringify(autoKey)})).currentScene,
+    hub: JSON.parse(localStorage.getItem(${JSON.stringify(autoKey)})).hub
+  }))()`);
+  if (!hub.assignmentVisible || !hub.assignmentText.includes("Report To Orientation") || hub.hubButtons < 2 || hub.scene !== "c01_hub_orientation") {
+    throw new Error(`Hub orientation did not render: ${JSON.stringify(hub)}`);
+  }
+  const actionToggle = await evalValue(cdp, `(() => {
+    const body = document.querySelector("#actionPanelBody");
+    const button = document.querySelector("#actionsBtn");
+    const before = {
+      collapsed: document.body.classList.contains("actions-collapsed"),
+      hidden: getComputedStyle(body).display === "none",
+      disabled: button.disabled,
+      count: button.dataset.count,
+      expanded: button.getAttribute("aria-expanded")
+    };
+    button.click();
+    const closed = {
+      collapsed: document.body.classList.contains("actions-collapsed"),
+      hidden: getComputedStyle(body).display === "none",
+      expanded: button.getAttribute("aria-expanded")
+    };
+    button.click();
+    const open = {
+      collapsed: document.body.classList.contains("actions-collapsed"),
+      hidden: getComputedStyle(body).display === "none",
+      expanded: button.getAttribute("aria-expanded")
+    };
+    return { before, open, closed };
+  })()`);
+  if (actionToggle.before.collapsed || actionToggle.before.hidden || actionToggle.before.disabled || Number(actionToggle.before.count) < 2 || actionToggle.before.expanded !== "true") {
+    throw new Error(`Actions toggle did not start open with available actions: ${JSON.stringify(actionToggle)}`);
+  }
+  if (!actionToggle.closed.collapsed || !actionToggle.closed.hidden || actionToggle.closed.expanded !== "false") {
+    throw new Error(`Actions toggle did not close the deck: ${JSON.stringify(actionToggle)}`);
+  }
+  if (actionToggle.open.collapsed || actionToggle.open.hidden || actionToggle.open.expanded !== "true") {
+    throw new Error(`Actions toggle did not reopen the deck: ${JSON.stringify(actionToggle)}`);
+  }
+  const hubLayout = await inspectLayout(cdp);
+  if (hubLayout.overflow.length || hubLayout.scrollOverflow > 1) {
+    throw new Error(`Hub mobile layout overflow:\n${JSON.stringify(hubLayout, null, 2)}`);
+  }
+  const hubCapture = await cdp.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+  fs.writeFileSync(path.join(buildDir, "browser-mobile-hub.png"), Buffer.from(hubCapture.data, "base64"));
+
+  await clickHubButton(cdp, "Lecture Hall A");
+  await delay(180);
+  let auto = await readAutoSave(cdp);
+  if (!auto.hub || auto.hub.locationId !== "lecture_hall" || auto.clock.minute <= 480) {
+    throw new Error(`Hub movement did not save location/time: ${JSON.stringify(auto.hub)} ${JSON.stringify(auto.clock)}`);
+  }
+
+  await clickHubButton(cdp, "Attend orientation");
+  await delay(200);
+  auto = await readAutoSave(cdp);
+  if (auto.currentScene !== "c01_orientation" || auto.hub.active) {
+    throw new Error(`Hub assignment did not enter orientation cleanly: ${auto.currentScene} ${JSON.stringify(auto.hub)}`);
+  }
+}
+
+async function clickHubButton(cdp, label) {
+  const clicked = await evalValue(cdp, `(() => {
+    const button = [...document.querySelectorAll(".hub-btn")].find((item) => item.textContent.includes(${JSON.stringify(label)}));
+    if (!button) return false;
+    button.click();
+    return true;
+  })()`);
+  if (!clicked) throw new Error(`Could not find hub button: ${label}`);
+}
+
 async function taskIndex(cdp, label) {
   const index = await evalValue(cdp, `(() => [...document.querySelectorAll("#taskList .task-btn")].findIndex((button) => button.textContent.includes(${JSON.stringify(label)})))()`);
   if (index < 0) throw new Error(`Could not find task button: ${label}`);
@@ -350,7 +438,7 @@ async function inspectLayout(cdp) {
   return evalValue(cdp, `(() => {
     const width = document.documentElement.clientWidth;
     const height = document.documentElement.clientHeight;
-    const targets = document.querySelectorAll("dialog[open], .start-dialog, .open-grid, .creator-grid, .pause-section, .slot, .text-btn, .dialog-subtitle");
+    const targets = document.querySelectorAll("dialog[open], .start-dialog, .open-grid, .creator-grid, .pause-section, .slot, .text-btn, .dialog-subtitle, .assignment-panel, .hub-card, .hub-btn");
     const overflow = [];
     for (const el of targets) {
       const rect = el.getBoundingClientRect();

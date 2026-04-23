@@ -11,6 +11,7 @@
     <script src="story.js" defer></script>
     <script src="story-expansion.js" defer></script>
     <script src="story-deepening.js" defer></script>
+    <script src="story-hubs.js" defer></script>
     <script src="game.js" defer></script>
   </head>
   <body>
@@ -54,7 +55,16 @@
           <div id="transcript" class="transcript" aria-label="Story transcript"></div>
 
           <div class="choice-deck" aria-label="Available choices">
-            <div id="choices" class="choices"></div>
+            <div class="choice-deck-head">
+              <button id="actionsBtn" class="action-toggle" type="button" aria-label="Toggle actions" aria-controls="actionPanelBody" aria-expanded="true" title="Actions">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h3v3H4V5Zm5 .5h11v2H9v-2ZM4 10.5h3v3H4v-3Zm5 .5h11v2H9v-2ZM4 16h3v3H4v-3Zm5 .5h11v2H9v-2Z"/></svg>
+                <span>Actions</span>
+              </button>
+            </div>
+            <div id="actionPanelBody" class="action-panel-body">
+              <div id="assignmentPanel" class="assignment-panel hidden"></div>
+              <div id="choices" class="choices"></div>
+            </div>
           </div>
         </section>
 

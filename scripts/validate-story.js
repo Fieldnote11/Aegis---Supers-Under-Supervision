@@ -1,7 +1,7 @@
 const fs = require("fs");
 const vm = require("vm");
 
-const STORY_FILES = ["story.js", "story-expansion.js", "story-deepening.js"];
+const STORY_FILES = ["story.js", "story-expansion.js", "story-deepening.js", "story-hubs.js"];
 const POWERS = ["energy", "gravity", "chronal", "bio", "tech", "space"];
 
 function loadStory() {
@@ -9,7 +9,9 @@ function loadStory() {
   STORY_FILES.forEach((file) => {
     vm.runInNewContext(fs.readFileSync(file, "utf8"), ctx, { filename: file });
   });
-  return ctx.window.AEGIS_STORY;
+  const story = ctx.window.AEGIS_STORY;
+  story.hubs = ctx.window.AEGIS_HUBS || { assignments: {}, locations: {} };
+  return story;
 }
 
 function nextIds(next) {
@@ -31,17 +33,27 @@ function graphReport(story) {
       nextIds(choice.next).forEach((next) => refs.push([id, index, next]));
     });
   });
+  Object.entries((story.hubs && story.hubs.locations) || {}).forEach(([locationId, location]) => {
+    (location.actions || []).forEach((action) => {
+      if (action.nextScene) refs.push([`hub:${locationId}`, action.id, action.nextScene]);
+    });
+  });
 
   const missing = refs.filter((item) => !ids.has(item[2]));
+  const intentionalOrphans = new Set(story.intentionalOrphans || []);
   const seen = new Set();
+  const allHubNextScenes = refs.filter((item) => String(item[0]).startsWith("hub:")).map((item) => item[2]);
   function walk(id) {
     if (!ids.has(id) || seen.has(id)) return;
     seen.add(id);
+    if (story.scenes[id].hub) {
+      allHubNextScenes.forEach(walk);
+    }
     (story.scenes[id].choices || []).forEach((choice) => nextIds(choice.next).forEach(walk));
   }
   walk(story.initialScene);
 
-  const orphans = [...ids].filter((id) => !seen.has(id)).sort();
+  const orphans = [...ids].filter((id) => !seen.has(id) && !intentionalOrphans.has(id)).sort();
   const incoming = {};
   ids.forEach((id) => { incoming[id] = 0; });
   refs.forEach(([, , next]) => {
@@ -50,6 +62,7 @@ function graphReport(story) {
   const zeroIncoming = Object.entries(incoming)
     .filter(([id, count]) => id !== story.initialScene && count === 0)
     .map(([id]) => id)
+    .filter((id) => !intentionalOrphans.has(id))
     .sort();
 
   return { scenes: ids.size, refs: refs.length, missing, orphans, zeroIncoming };
@@ -114,6 +127,13 @@ function simulate(story, power, seed) {
     if (condition.type === "powerLevelAtLeast") return state.power.level >= condition.value;
     if (condition.type === "matureContent") return state.matureContent;
     if (condition.type === "npcAtLeast") return true;
+    if (condition.type === "chapterAtLeast") return (story.scenes[state.scene] || {}).chapter >= condition.value;
+    if (condition.type === "chapterBefore") return (story.scenes[state.scene] || {}).chapter < condition.value;
+    if (condition.type === "assignmentIs") return true;
+    if (condition.type === "locationVisited") return true;
+    if (condition.type === "actionDone") return false;
+    if (condition.type === "notActionDone") return true;
+    if (condition.type === "actionCountAtLeast") return false;
     return true;
   }
 
@@ -139,6 +159,13 @@ function simulate(story, power, seed) {
     if (!scene) return { ok: false, reason: `missing ${state.scene}`, path };
     path.push(state.scene);
     if (scene.ending) return { ok: true, steps: step + 1, path };
+    if (scene.hub) {
+      const action = assignmentAction(story.hubs, scene.hub.assignmentId) || firstHubAction(story.hubs);
+      if (!action || !action.nextScene) return { ok: false, reason: `no hub route at ${state.scene}`, path };
+      apply(action.effects || []);
+      state.scene = action.nextScene;
+      continue;
+    }
     const choices = (scene.choices || []).filter((choice) => (choice.conditions || []).every(check));
     if (!choices.length) return { ok: false, reason: `no visible choices at ${state.scene}`, path };
     const choice = choices[Math.floor(random() * choices.length)];
@@ -146,6 +173,21 @@ function simulate(story, power, seed) {
     state.scene = resolveNext(choice);
   }
   return { ok: false, reason: "step limit", path };
+}
+
+function assignmentAction(hubs, assignmentId) {
+  const assignment = hubs && hubs.assignments && hubs.assignments[assignmentId];
+  const location = assignment && hubs.locations && hubs.locations[assignment.targetLocation];
+  return location && (location.actions || []).find((action) => action.id === assignment.targetAction);
+}
+
+function firstHubAction(hubs) {
+  const locations = Object.values((hubs && hubs.locations) || {});
+  for (const location of locations) {
+    const action = (location.actions || []).find((item) => item.nextScene);
+    if (action) return action;
+  }
+  return null;
 }
 
 function assetReport(story) {
@@ -158,6 +200,7 @@ function assetReport(story) {
     for (let i = 1; i <= 5; i += 1) files.add(`assets/avatars/${group}-${i}.png`);
   });
   files.add("assets/aegis-mark.svg");
+  files.add("story-hubs.js");
 
   const missing = [...files].filter((file) => !fs.existsSync(file));
   const serviceWorker = fs.existsSync("sw.js") ? fs.readFileSync("sw.js", "utf8") : "";

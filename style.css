@@ -156,6 +156,7 @@ input:focus-visible {
 }
 
 .icon-btn {
+  position: relative;
   display: grid;
   place-items: center;
   width: 44px;
@@ -178,6 +179,36 @@ input:focus-visible {
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0 var(--edge);
   background: var(--yellow);
+}
+
+.icon-btn.active {
+  background: var(--yellow);
+  color: #171414;
+}
+
+.icon-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.icon-btn.has-actions::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -9px;
+  right: -9px;
+  display: grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  border: 2px solid var(--edge);
+  background: var(--red);
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0 4px;
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1;
 }
 
 .icon-btn:active {
@@ -286,6 +317,7 @@ input:focus-visible {
   padding: 14px 16px;
   border-radius: 6px;
   overflow-wrap: anywhere;
+  scroll-margin-top: 118px;
 }
 
 .entry.scene {
@@ -430,11 +462,249 @@ body.dark-mode .entry.task {
     var(--paper);
   box-shadow: var(--shadow);
   padding: 12px;
+  z-index: 8;
+}
+
+.choice-deck-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.action-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  border: 3px solid var(--edge);
+  background: var(--button-bg);
+  color: var(--ink);
+  box-shadow: var(--thin-shadow);
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.action-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.action-toggle.active,
+.action-toggle:hover {
+  background: var(--yellow);
+  color: #171414;
+}
+
+.action-toggle:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.action-toggle.has-actions::after {
+  content: attr(data-count);
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  border: 2px solid var(--edge);
+  background: var(--red);
+  color: #ffffff;
+  border-radius: 50%;
+  padding: 0 5px;
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+body.actions-collapsed .action-panel-body {
+  display: none;
+}
+
+body.actions-collapsed .transcript {
+  min-height: calc(100vh - 380px);
+  max-height: calc(100vh - 330px);
 }
 
 .choices {
   display: grid;
   gap: 10px;
+}
+
+.assignment-panel {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+  border: 3px solid var(--edge);
+  background:
+    linear-gradient(90deg, rgba(225, 59, 50, 0.16), transparent 42%),
+    var(--status-bg);
+  box-shadow: var(--thin-shadow);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.assignment-panel h3,
+.hub-card h3,
+.hub-section h3 {
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.assignment-panel p,
+.hub-card p,
+.hub-empty {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.assignment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.assignment-meta span {
+  border: 2px solid var(--edge);
+  background: var(--button-bg);
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.hub-controls {
+  display: grid;
+  gap: 12px;
+  max-height: min(58vh, 620px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.hub-card,
+.hub-section {
+  border: 3px solid var(--edge);
+  background: var(--panel);
+  box-shadow: var(--thin-shadow);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.hub-card {
+  display: grid;
+  gap: 8px;
+}
+
+.hub-section {
+  display: grid;
+  gap: 10px;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+}
+
+.hub-grid.exits {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.hub-btn {
+  display: grid;
+  gap: 8px;
+  min-height: 96px;
+  width: 100%;
+  border: 3px solid var(--edge);
+  background: var(--choice-bg);
+  color: var(--ink);
+  box-shadow: var(--thin-shadow);
+  border-radius: 4px;
+  padding: 9px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.hub-btn.primary {
+  background:
+    linear-gradient(135deg, rgba(244, 197, 66, 0.36), transparent 58%),
+    var(--choice-bg);
+}
+
+.hub-btn:hover {
+  background: var(--notice-bg);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--edge);
+}
+
+.hub-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--edge);
+}
+
+.hub-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hub-btn-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.hub-btn-head strong {
+  min-width: 0;
+  text-transform: uppercase;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.hub-btn-head span {
+  flex: 0 0 auto;
+  max-width: 44%;
+  border: 2px solid var(--edge);
+  background: var(--cyan);
+  color: #ffffff;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.hub-btn-detail {
+  display: block;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.entry.location {
+  background:
+    linear-gradient(90deg, rgba(39, 132, 88, 0.14), transparent 38%),
+    var(--panel);
+}
+
+.entry.hubAction {
+  background:
+    linear-gradient(90deg, rgba(118, 82, 184, 0.14), transparent 38%),
+    var(--panel);
 }
 
 .choice-btn {
@@ -1243,6 +1513,19 @@ body.dark-mode .choice-index {
 
   .transcript {
     max-height: none;
+    min-height: 0;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  body.actions-collapsed .transcript {
+    max-height: none;
+    min-height: 0;
+  }
+
+  .choice-deck {
+    position: static;
+    margin-top: 12px;
   }
 }
 
@@ -1332,6 +1615,36 @@ body.dark-mode .choice-index {
     grid-template-columns: 34px minmax(0, 1fr);
     min-height: 54px;
     padding-right: 8px;
+  }
+
+  .choice-deck {
+    max-height: 72dvh;
+    overflow: visible;
+    padding: 10px;
+  }
+
+  .hub-controls {
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .hub-grid,
+  .hub-grid.exits {
+    grid-template-columns: 1fr;
+  }
+
+  .hub-btn {
+    min-height: 86px;
+  }
+
+  .hub-btn-head {
+    display: grid;
+  }
+
+  .hub-btn-head span {
+    max-width: 100%;
+    width: fit-content;
   }
 
   .choice-index {
