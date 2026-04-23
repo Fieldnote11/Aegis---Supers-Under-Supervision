@@ -84,7 +84,7 @@
           text: [
             "Processing is less dramatic than the gate and somehow more invasive. A medic checks your pulse. A legal officer explains consent with the precision of someone who has seen consent challenged in court. A power tech asks whether your output changes when you are startled, praised, cornered, insulted, or touched by someone you trust.",
             "Aegis writes everything down. Not because paper can stop you. Because paper can prove who knew what before something went wrong.",
-            "Commandant Vance passes through the glass-walled office beyond processing. She does not stop. She does not need to. Her glance lands once, sharp and brief, and you understand that the file has already been read by someone who thinks in contingencies."
+            "Commandant Vance passes through the glass-walled office beyond processing. He does not stop. He does not need to. His glance lands once, sharp and brief, and you understand that the file has already been read by someone who thinks in contingencies."
           ],
           choices: [
             makeChoice("Answer the invasive questions completely. Data beats rumor.", [
@@ -257,7 +257,7 @@
           focus: "Vance",
           text: [
             "Through the observation glass, the baseline chamber looks almost empty. That is the trick. Empty rooms make consequences easier to see. Every scorch mark, frost bloom, shock wave, and fracture belongs to someone. The room remembers better than people do.",
-            "Vance stands with a tablet under one arm, watching residents finish their runs. She does not look impressed by spectacle. She looks interested in recovery time, in how quickly a resident stops after success, in whether their eyes seek applause or exits.",
+            "Vance stands with a tablet under one arm, watching residents finish their runs. He does not look impressed by spectacle. He looks interested in recovery time, in how quickly a resident stops after success, in whether their eyes seek applause or exits.",
             "You realize that Aegis is not only measuring what you can do. It is measuring what power does to your attention."
           ],
           choices: [
@@ -653,7 +653,7 @@
               { type: "stat", key: "audacity", delta: 1 },
               { type: "flag", key: "dockImmediateYes", value: true }
             ]),
-            makeChoice("Ask what Vance would call this if she saw it.", [
+            makeChoice("Ask what Vance would call this if he saw it.", [
               { type: "relationship", key: "Vance", delta: 1 },
               { type: "stat", key: "aegisTrust", delta: 1 },
               { type: "flag", key: "askedVanceDockAngle", value: true }
@@ -945,7 +945,7 @@
           focus: "Vance",
           text: [
             "Aegis medical smells like antiseptic, coffee, and people pretending they slept. The Event Horizon report has already grown teeth. Vektor is no longer a rumor with expensive lawyers. Rhea Kane is no longer a name in someone else's file.",
-            "Vance reviews the facts without raising her voice. That makes them worse. External hostile contact. Targeted intelligence. Unclear leak vector. Unknown escalation ceiling. You sit under fluorescent lights while the adults in charge decide which category of danger you have become.",
+            "Vance reviews the facts without raising his voice. That makes them worse. External hostile contact. Targeted intelligence. Unclear leak vector. Unknown escalation ceiling. You sit under fluorescent lights while the adults in charge decide which category of danger you have become.",
             "The worst part is that some of their fear is reasonable."
           ],
           choices: [
@@ -1420,9 +1420,9 @@
           location: "Aegis Atrium",
           focus: "Vance",
           text: [
-            "Vance gives speeches the way some people handle blades: carefully, with no wasted movement. She talks about responsibility, integration, restraint, public trust. She does not say fear. She does not say money. She does not say that powerful adults become political facts the moment they step outside supervised walls.",
+            "Vance gives speeches the way some people handle blades: carefully, with no wasted movement. He talks about responsibility, integration, restraint, public trust. He does not say fear. He does not say money. He does not say that powerful adults become political facts the moment they step outside supervised walls.",
             "When your name is called, the walk to the stage feels longer than the building. The folder is heavier than paper should be.",
-            "Vance holds your eye as she hands it over. Whatever she thinks of your choices, she knows they were choices. That is not forgiveness. It might be respect."
+            "Vance holds your eye as he hands it over. Whatever he thinks of your choices, he knows they were choices. That is not forgiveness. It might be respect."
           ],
           choices: [
             makeChoice("Accept the folder like a license you intend to honor.", [
@@ -1435,7 +1435,7 @@
               { type: "stat", key: "resolve", delta: 1 },
               { type: "flag", key: "acceptedFolderAsEvidence", value: true }
             ]),
-            makeChoice("Ask Vance quietly whether the recommendation is hers or Aegis's.", [
+            makeChoice("Ask Vance quietly whether the recommendation is his or Aegis's.", [
               { type: "relationship", key: "Vance", delta: 2 },
               { type: "stat", key: "contractorPath", delta: 1 },
               { type: "flag", key: "askedVanceRecommendationOwner", value: true }

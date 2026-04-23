@@ -1,4 +1,4 @@
-const CACHE_NAME = "aegis-playtest-v8";
+const CACHE_NAME = "aegis-playtest-v9";
 const FILES = [
   "./",
   "./index.html",

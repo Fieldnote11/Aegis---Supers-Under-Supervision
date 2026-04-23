@@ -309,6 +309,29 @@ async function exerciseOldSaveAndTasks(cdp) {
     throw new Error(`Speaker portrait tiles did not render/load: ${JSON.stringify(speechTiles)}`);
   }
 
+  await evalValue(cdp, `document.querySelector("#statusBtn").click(); true`);
+  await delay(250);
+  const drawer = await evalValue(cdp, `(() => {
+    const panel = document.querySelector("#dossier");
+    const rect = panel.getBoundingClientRect();
+    return {
+      open: panel.classList.contains("panel-open"),
+      hidden: panel.getAttribute("aria-hidden"),
+      left: Math.round(rect.left),
+      right: Math.round(rect.right),
+      viewport: document.documentElement.clientWidth,
+      bonds: document.querySelector("#relationshipList").textContent
+    };
+  })()`);
+  if (!drawer.open || drawer.hidden !== "false" || drawer.left < -1 || drawer.right > drawer.viewport + 1) {
+    throw new Error(`Mobile status drawer did not open cleanly: ${JSON.stringify(drawer)}`);
+  }
+  if (!drawer.bonds.includes("Piper") || drawer.bonds.includes("Camille") || drawer.bonds.includes("Julian") || drawer.bonds.includes("Theo")) {
+    throw new Error(`Bond reveal did not match met characters in old-save smoke: ${JSON.stringify(drawer.bonds)}`);
+  }
+  await evalValue(cdp, `document.querySelector("#closeDossierBtn").click(); true`);
+  await delay(100);
+
   const capture = await cdp.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
   fs.writeFileSync(path.join(buildDir, "browser-mobile-play.png"), Buffer.from(capture.data, "base64"));
 }

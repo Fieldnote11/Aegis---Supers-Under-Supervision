@@ -405,6 +405,7 @@
       statWheel: document.getElementById("statWheel"),
       statusList: document.getElementById("statusList"),
       relationshipList: document.getElementById("relationshipList"),
+      closeDossierBtn: document.getElementById("closeDossierBtn"),
       autosaveStatus: document.getElementById("autosaveStatus"),
       startDialog: document.getElementById("startDialog"),
       openGameView: document.getElementById("openGameView"),
@@ -497,8 +498,14 @@
       render();
     });
     els.statusBtn.addEventListener("click", () => {
-      els.dossier.classList.toggle("hidden");
+      toggleDossier();
     });
+    els.closeDossierBtn.addEventListener("click", () => closeDossierDrawer());
+    window.addEventListener("resize", syncDossierLayout);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeDossierDrawer();
+    });
+    syncDossierLayout();
   }
 
   function setupCreator() {
@@ -767,7 +774,7 @@
         speaker.textContent = displaySpeaker(entry.speaker || "Scene");
         body.appendChild(speaker);
         entry.text.forEach((paragraph) => body.appendChild(paragraphNode(paragraph)));
-        node.append(speakerTile(entry.speaker || "Seth", "Speaking"), body);
+        node.append(speakerTile(entry.speaker || "Seth", "Focus"), body);
       } else if (entry.type === "choice") {
         node.classList.add("speech-entry", "player-entry");
         const body = document.createElement("div");
@@ -952,8 +959,9 @@
 
   function renderRelationships() {
     els.relationshipList.innerHTML = "";
+    let visibleCount = 0;
     Object.entries(state.relationships).forEach(([name, value]) => {
-      if (!MAIN_NPCS.includes(name) && value < 3) return;
+      if (!hasMetCharacter(name)) return;
       const row = document.createElement("div");
       row.className = "bond-signal";
 
@@ -972,7 +980,14 @@
 
       row.append(label, meter, score);
       els.relationshipList.appendChild(row);
+      visibleCount += 1;
     });
+    if (!visibleCount) {
+      const empty = document.createElement("p");
+      empty.className = "empty-state";
+      empty.textContent = "No bonds on record yet.";
+      els.relationshipList.appendChild(empty);
+    }
   }
 
   function renderNpcDossiers(target, options = {}) {
@@ -1042,13 +1057,34 @@
 
   function dossierNames(compact) {
     const names = Object.keys(STORY.defaultRelationships).filter((name) => STORY.characters[name]);
-    if (!compact) return names;
-    const visible = new Set(MAIN_NPCS);
+    if (!compact) return names.filter((name) => hasMetCharacter(name));
+    const visible = new Set();
     names.forEach((name) => {
       const npc = ensureNpcState(name);
-      if ((state.relationships[name] || 0) >= 3 || npc.memories.length || npc.romance !== "None") visible.add(name);
+      if (hasMetCharacter(name) && ((state.relationships[name] || 0) >= 3 || npc.memories.length || npc.romance !== "None" || MAIN_NPCS.includes(name))) visible.add(name);
     });
     return names.filter((name) => visible.has(name));
+  }
+
+  function hasMetCharacter(name) {
+    if (!name || name === "Seth" || !STORY.characters[name]) return false;
+    const defaultValue = STORY.defaultRelationships[name] || 0;
+    const relationshipChanged = (state.relationships && (state.relationships[name] || 0) !== defaultValue);
+    const npc = state.npcs && state.npcs[name];
+    const npcChanged = npc && (
+      npc.romance !== "None" ||
+      Boolean(npc.agency) ||
+      (npc.memories || []).length > 0 ||
+      npc.attraction > 0 ||
+      npc.friction > 0 ||
+      npc.concern > 0
+    );
+    if (relationshipChanged || npcChanged) return true;
+    return (state.history || []).some((entry) => {
+      if (entry.speaker === name) return true;
+      const lines = Array.isArray(entry.text) ? entry.text : [entry.text || ""];
+      return lines.some((line) => String(line).toLowerCase().includes(name.toLowerCase()));
+    });
   }
 
   function renderProgress() {
@@ -2010,6 +2046,44 @@
   function getAvatarDef(gender, avatarId) {
     const group = AVATAR_CATALOG[gender] || AVATAR_CATALOG.neutral;
     return group.find((avatar) => avatar.id === avatarId) || group[0];
+  }
+
+  function isDossierDrawerLayout() {
+    return window.matchMedia("(max-width: 1040px)").matches;
+  }
+
+  function toggleDossier() {
+    if (isDossierDrawerLayout()) {
+      const isOpen = els.dossier.classList.toggle("panel-open");
+      setDossierDrawerState(isOpen);
+      return;
+    }
+    els.dossier.classList.toggle("hidden");
+    els.statusBtn.setAttribute("aria-expanded", String(!els.dossier.classList.contains("hidden")));
+  }
+
+  function closeDossierDrawer() {
+    if (!els.dossier || !els.dossier.classList.contains("panel-open")) return;
+    els.dossier.classList.remove("panel-open");
+    setDossierDrawerState(false);
+  }
+
+  function setDossierDrawerState(isOpen) {
+    els.dossier.setAttribute("aria-hidden", String(!isOpen));
+    els.statusBtn.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("dossier-open", isOpen);
+  }
+
+  function syncDossierLayout() {
+    if (isDossierDrawerLayout()) {
+      els.dossier.classList.remove("hidden");
+      setDossierDrawerState(els.dossier.classList.contains("panel-open"));
+      return;
+    }
+    els.dossier.classList.remove("panel-open");
+    els.dossier.removeAttribute("aria-hidden");
+    document.body.classList.remove("dossier-open");
+    els.statusBtn.setAttribute("aria-expanded", String(!els.dossier.classList.contains("hidden")));
   }
 
   function displaySpeaker(speaker) {

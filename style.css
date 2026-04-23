@@ -491,6 +491,10 @@ body.dark-mode .entry.task {
   top: 104px;
 }
 
+.drawer-head {
+  display: none;
+}
+
 .portrait-panel,
 .status-panel,
 .relationship-panel {
@@ -569,6 +573,12 @@ dd {
 .signals {
   display: grid;
   gap: 8px;
+}
+
+.empty-state {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 900;
 }
 
 .bond-signal {
@@ -1167,8 +1177,58 @@ body.dark-mode .choice-index {
   }
 
   .dossier {
-    position: static;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    width: min(390px, calc(100dvw - 28px));
+    grid-template-columns: 1fr;
+    align-content: start;
+    overflow-y: auto;
+    padding: 12px;
+    border-left: 4px solid var(--edge);
+    background: var(--paper);
+    box-shadow: -6px 0 0 var(--edge);
+    transform: translateX(calc(100% + 12px));
+    transition: transform 160ms ease;
+  }
+
+  .dossier.panel-open {
+    transform: translateX(0);
+  }
+
+  body.dossier-open .dossier.panel-open {
+    transform: translateX(0);
+  }
+
+  body.dossier-open {
+    overflow: hidden;
+  }
+
+  body.dossier-open::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: rgba(5, 7, 13, 0.55);
+  }
+
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border: 4px solid var(--edge);
+    background: var(--panel);
+    box-shadow: var(--thin-shadow);
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  .drawer-head h2 {
+    margin: 0;
+    text-transform: uppercase;
   }
 
   .pause-grid {
@@ -1279,7 +1339,6 @@ body.dark-mode .choice-index {
     height: 30px;
   }
 
-  .dossier,
   .pause-grid,
   .open-grid,
   .creator-grid,
