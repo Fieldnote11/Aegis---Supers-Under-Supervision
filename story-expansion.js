@@ -1726,3 +1726,94 @@
   redirect("c10_graduation", "c10_dinner_reveal", "c10_goodbyes");
   redirect("c10_reactions", "c10_final_path", "c10_last_vote");
 })();
+
+/* AUTHORING_PACKS_REDIRECTS_START */
+(function () {
+  "use strict";
+
+  const STORY = window.AEGIS_STORY;
+  if (!STORY) return;
+  const scenes = STORY.scenes;
+
+  function redirect(sceneId, from, to) {
+    const scene = scenes[sceneId];
+    if (!scene || !scene.choices) return;
+    scene.choices.forEach((choice) => {
+      if (choice.next === from) choice.next = to;
+      if (choice.next && choice.next.default === from) choice.next.default = to;
+      if (choice.next && choice.next.cases) {
+        choice.next.cases.forEach((item) => {
+          if (item.scene === from) item.scene = to;
+        });
+      }
+    });
+  }
+
+  function retargetAllChoices(sceneId, to) {
+    const scene = scenes[sceneId];
+    if (!scene || !scene.choices) return;
+    scene.choices.forEach((choice) => {
+      choice.next = to;
+    });
+  }
+
+  redirect("c01_arrival", "c01_orientation", "add_c01_intake_overlap_to_orientation");
+  redirect("c01_arrival", "c01_shortcuts", "add_c01_intake_overlap_to_shortcuts");
+  redirect("c01_arrival", "c01_camille_first", "add_c01_intake_overlap_to_camille");
+  redirect("c01_orientation", "c01_lounge", "add_c01_after_orientation_group");
+  redirect("c01_room_assignment", "c01_intake_night", "add_c01_common_room_night");
+
+  redirect("c02_baseline_intro", "c02_after", "add_c02_after_baseline_reactivity");
+  redirect("c02_control_lab", "c02_residence_after", "add_c02_control_lab_fallout");
+
+  redirect("c02_residence_after", "c03_deep_invitation", "add_c03_admin_notice_board");
+  redirect("c02_residence_after", "c03_hub_gallery", "add_c03_admin_notice_board");
+
+  retargetAllChoices("add_c03_residence_kitchen_after_reports", "add_c04_anchor_afterhours");
+  redirect("c03_private_notes", "c04_deep_solo", "add_c03_residence_kitchen_after_reports");
+  redirect("c03_private_notes", "c04_hub_training", "add_c03_residence_kitchen_after_reports");
+
+  redirect("c04_debrief", "c05_deep_after", "add_c04_debrief_crosscurrents");
+  redirect("c04_debrief", "c05_hub_dock", "add_c04_debrief_crosscurrents");
+
+  redirect("c05_after_flight", "c05_relationship", "add_c05_infirmary_after");
+  redirect("c05_rooftop_after", "c06_deep_permission", "add_c05_residence_kitchen_return");
+  redirect("c05_rooftop_after", "c06_hub_event", "add_c05_residence_kitchen_return");
+  redirect("c05_rooftop_after", "c06_event_horizon", "add_c05_residence_kitchen_return");
+
+  redirect("c06_aftershock", "c06_apartment_board", "add_c06_blackwater_aftershock");
+  redirect("c06_rhea_arrives", "c06_after_rhea", "add_c06_rhea_floor_freeze");
+  redirect("c06_apartment_board", "c07_bait", "add_c06_apartment_board_night");
+  redirect("c06_apartment_board", "c07_deep_morning", "add_c06_apartment_board_night");
+  redirect("c06_apartment_board", "c07_hub_bait", "add_c06_apartment_board_night");
+
+  redirect("c07_deep_morning", "c07_deep_fallout", "add_c07_morning_kitchen_fallout");
+  redirect("add_c07_bait_conscience_expanded", "c07_before_bait", "add_c07_before_bait_fracture");
+  redirect("c07_afteraction_erased", "c07_medbay_fallout", "add_c07_afteraction_kitchen");
+  redirect("c07_afteraction_contained", "c07_medbay_fallout", "add_c07_afteraction_kitchen");
+  redirect("c07_afteraction_escaped", "c07_medbay_fallout", "add_c07_afteraction_kitchen");
+
+  redirect("c07_jordan_signal", "c08_deep_review", "add_c08_hangar_arrival");
+  redirect("c07_jordan_signal", "c08_hub_airbase", "add_c08_hangar_arrival");
+  redirect("c08_rina_wall", "c08_private_threshold", "add_c08_afterburn_corridor");
+  redirect("c08_stored_sun", "c08_private_threshold", "add_c08_afterburn_corridor");
+
+  redirect("c09_packing", "c09_graduation_eve", "add_c09_before_pizza_threshold");
+  redirect("c09_last_messages", "c09_plan_reveal", "add_c09_after_messages_table");
+  redirect("add_c09_after_messages_table", "c09_plan_reveal", "add_c09_final_shared_kitchen");
+  redirect("c09_last_private_moments", "c09_private_camille", "add_c09_camille_service_stair");
+  redirect("c09_last_private_moments", "c09_private_julian", "add_c09_julian_packing_show_v2");
+  redirect("c09_last_private_moments", "c09_private_theo", "add_c09_theo_archive_walk");
+  redirect("c09_private_camille", "c09_walk_piper", "add_c09_piper_rooftop_long");
+  redirect("c09_private_julian", "c09_walk_piper", "add_c09_piper_rooftop_long");
+  redirect("c09_private_theo", "c09_walk_piper", "add_c09_piper_rooftop_long");
+  redirect("c09_private_shared", "c09_walk_piper", "add_c09_piper_rooftop_long");
+  redirect("add_c09_camille_service_stair", "c09_walk_piper", "add_c09_piper_rooftop_long");
+  redirect("add_c09_julian_packing_show_v2", "c09_last_private_moments", "add_c09_piper_rooftop_long");
+  redirect("add_c09_theo_archive_walk", "c09_last_private_moments", "add_c09_piper_rooftop_long");
+
+  redirect("c10_before_stage", "c10_graduation", "add_c10_backstage_core_four");
+  redirect("c10_graduation", "c10_goodbyes", "add_c10_after_stage_service_corridor");
+  redirect("c10_goodbyes", "c10_dinner_reveal", "add_c10_restaurant_anteroom");
+})();
+/* AUTHORING_PACKS_REDIRECTS_END */

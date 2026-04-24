@@ -1,7 +1,7 @@
 const fs = require("fs");
 const vm = require("vm");
 
-const STORY_FILES = ["story.js", "story-expansion.js", "story-deepening.js", "story-hubs.js"];
+const STORY_FILES = ["story.js", "story-expansion.js", "story-deepening.js", "story-hubs.js", "story-volume.js"];
 const POWERS = ["energy", "gravity", "chronal", "bio", "tech", "space"];
 
 function loadStory() {

@@ -12,47 +12,62 @@
     <script src="story-expansion.js" defer></script>
     <script src="story-deepening.js" defer></script>
     <script src="story-hubs.js" defer></script>
+    <script src="story-volume.js" defer></script>
     <script src="game.js" defer></script>
   </head>
   <body>
     <div class="app-shell">
-      <header class="topbar">
-        <div class="brand-lockup">
-          <img src="assets/aegis-mark.svg" alt="" class="brand-mark">
-          <div>
-            <h1>Aegis</h1>
-            <p>Supers Under Supervision</p>
-          </div>
-        </div>
-        <div id="autosaveStatus" class="autosave-status" aria-live="polite">Autosave ready</div>
-        <nav class="toolstrip" aria-label="Game controls">
-          <button id="newGameBtn" class="icon-btn" type="button" aria-label="New game" title="New game">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 8.7 6.7h-2.2A7 7 0 1 1 12 5c1.8 0 3.4.7 4.7 1.8L14 9.5h7V2.6l-2.9 2.8A9 9 0 0 0 12 3Z"/></svg>
-          </button>
-          <button id="restartChapterBtn" class="icon-btn" type="button" aria-label="Restart chapter" title="Restart chapter">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v3h-2V6H8v12h8v-1h2v3H6V4Zm11.2 5.2L22 14l-4.8 4.8v-3.3H11v-3h6.2V9.2Z"/></svg>
-          </button>
-          <button id="saveLoadBtn" class="icon-btn" type="button" aria-label="Pause menu" title="Pause menu">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7V4Zm6 0h4v16h-4V4Z"/></svg>
-          </button>
-          <button id="statusBtn" class="icon-btn" type="button" aria-label="Toggle status panel" aria-controls="dossier" aria-expanded="true" title="Toggle status panel">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16v18H4V3Zm2 2v14h12V5H6Zm2 3h8v2H8V8Zm0 4h8v2H8v-2Zm0 4h5v2H8v-2Z"/></svg>
-          </button>
-        </nav>
-      </header>
-
       <main class="game-grid">
         <section class="story-panel" aria-live="polite">
           <div class="scene-banner">
             <img id="sceneArt" src="assets/backgrounds/aegis-point.svg" alt="" class="scene-art">
+            <header class="topbar">
+              <div class="brand-lockup">
+                <img src="assets/aegis-mark.svg" alt="" class="brand-mark">
+                <div>
+                  <h1>Aegis</h1>
+                  <p>Supers Under Supervision</p>
+                </div>
+              </div>
+              <div id="autosaveStatus" class="autosave-status" aria-live="polite">Autosave ready</div>
+              <nav class="toolstrip" aria-label="Game controls">
+                <button id="newGameBtn" class="icon-btn" type="button" aria-label="New game" title="New game">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 8.7 6.7h-2.2A7 7 0 1 1 12 5c1.8 0 3.4.7 4.7 1.8L14 9.5h7V2.6l-2.9 2.8A9 9 0 0 0 12 3Z"/></svg>
+                </button>
+                <button id="restartChapterBtn" class="icon-btn" type="button" aria-label="Restart chapter" title="Restart chapter">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4h12v3h-2V6H8v12h8v-1h2v3H6V4Zm11.2 5.2L22 14l-4.8 4.8v-3.3H11v-3h6.2V9.2Z"/></svg>
+                </button>
+                <button id="saveLoadBtn" class="icon-btn" type="button" aria-label="Pause menu" title="Pause menu">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7V4Zm6 0h4v16h-4V4Z"/></svg>
+                </button>
+                <button id="statusBtn" class="icon-btn" type="button" aria-label="Toggle status and bonds" aria-controls="dossier" aria-expanded="false" title="Status and bonds">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h16v18H4V3Zm2 2v14h12V5H6Zm2 3h8v2H8V8Zm0 4h8v2H8v-2Zm0 4h5v2H8v-2Z"/></svg>
+                </button>
+              </nav>
+            </header>
             <div class="scene-ink">
-              <span id="chapterKicker">Chapter 1</span>
-              <h2 id="sceneHeading">Pressure Cooker</h2>
-              <p id="sceneLocation">Aegis Point</p>
+              <div class="scene-summary">
+                <div class="scene-title-block">
+                  <span id="chapterKicker" class="scene-kicker">Chapter 1</span>
+                  <h2 id="sceneHeading">Pressure Cooker</h2>
+                </div>
+                <div id="sceneState" class="scene-state" aria-label="Current scene status">
+                  <span id="sceneLocationBadge" class="scene-state-pill">Location: Aegis Point</span>
+                  <span id="sceneTaskBadge" class="scene-state-pill hidden"></span>
+                </div>
+              </div>
             </div>
           </div>
 
           <div id="transcript" class="transcript" aria-label="Story transcript"></div>
+          <div
+            id="paneResizeHandle"
+            class="pane-resizer"
+            role="separator"
+            aria-label="Resize story and actions panes"
+            aria-orientation="vertical"
+            tabindex="0"
+          ></div>
 
           <div class="choice-deck" aria-label="Available choices">
             <div class="choice-deck-head">
@@ -60,6 +75,17 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h3v3H4V5Zm5 .5h11v2H9v-2ZM4 10.5h3v3H4v-3Zm5 .5h11v2H9v-2ZM4 16h3v3H4v-3Zm5 .5h11v2H9v-2Z"/></svg>
                 <span>Actions</span>
               </button>
+              <div class="choice-deck-tools" role="group" aria-label="Actions pane position">
+                <button id="dockLeftBtn" class="dock-toggle" type="button" aria-label="Dock actions left" title="Dock actions left">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v16H4V4Zm8 0h8v4h-8V4Zm0 6h8v4h-8v-4Zm0 6h8v4h-8v-4Z"/></svg>
+                </button>
+                <button id="dockBottomBtn" class="dock-toggle" type="button" aria-label="Dock actions bottom" title="Dock actions bottom">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v8H4V4Zm0 10h4v6H4v-6Zm6 0h4v6h-4v-6Zm6 0h4v6h-4v-6Z"/></svg>
+                </button>
+                <button id="dockRightBtn" class="dock-toggle" type="button" aria-label="Dock actions right" title="Dock actions right">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v16h-6V4ZM4 4h8v4H4V4Zm0 6h8v4H4v-4Zm0 6h8v4H4v-4Z"/></svg>
+                </button>
+              </div>
             </div>
             <div id="actionPanelBody" class="action-panel-body">
               <div id="assignmentPanel" class="assignment-panel hidden"></div>

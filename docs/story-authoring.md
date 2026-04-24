@@ -6,7 +6,8 @@ The story is data-driven JavaScript. The browser loads the story files first, th
 2. `story-expansion.js`
 3. `story-deepening.js`
 4. `story-hubs.js`
-5. `game.js`
+5. `story-volume.js`
+6. `game.js`
 
 The base story lives in `story.js` under `window.AEGIS_STORY`.
 
@@ -16,12 +17,15 @@ The deepening pass lives in `story-deepening.js`. It loads after `story-expansio
 
 The hub exploration pass lives in `story-hubs.js`. It loads after the deepening pass, adds the chapter-by-chapter location layer, defines current assignments, and redirects selected story beats into hub exploration.
 
+The volume pass lives in `story-volume.js`. It loads after the hub layer and adds longer optional conversations, multi-beat character scenes, richer training drills, post-fight/recovery texture, hidden/conditional exploration, and late-game relationship callbacks.
+
 ## File Roles
 
 - `story.js`: canonical base story object. Contains `chapters`, `characters`, `backgrounds`, the original `scenes`, default stats/status/relationships, and the initial scene id.
 - `story-expansion.js`: additive layer. It mutates `window.AEGIS_STORY` after the base file loads, adds more scenes, and redirects some existing choices through those scenes.
 - `story-deepening.js`: second additive layer. It adds extra chapter beats and changes chapter starts/rejoin points.
 - `story-hubs.js`: hub/location layer. It defines `window.AEGIS_HUBS`, hub activation scenes, location data, assignment targets, optional interactions, and chapter exploration redirects.
+- `story-volume.js`: optional volume layer. It adds longer hub-driven scene chains and callbacks without changing core story routes.
 - `game.js`: engine and UI. It handles saves, state normalization, conditions, effects, power leveling, relationships, clock/fatigue, free-time tasks, and rendering.
 - `docs/story-templates.js`: examples only. It is not loaded by the game.
 
@@ -32,6 +36,7 @@ story.js
 story-expansion.js
 story-deepening.js
 story-hubs.js
+story-volume.js
 game.js
 docs/story-authoring.md
 docs/story-templates.js

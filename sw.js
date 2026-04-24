@@ -1,4 +1,4 @@
-const CACHE_NAME = "aegis-playtest-v13";
+const CACHE_NAME = "aegis-playtest-v14";
 const FILES = [
   "./",
   "./index.html",
@@ -8,6 +8,7 @@ const FILES = [
   "./story-expansion.js",
   "./story-deepening.js",
   "./story-hubs.js",
+  "./story-volume.js",
   "./manifest.webmanifest",
   "./assets/aegis-mark.svg",
   "./assets/backgrounds/aegis-point.svg",

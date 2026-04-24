@@ -6,6 +6,7 @@
   const SAVE_PREFIX = "aegis-choice-game";
   const AUTO_KEY = `${SAVE_PREFIX}:autosave`;
   const THEME_KEY = `${SAVE_PREFIX}:theme`;
+  const LAYOUT_KEY = `${SAVE_PREFIX}:layout`;
   const SLOT_KEY = (slot) => `${SAVE_PREFIX}:slot:${slot}`;
   const POWER_THRESHOLDS = [0, 4, 9, 16, 25, 36, 50, 66, 84, 105];
   const START_TIME_MINUTES = 8 * 60;
@@ -365,6 +366,8 @@
   const els = {};
   let state;
   let actionsOpen = true;
+  let layoutPrefs = defaultLayoutPrefs();
+  let paneResizeState = null;
   let creatorSelection = {
     gender: "male",
     pronouns: "he",
@@ -379,6 +382,8 @@
 
   function init() {
     cacheElements();
+    layoutPrefs = loadLayoutPrefs();
+    applyLayoutPrefs();
     applyTheme(localStorage.getItem(THEME_KEY) || "light");
     bindEvents();
     state = load(AUTO_KEY) || createState();
@@ -396,9 +401,12 @@
     Object.assign(els, {
       chapterKicker: document.getElementById("chapterKicker"),
       sceneHeading: document.getElementById("sceneHeading"),
-      sceneLocation: document.getElementById("sceneLocation"),
+      sceneLocationBadge: document.getElementById("sceneLocationBadge"),
+      sceneTaskBadge: document.getElementById("sceneTaskBadge"),
       sceneArt: document.getElementById("sceneArt"),
       transcript: document.getElementById("transcript"),
+      storyPanel: document.querySelector(".story-panel"),
+      paneResizeHandle: document.getElementById("paneResizeHandle"),
       assignmentPanel: document.getElementById("assignmentPanel"),
       choices: document.getElementById("choices"),
       portrait: document.getElementById("portrait"),
@@ -443,6 +451,9 @@
       newGameBtn: document.getElementById("newGameBtn"),
       restartChapterBtn: document.getElementById("restartChapterBtn"),
       actionsBtn: document.getElementById("actionsBtn"),
+      dockLeftBtn: document.getElementById("dockLeftBtn"),
+      dockBottomBtn: document.getElementById("dockBottomBtn"),
+      dockRightBtn: document.getElementById("dockRightBtn"),
       saveLoadBtn: document.getElementById("saveLoadBtn"),
       statusBtn: document.getElementById("statusBtn")
     });
@@ -467,6 +478,11 @@
 
     els.saveLoadBtn.addEventListener("click", openPauseDialog);
     els.actionsBtn.addEventListener("click", () => toggleActionsPanel());
+    els.dockLeftBtn.addEventListener("click", () => setActionsDock("left"));
+    els.dockBottomBtn.addEventListener("click", () => setActionsDock("bottom"));
+    els.dockRightBtn.addEventListener("click", () => setActionsDock("right"));
+    els.paneResizeHandle.addEventListener("pointerdown", startPaneResize);
+    els.paneResizeHandle.addEventListener("keydown", handlePaneResizeKey);
     els.showCreatorBtn.addEventListener("click", showCreatorView);
     els.backToOpenBtn.addEventListener("click", showOpenGameView);
     els.beginGameBtn.addEventListener("click", () => {
@@ -509,10 +525,12 @@
     });
     els.closeDossierBtn.addEventListener("click", () => closeDossierDrawer());
     window.addEventListener("resize", syncDossierLayout);
+    window.addEventListener("resize", syncPaneLayout);
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") closeDossierDrawer();
     });
     syncDossierLayout();
+    syncPaneLayout();
   }
 
   function setupCreator() {
@@ -751,10 +769,15 @@
     const background = STORY.backgrounds[backgroundKey] || STORY.backgrounds.aegis;
 
     els.chapterKicker.textContent = `Chapter ${chapter.id}`;
-    els.sceneHeading.textContent = hubLocation ? hubLocation.name : scene.title;
-    els.sceneLocation.textContent = hubLocation
-      ? `${hubLocation.region || scene.location || "Aegis Point"}${assignment ? ` | ${assignment.title}` : ""}`
-      : scene.location || "";
+    els.sceneHeading.textContent = chapter.title || scene.title;
+    els.sceneLocationBadge.textContent = `Location: ${hubLocation ? hubLocation.name : (scene.location || "Aegis Point")}`;
+    if (assignment && hubLocation) {
+      els.sceneTaskBadge.textContent = `Task: ${assignment.title}`;
+      els.sceneTaskBadge.classList.remove("hidden");
+    } else {
+      els.sceneTaskBadge.textContent = "";
+      els.sceneTaskBadge.classList.add("hidden");
+    }
     els.sceneArt.src = background;
     els.portrait.src = focus.portrait;
     els.focusName.textContent = focus.name || scene.focus || state.profile.name;
@@ -762,6 +785,7 @@
 
     renderTranscript();
     renderChoices(scene);
+    applyLayoutPrefs();
     renderPowerPanel();
     renderStatWheel();
     renderStatus();
@@ -859,7 +883,9 @@
 
   function renderChoices(scene) {
     els.choices.innerHTML = "";
-    if (isHubActive()) {
+    const hubMode = isHubActive();
+    document.body.classList.toggle("hub-active", hubMode);
+    if (hubMode) {
       renderHubControls();
       return;
     }
@@ -911,9 +937,11 @@
 
   function renderHubControls() {
     const location = currentHubLocation();
-    const assignment = currentAssignment();
     els.choices.innerHTML = "";
-    renderAssignmentPanel(assignment);
+    if (els.assignmentPanel) {
+      els.assignmentPanel.classList.add("hidden");
+      els.assignmentPanel.innerHTML = "";
+    }
     updateActionsToggle(availableActionCount());
 
     if (!location) {
@@ -935,16 +963,6 @@
     const wrapper = document.createElement("div");
     wrapper.className = "hub-controls";
 
-    const locationCard = document.createElement("section");
-    locationCard.className = "hub-card location-card";
-    const locationTitle = document.createElement("h3");
-    locationTitle.textContent = `${location.name} | ${formatClock()}`;
-    locationCard.appendChild(locationTitle);
-    getHubLocationLines(location).forEach((line) => {
-      locationCard.appendChild(paragraphNode(line));
-    });
-    wrapper.appendChild(locationCard);
-
     const actions = visibleHubActions(location);
     const actionsSection = document.createElement("section");
     actionsSection.className = "hub-section";
@@ -952,7 +970,7 @@
     actionsTitle.textContent = "Available Actions";
     actionsSection.appendChild(actionsTitle);
     const actionGrid = document.createElement("div");
-    actionGrid.className = "hub-grid";
+    actionGrid.className = "hub-grid exits";
     if (actions.length) {
       actions.forEach(({ action, available, reason }) => {
         actionGrid.appendChild(hubButton({
@@ -961,7 +979,8 @@
           meta: hubActionMeta(action),
           disabled: !available,
           disabledReason: reason,
-          primary: assignment && action.id === assignment.targetAction,
+          compact: true,
+          primary: currentAssignment() && action.id === currentAssignment().targetAction,
           onClick: () => performHubAction(action.id)
         }));
       });
@@ -1024,7 +1043,7 @@
   function hubButton(options) {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `hub-btn${options.primary ? " primary" : ""}`;
+    button.className = `hub-btn${options.primary ? " primary" : ""}${options.compact ? " compact" : ""}`;
     button.disabled = Boolean(options.disabled);
     if (!options.disabled) button.addEventListener("click", options.onClick);
 
@@ -2555,17 +2574,168 @@
   }
 
   function isDossierDrawerLayout() {
-    return window.matchMedia("(max-width: 1040px)").matches;
+    return true;
+  }
+
+  function defaultLayoutPrefs() {
+    return {
+      dock: "right",
+      sideWidth: 360,
+      bottomHeight: 290
+    };
+  }
+
+  function loadLayoutPrefs() {
+    const base = defaultLayoutPrefs();
+    try {
+      const raw = JSON.parse(localStorage.getItem(LAYOUT_KEY) || "null");
+      return normalizeLayoutPrefs(raw || base);
+    } catch (_error) {
+      return normalizeLayoutPrefs(base);
+    }
+  }
+
+  function normalizeLayoutPrefs(input) {
+    const next = Object.assign(defaultLayoutPrefs(), input || {});
+    const dock = ["left", "right", "bottom"].includes(next.dock) ? next.dock : "right";
+    const sideMax = Math.max(320, Math.min(760, window.innerWidth - 320));
+    const bottomMax = Math.max(240, Math.min(520, window.innerHeight - 240));
+    return {
+      dock,
+      sideWidth: clamp(next.sideWidth, 280, sideMax),
+      bottomHeight: clamp(next.bottomHeight, 220, bottomMax)
+    };
+  }
+
+  function saveLayoutPrefs() {
+    localStorage.setItem(LAYOUT_KEY, JSON.stringify(layoutPrefs));
+  }
+
+  function applyLayoutPrefs() {
+    layoutPrefs = normalizeLayoutPrefs(layoutPrefs);
+    document.body.classList.toggle("actions-left", layoutPrefs.dock === "left");
+    document.body.classList.toggle("actions-right", layoutPrefs.dock === "right");
+    document.body.classList.toggle("actions-bottom", layoutPrefs.dock === "bottom");
+    document.documentElement.style.setProperty("--hub-side-width", `${layoutPrefs.sideWidth}px`);
+    document.documentElement.style.setProperty("--hub-bottom-height", `${layoutPrefs.bottomHeight}px`);
+    if (els.paneResizeHandle) {
+      els.paneResizeHandle.setAttribute("aria-orientation", layoutPrefs.dock === "bottom" ? "horizontal" : "vertical");
+    }
+    updateDockButtons();
+  }
+
+  function updateDockButtons() {
+    const buttonMap = {
+      left: els.dockLeftBtn,
+      bottom: els.dockBottomBtn,
+      right: els.dockRightBtn
+    };
+    Object.entries(buttonMap).forEach(([dock, button]) => {
+      if (!button) return;
+      const active = layoutPrefs.dock === dock;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+  }
+
+  function setActionsDock(dock) {
+    if (!["left", "right", "bottom"].includes(dock)) return;
+    layoutPrefs.dock = dock;
+    applyLayoutPrefs();
+    saveLayoutPrefs();
+  }
+
+  function isPaneResizeEnabled() {
+    return isHubActive() && window.matchMedia("(min-width: 981px)").matches;
+  }
+
+  function startPaneResize(event) {
+    if (!isPaneResizeEnabled()) return;
+    event.preventDefault();
+    paneResizeState = {
+      dock: layoutPrefs.dock,
+      startX: event.clientX,
+      startY: event.clientY,
+      sideWidth: layoutPrefs.sideWidth,
+      bottomHeight: layoutPrefs.bottomHeight
+    };
+    document.body.classList.add("pane-resizing");
+    if (els.paneResizeHandle.setPointerCapture && event.pointerId !== undefined) {
+      els.paneResizeHandle.setPointerCapture(event.pointerId);
+    }
+    window.addEventListener("pointermove", onPaneResize);
+    window.addEventListener("pointerup", stopPaneResize);
+    window.addEventListener("pointercancel", stopPaneResize);
+  }
+
+  function onPaneResize(event) {
+    if (!paneResizeState) return;
+    if (paneResizeState.dock === "bottom") {
+      const delta = paneResizeState.startY - event.clientY;
+      layoutPrefs.bottomHeight = paneResizeState.bottomHeight + delta;
+    } else if (paneResizeState.dock === "right") {
+      const delta = paneResizeState.startX - event.clientX;
+      layoutPrefs.sideWidth = paneResizeState.sideWidth + delta;
+    } else {
+      const delta = event.clientX - paneResizeState.startX;
+      layoutPrefs.sideWidth = paneResizeState.sideWidth + delta;
+    }
+    applyLayoutPrefs();
+  }
+
+  function stopPaneResize() {
+    if (!paneResizeState) return;
+    paneResizeState = null;
+    document.body.classList.remove("pane-resizing");
+    saveLayoutPrefs();
+    window.removeEventListener("pointermove", onPaneResize);
+    window.removeEventListener("pointerup", stopPaneResize);
+    window.removeEventListener("pointercancel", stopPaneResize);
+  }
+
+  function handlePaneResizeKey(event) {
+    if (!isPaneResizeEnabled()) return;
+    const step = event.shiftKey ? 40 : 20;
+    let changed = false;
+    if (layoutPrefs.dock === "bottom") {
+      if (event.key === "ArrowUp") {
+        layoutPrefs.bottomHeight += step;
+        changed = true;
+      } else if (event.key === "ArrowDown") {
+        layoutPrefs.bottomHeight -= step;
+        changed = true;
+      }
+    } else if (layoutPrefs.dock === "right") {
+      if (event.key === "ArrowLeft") {
+        layoutPrefs.sideWidth += step;
+        changed = true;
+      } else if (event.key === "ArrowRight") {
+        layoutPrefs.sideWidth -= step;
+        changed = true;
+      }
+    } else {
+      if (event.key === "ArrowRight") {
+        layoutPrefs.sideWidth += step;
+        changed = true;
+      } else if (event.key === "ArrowLeft") {
+        layoutPrefs.sideWidth -= step;
+        changed = true;
+      }
+    }
+    if (!changed) return;
+    event.preventDefault();
+    applyLayoutPrefs();
+    saveLayoutPrefs();
+  }
+
+  function syncPaneLayout() {
+    applyLayoutPrefs();
   }
 
   function toggleDossier() {
-    if (isDossierDrawerLayout()) {
-      const isOpen = els.dossier.classList.toggle("panel-open");
-      setDossierDrawerState(isOpen);
-      return;
-    }
-    els.dossier.classList.toggle("hidden");
-    els.statusBtn.setAttribute("aria-expanded", String(!els.dossier.classList.contains("hidden")));
+    const isOpen = !els.dossier.classList.contains("panel-open");
+    els.dossier.classList.toggle("panel-open", isOpen);
+    setDossierDrawerState(isOpen);
   }
 
   function closeDossierDrawer() {
@@ -2576,20 +2746,16 @@
 
   function setDossierDrawerState(isOpen) {
     els.dossier.setAttribute("aria-hidden", String(!isOpen));
+    if ("inert" in els.dossier) {
+      els.dossier.inert = !isOpen;
+    }
     els.statusBtn.setAttribute("aria-expanded", String(isOpen));
+    els.statusBtn.classList.toggle("active", isOpen);
     document.body.classList.toggle("dossier-open", isOpen);
   }
 
   function syncDossierLayout() {
-    if (isDossierDrawerLayout()) {
-      els.dossier.classList.remove("hidden");
-      setDossierDrawerState(els.dossier.classList.contains("panel-open"));
-      return;
-    }
-    els.dossier.classList.remove("panel-open");
-    els.dossier.removeAttribute("aria-hidden");
-    document.body.classList.remove("dossier-open");
-    els.statusBtn.setAttribute("aria-expanded", String(!els.dossier.classList.contains("hidden")));
+    setDossierDrawerState(els.dossier.classList.contains("panel-open"));
   }
 
   function displaySpeaker(speaker) {

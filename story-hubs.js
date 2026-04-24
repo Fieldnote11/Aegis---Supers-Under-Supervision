@@ -3396,3 +3396,233 @@
   redirect("c08_private_threshold", "c09_deep_return", "c09_hub_graduation_eve");
   redirect("c09_sleep_or_not", "c10_deep_morning", "c10_hub_graduation");
 })();
+
+/* AUTHORING_PACKS_HUBS_START */
+(function () {
+  "use strict";
+
+  const STORY = window.AEGIS_STORY;
+  const HUBS = window.AEGIS_HUBS;
+  if (!STORY || !HUBS) return;
+
+  const scenes = STORY.scenes;
+  const intentionalOrphans = new Set(STORY.intentionalOrphans || []);
+
+  function chapterWindow(chapter) {
+    return [{ type: "chapterAtLeast", value: chapter }, { type: "chapterBefore", value: chapter + 1 }];
+  }
+
+  function humanizeId(id) {
+    return String(id || "")
+      .replace(/^add_c\d+_/, "")
+      .replace(/_v2$/, "")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (m) => m.toUpperCase());
+  }
+
+  function addAction(locationId, config) {
+    const location = HUBS.locations[locationId];
+    if (!location) return;
+    location.actions = location.actions || [];
+    const existing = location.actions.find((item) => item.id === config.id);
+    if (existing) Object.assign(existing, config);
+    else location.actions.push(config);
+  }
+
+  function actionForScene(sceneId, locationId, chapter, label, detail, extra = {}) {
+    const scene = scenes[sceneId];
+    addAction(locationId, {
+      id: extra.id || sceneId,
+      label: label || (scene && scene.title) || humanizeId(sceneId),
+      detail: detail || (scene && scene.location) || HUBS.locations[locationId]?.name || "Aegis Point",
+      once: extra.once !== false,
+      hidden: Boolean(extra.hidden),
+      conditions: [...chapterWindow(chapter), ...(extra.conditions || [])],
+      timeMinutes: extra.timeMinutes || 15,
+      fatigue: typeof extra.fatigue === "number" ? extra.fatigue : 0.4,
+      nextScene: sceneId,
+      repeatLimit: extra.repeatLimit,
+      assignmentId: extra.assignmentId,
+      completeAssignment: extra.completeAssignment,
+      effects: extra.effects
+    });
+  }
+
+  function retargetAction(locationId, actionId, nextScene, extra = {}) {
+    const location = HUBS.locations[locationId];
+    if (!location || !location.actions) return;
+    const action = location.actions.find((item) => item.id === actionId);
+    if (!action) return;
+    action.nextScene = nextScene;
+    Object.assign(action, extra);
+  }
+
+  function redirect(sceneId, from, to) {
+    const scene = scenes[sceneId];
+    if (!scene || !scene.choices) return;
+    scene.choices.forEach((choice) => {
+      if (typeof choice.next === "string") {
+        if (choice.next === from) choice.next = to;
+        return;
+      }
+      if (!choice.next || typeof choice.next !== "object") return;
+      if (choice.next.default === from) choice.next.default = to;
+      (choice.next.cases || []).forEach((item) => {
+        if (item.scene === from) item.scene = to;
+      });
+    });
+  }
+
+  function retargetAllChoices(sceneId, to) {
+    const scene = scenes[sceneId];
+    if (!scene || !scene.choices) return;
+    scene.choices.forEach((choice) => {
+      choice.next = to;
+    });
+  }
+
+  [
+    { locationId: "simulation_block", actionId: "enter-baseline", nextScene: "add_c02_queue_glass" },
+    { locationId: "event_horizon", actionId: "enter-event-horizon", nextScene: "add_c06_threshold_glass" },
+    { locationId: "briefing_room", actionId: "enter-bait-briefing", nextScene: "c07_deep_fallout" },
+    { locationId: "airbase_hangar", actionId: "begin-mach-test", nextScene: "add_c08_vance_brief" },
+    { locationId: "graduation_hall", actionId: "enter-graduation", nextScene: "c10_deep_morning" }
+  ].forEach((item) => retargetAction(item.locationId, item.actionId, item.nextScene));
+
+  retargetAction("lecture_hall", "attend-orientation", "add_c01_intake_overlap_to_orientation");
+  addAction("intake_hall", {
+    id: "aegis-pack-piper-shortcut",
+    label: "Take Piper's shortcut first",
+    detail: "Let Piper turn orientation into an unofficial route before the room settles.",
+    once: true,
+    hidden: false,
+    conditions: chapterWindow(1),
+    timeMinutes: 15,
+    fatigue: 0.3,
+    nextScene: "add_c01_intake_overlap_to_shortcuts"
+  });
+  addAction("intake_hall", {
+    id: "aegis-pack-camille-intro",
+    label: "Cross to Camille before the briefing",
+    detail: "Step into the colder orbit first and see what it changes.",
+    once: true,
+    hidden: false,
+    conditions: chapterWindow(1),
+    timeMinutes: 15,
+    fatigue: 0.3,
+    nextScene: "add_c01_intake_overlap_to_camille"
+  });
+
+  [
+    { sceneId: "add_c01_julian_cafeteria", locationId: "cafeteria", chapter: 1, label: "Talk with Julian before the tea dies", detail: "Let Julian turn a bad cafeteria table into something worth remembering." },
+    { sceneId: "add_c01_theo_walk", locationId: "residence_wing", chapter: 1, label: "Walk with Theo instead of going straight to housing", detail: "Take the quieter route and see what Theo notices when the hallway empties." },
+    { sceneId: "add_c01_med_spike", locationId: "medical", chapter: 1, label: "Check med after the power spike", detail: "Let Aegis medical decide whether first-day instability counts as paperwork or warning." },
+    { sceneId: "add_c01_ben_laundry", locationId: "residence_wing", chapter: 1, label: "Help Ben in the laundry room", detail: "Do one practical thing with someone who understands useful quiet." },
+    { sceneId: "add_c01_jordan_boundary", locationId: "cafeteria", chapter: 1, label: "Sit with Jordan before the room writes everyone down", detail: "Trade a little candor for a cleaner read on the cohort." },
+    { sceneId: "add_c01_rooftop_breath", locationId: "rooftop", chapter: 1, label: "Go up for air", detail: "Find the first honest quiet the building allows." },
+    { sceneId: "add_c02_camille_stairs", locationId: "observation_hall", chapter: 2, label: "Catch Camille on the stairwell", detail: "Let the baseline follow you into a more private kind of scrutiny." },
+    { sceneId: "add_c02_piper_track", locationId: "courtyard", chapter: 2, label: "Find Piper on the training track", detail: "See what speed sounds like when the crowd is gone." },
+    { sceneId: "add_c02_julian_lounge", locationId: "common_lounge", chapter: 2, label: "Find Julian in the lounge", detail: "Ask what he thinks the room is really learning from the tests." },
+    { sceneId: "add_c02_theo_annex", locationId: "observation_hall", chapter: 2, label: "Pull Theo aside after the numbers land", detail: "Get the ugly version of the data before the hallway edits it." },
+    { sceneId: "add_c02_med_assessment", locationId: "medical", chapter: 2, label: "Let medical run a second look", detail: "Find out what the baseline did to you once adrenaline stops lying." },
+    { sceneId: "add_c02_rina_warmup", locationId: "simulation_block", chapter: 2, label: "Talk to Rina in the warm-up lane", detail: "See whether rivalry and useful advice can occupy the same sentence." },
+    { sceneId: "add_c02_vance_review", locationId: "observation_hall", chapter: 2, label: "Catch Vance before the review settles", detail: "Ask the commandant what the gallery actually remembers." },
+    { sceneId: "add_c03_gallery_edges", locationId: "observation_hall", chapter: 3, label: "Read the room outside Sim Block C", detail: "Catch the cohort in the hallway where observation becomes social weather." },
+    { sceneId: "add_c03_julian_hall_mirror", locationId: "observation_hall", chapter: 3, label: "Let Julian steal the hallway for a minute", detail: "Hear what he thinks the room wants from your contradictions." },
+    { sceneId: "add_c03_theo_annex_math", locationId: "records_annex", chapter: 3, label: "Find Theo in the records annex", detail: "Walk in on Theo trying to turn concern into arithmetic." },
+    { sceneId: "add_c03_camille_report_language", locationId: "admin_wing", chapter: 3, label: "Read the language with Camille", detail: "See what happens when Camille has to translate you into file-safe words." },
+    { sceneId: "add_c03_piper_stillness_tax", locationId: "common_lounge", chapter: 3, label: "Ask Piper what stillness costs", detail: "Let her talk about speed like a burden instead of a trick." },
+    { sceneId: "add_c03_medical_residuum", locationId: "medical", chapter: 3, label: "Check the residual burn in medical", detail: "Find out what the building thinks lingers after a watched performance." },
+    { sceneId: "add_c03_ben_reset_room", locationId: "training_wing", chapter: 3, label: "Take the reset room with Ben", detail: "Find out what endurance sounds like when nobody is pretending to admire it." },
+    { sceneId: "add_c03_vance_glass_office", locationId: "admin_wing", chapter: 3, label: "Step into Vance's glass office", detail: "Ask what he thinks review rooms actually train into people." },
+    { sceneId: "add_c04_warmup_lane_rina", locationId: "simulation_block", chapter: 4, label: "Talk to Rina in the warm-up lane", detail: "Get the competitor's version of what today's pressure is really testing." },
+    { sceneId: "add_c04_camille_service_corridor", locationId: "simulation_block", chapter: 4, label: "Meet Camille in the service corridor", detail: "Let the rules go private before the chamber doors close." },
+    { sceneId: "add_c04_julian_gallery_rail", locationId: "simulation_block", chapter: 4, label: "Find Julian at the gallery rail", detail: "Let him name what the room wants from you before the test begins." },
+    { sceneId: "add_c04_theo_reset_room", locationId: "training_wing", chapter: 4, label: "Take the reset room with Theo", detail: "Catch Theo doing math about you instead of hiding that he cares." },
+    { sceneId: "add_c04_medical_aftertaste", locationId: "medical", chapter: 4, label: "Sit through the medical aftertaste", detail: "Let the scan bay tell you what pressure cost in the body." },
+    { sceneId: "add_c04_vance_review_window", locationId: "common_lounge", chapter: 4, label: "Catch Vance near the review window", detail: "Hear what command sees when repetition finally starts exposing character." },
+    { sceneId: "add_c04_ben_pool_edge", locationId: "medical", chapter: 4, label: "Sit with Ben by the recovery pool", detail: "Talk to the one person nobody lets look breakable." },
+    { sceneId: "add_c04_piper_track_late", locationId: "courtyard", chapter: 4, label: "Find Piper on the late track", detail: "See what speed looks like after too much scrutiny and not enough sleep." },
+    { sceneId: "add_c05_camille_promenade_angles", locationId: "blackwater_promenade", chapter: 5, label: "Walk the promenade with Camille", detail: "Let Camille read the crowd and the future in the same motion." },
+    { sceneId: "add_c05_julian_anchor_corner", locationId: "rusty_anchor", chapter: 5, label: "Take a corner table with Julian", detail: "Find the private line hidden under the bar-light performance." },
+    { sceneId: "add_c05_theo_transit_math", locationId: "transit_platform", chapter: 5, label: "Catch Theo doing transit math", detail: "Ask what the branch model misses when real people start wanting things." },
+    { sceneId: "add_c05_vance_platform_clearance", locationId: "transit_platform", chapter: 5, label: "Talk to Vance on the platform", detail: "Find out what clearance looks like when an adult institution says yes carefully." },
+    { sceneId: "add_c05_piper_dock_pressure", locationId: "east_dock", chapter: 5, label: "Find Piper before the dock turns serious", detail: "Hear the joke version and the real version before launch." },
+    { sceneId: "add_c05_rina_service_ramp", locationId: "east_dock", chapter: 5, label: "Catch Rina on the service ramp", detail: "See whether rivalry can survive the shift from sim pressure to water." },
+    { sceneId: "add_c05_ben_towel_honesty", locationId: "blackwater_infirmary", chapter: 5, label: "Find Ben after the landing", detail: "Give the protector a moment where he is not carrying the whole room." },
+    { sceneId: "add_c05_camille_dock_cleanup", locationId: "east_dock", chapter: 5, label: "Stay for the dock cleanup with Camille", detail: "Talk to Camille while adrenaline becomes logistics." },
+    { sceneId: "add_c05_piper_walkback_after", locationId: "blackwater_promenade", chapter: 5, label: "Walk back with Piper after the infirmary", detail: "Let the private part of the dock test arrive on foot." },
+    { sceneId: "add_c06_booth_currents", locationId: "event_horizon", chapter: 6, label: "Read the booth currents", detail: "Let Event Horizon show how power arranges itself when nobody says hero." },
+    { sceneId: "add_c06_julian_balcony", locationId: "event_horizon", chapter: 6, label: "Step onto the balcony with Julian", detail: "Trade the room for harbor wind and the sharper version of his honesty." },
+    { sceneId: "add_c06_piper_backbar", locationId: "event_horizon", chapter: 6, label: "Find Piper at the back bar", detail: "See how she jokes when neutral ground still feels like a trap." },
+    { sceneId: "add_c06_camille_service_corridor", locationId: "event_horizon", chapter: 6, label: "Take the service corridor with Camille", detail: "Catch Camille where exits matter more than atmosphere." },
+    { sceneId: "add_c06_theo_sideoffice", locationId: "event_horizon", chapter: 6, label: "Find Theo in the side office", detail: "Talk to Theo where probability gets quieter and more personal." },
+    { sceneId: "add_c07_records_annex_julian", locationId: "records_annex", chapter: 7, label: "Ask Julian what the file is hiding", detail: "Let the redactions turn into a more private kind of conversation." },
+    { sceneId: "add_c07_medical_piper", locationId: "medical", chapter: 7, label: "Find Piper in medical", detail: "Catch the version of Piper that shows up when the jokes are busy failing." },
+    { sceneId: "add_c07_bait_conscience_expanded", locationId: "briefing_room", chapter: 7, label: "Interrogate the conscience of the bait plan", detail: "Push the moral part of the strategy until it stops hiding behind briefing language." },
+    { sceneId: "add_c07_camille_lock_protocol_expanded", locationId: "briefing_room", chapter: 7, label: "Ask Camille about the lock protocol", detail: "Push the strategy until it stops pretending to be only procedural." },
+    { sceneId: "add_c07_vance_review_expanded", locationId: "briefing_room", chapter: 7, label: "Ask Vance for the real review", detail: "Hear what the operation becomes once command strips the brief down to risk." },
+    { sceneId: "add_c07_jordan_signal", locationId: "records_annex", chapter: 7, label: "Let Jordan read the room before the bait goes live", detail: "Use the network before certainty turns contagious." },
+    { sceneId: "add_c07_ben_training_support", locationId: "training_wing", chapter: 7, label: "Take the training wing with Ben", detail: "Talk to Ben about what backup means when the trap is on purpose." },
+    { sceneId: "add_c08_piper_runway_hold", locationId: "airbase_hangar", chapter: 8, label: "Hold the runway line with Piper", detail: "Let the impossible speed test become human before it becomes kinetic." },
+    { sceneId: "add_c08_camille_abort_geometry", locationId: "medical", chapter: 8, label: "Ask Camille about the abort geometry", detail: "See what her trust looks like when failure has runway attached to it." },
+    { sceneId: "add_c08_theo_medical_afterburn", locationId: "medical", chapter: 8, label: "Find Theo after the burn line", detail: "Catch Theo where the numbers stop behaving like enough." },
+    { sceneId: "add_c08_julian_catwalk", locationId: "airbase_hangar", chapter: 8, label: "Take the catwalk with Julian", detail: "Watch the runway from above with someone who understands spectacle too well." },
+    { sceneId: "add_c08_ben_crashmats", locationId: "airbase_hangar", chapter: 8, label: "Find Ben by the crash mats", detail: "Talk to the person everybody expects to absorb the rest of the plan." },
+    { sceneId: "add_c08_transit_night", locationId: "transit_platform", chapter: 8, label: "Take the night transit back slowly", detail: "Let the airbase sit in your body long enough to turn into thought." },
+    { sceneId: "add_c08_kitchen_reentry", locationId: "common_lounge", chapter: 8, label: "Reenter through the kitchen lights", detail: "Come back to campus through the lived-in parts instead of the heroic ones." },
+    { sceneId: "add_c09_camille_service_stair", locationId: "residence_wing", chapter: 9, label: "Find Camille on the service stair", detail: "Take the quieter landing and let Camille say the part she would never stage." },
+    { sceneId: "add_c09_julian_packing_show_v2", locationId: "residence_wing", chapter: 9, label: "Find Julian while he packs", detail: "Catch Julian in the version of honesty that only shows up when the room is almost over." },
+    { sceneId: "add_c09_theo_archive_walk", locationId: "records_annex", chapter: 9, label: "Take the archive walk with Theo", detail: "Let Theo talk future, risk, and wanting without flattening any of them." },
+    { sceneId: "add_c09_ben_cafeteria_last_plate", locationId: "cafeteria", chapter: 9, label: "Sit with Ben over the last cafeteria plate", detail: "Let the last night get practical and honest at the same time." },
+    { sceneId: "add_c09_jordan_lounge_truth", locationId: "common_lounge", chapter: 9, label: "Find Jordan in the lounge", detail: "Ask for the social truth without making it perform." },
+    { sceneId: "add_c09_vance_campus_walk_v2", locationId: "courtyard", chapter: 9, label: "Take the campus walk with Vance", detail: "Hear what the command voice says when graduation is close enough to touch." },
+    { sceneId: "add_c09_med_night_scan", locationId: "medical", chapter: 9, label: "Take one last scan", detail: "Let the last night remember what the body cost too." },
+    { sceneId: "add_c09_rina_gallery_exit", locationId: "training_wing", chapter: 9, label: "Catch Rina on the gallery exit", detail: "See what victory means to someone who hates decorative closure." },
+    { sceneId: "add_c10_vance_admin_corridor", locationId: "admin_wing", chapter: 10, label: "Catch Vance in the admin corridor", detail: "Get the unofficial evaluation before the room calls it a ceremony." },
+    { sceneId: "add_c10_piper_side_door_v2", locationId: "graduation_hall", chapter: 10, label: "Find Piper by the side door", detail: "Stand by the cleanest exit and see whether either of you means to take it." },
+    { sceneId: "add_c10_camille_courtyard_honesty_v2", locationId: "courtyard", chapter: 10, label: "Take the shade rail with Camille", detail: "Let Camille say the unsupervised version before the stage starts." },
+    { sceneId: "add_c10_julian_program_v2", locationId: "admin_wing", chapter: 10, label: "Let Julian rewrite the program with you", detail: "Find out what ceremony looks like when Julian stops pretending it is harmless." },
+    { sceneId: "add_c10_theo_last_probability_v2", locationId: "courtyard", chapter: 10, label: "Take Theo's last probability walk", detail: "Ask Theo what he wants when percentages stop being enough." },
+    { sceneId: "add_c10_ben_service_dock", locationId: "graduation_hall", chapter: 10, label: "Find Ben near the service dock", detail: "Check on the person everyone trusts with the heavy part of a threshold." },
+    { sceneId: "add_c10_jordan_admin_truth", locationId: "admin_wing", chapter: 10, label: "Catch Jordan before the stage", detail: "Get the social truth while the admin wing is still pretending it can hold it." }
+  ].forEach((item) => actionForScene(item.sceneId, item.locationId, item.chapter, item.label, item.detail));
+
+  redirect("c02_residence_after", "c03_hub_gallery", "add_c03_admin_notice_board");
+  redirect("c03_private_notes", "c04_hub_training", "add_c03_residence_kitchen_after_reports");
+  retargetAllChoices("add_c03_residence_kitchen_after_reports", "add_c04_anchor_afterhours");
+  redirect("c04_debrief", "c05_hub_dock", "add_c04_debrief_crosscurrents");
+  redirect("c05_flight", "c05_after_flight", "add_c05_waterline_commitment");
+  retargetAllChoices("add_c05_waterline_commitment", "c05_after_flight");
+  redirect("c05_rooftop_after", "c06_hub_event", "add_c05_residence_kitchen_return");
+  retargetAllChoices("add_c05_residence_kitchen_return", "add_c06_blackwater_window");
+  retargetAllChoices("add_c06_blackwater_window", "c06_hub_event");
+  redirect("c06_blackwater_drive", "add_c06_blackwater_window", "c06_event_horizon");
+  redirect("c06_apartment_board", "c07_hub_bait", "add_c06_apartment_board_night");
+  retargetAllChoices("add_c06_apartment_board_night", "c07_deep_morning");
+  redirect("c07_deep_morning", "c07_deep_fallout", "add_c07_morning_kitchen_fallout");
+  retargetAllChoices("add_c07_bait_conscience_expanded", "add_c07_before_bait_fracture");
+  redirect("c07_afteraction_erased", "c07_medbay_fallout", "add_c07_afteraction_kitchen");
+  redirect("c07_afteraction_contained", "c07_medbay_fallout", "add_c07_afteraction_kitchen");
+  redirect("c07_afteraction_escaped", "c07_medbay_fallout", "add_c07_afteraction_kitchen");
+  redirect("c07_jordan_signal", "c08_hub_airbase", "add_c08_hangar_arrival");
+  retargetAllChoices("add_c08_hangar_arrival", "c08_deep_review");
+  redirect("c08_rina_wall", "c08_private_threshold", "add_c08_afterburn_corridor");
+  redirect("c08_private_threshold", "c09_hub_graduation_eve", "add_c09_before_pizza_threshold");
+  redirect("c09_sleep_or_not", "c10_hub_graduation", "add_c10_morning_courtyard_pulse");
+
+  STORY.intentionalOrphans = Array.from(new Set([
+    ...intentionalOrphans,
+    "c02_deep_glass",
+    "c02_deep_numbers",
+    "c02_deep_queue",
+    "c02_deep_threshold",
+    "c02_deep_wake",
+    "c02_observation_deck",
+    "c07_deep_fallout",
+    "c07_deep_bait",
+    "c07_deep_private",
+    "c07_deep_threshold"
+  ]));
+})();
+/* AUTHORING_PACKS_HUBS_END */
