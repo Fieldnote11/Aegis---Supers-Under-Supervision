@@ -333,7 +333,7 @@
           next: "c03_observe"
         },
         {
-          text: "Study the audience. Gossip is data if you hate yourself enough.",
+          text: "Study the audience. Rumor is data if you can keep perspective.",
           effects: [
             { type: "relationship", key: "Jordan", delta: 1 },
             { type: "stat", key: "exposure", delta: 1 },
@@ -352,7 +352,7 @@
       text: [
         "After the exercise, the hallway turns into a court without a judge. Residents offer opinions in careful voices. Camille accepts praise like it is raw material and criticism like it is overdue maintenance.",
         "Julian catches you watching and smiles. \"Careful. People who admire standards either become excellent or insufferable. Occasionally both.\"",
-        "Theo, beside him, does not smile. \"Standards are useful. Worship is not.\" The correction is quiet enough that only the three of you hear it."
+        "Theo, beside him, does not smile. \"Standards are useful. Admiration is not analysis.\" The correction is quiet enough that only the three of you hear it."
       ],
       choices: [
         {
@@ -476,7 +476,7 @@
       text: [
         "After Camille's sim, medical runs scans that pretend not to be invasive by using polite lighting. The medic asks whether the power leaves a taste, a sound, a pressure behind the eyes. She checks boxes when you answer and different boxes when you hesitate.",
         "The scan shows stress but not damage. That sounds like good news until the medic explains that Aegis worries more when the body looks fine after impossible output. A normal injury has boundaries. Your power keeps refusing to provide them.",
-        "A message from Camille arrives during the scan: acceptable improvement. From Piper: if acceptable is her version of flirting, I am suing."
+        "A message from Camille arrives during the scan: acceptable improvement. From Piper: if acceptable is her version of encouragement, I am suing."
       ],
       choices: [
         {
@@ -1100,7 +1100,7 @@
         },
         {
           conditions: [{ type: "flag", key: "heldMachEnergy" }],
-          text: ["Because you held the energy instead of showing it off, the pressure has nowhere theatrical to go. It becomes intimate, which may be worse."]
+          text: ["Because you held the energy instead of showing it off, the pressure has nowhere theatrical to go. It becomes private, which may be worse."]
         },
         {
           conditions: [{ type: "flag", key: "kineticAurora" }],
@@ -1677,7 +1677,7 @@
             { type: "relationship", key: "Julian", delta: 1 },
             { type: "stat", key: "aegisFear", delta: 1 },
             { type: "stat", key: "villainPath", delta: 1 },
-            { type: "flag", key: "dontFuckWithUs", value: true },
+            { type: "flag", key: "stoodFirmTogether", value: true },
             { type: "flag", key: "ownershipWarning", value: true }
           ],
           next: "c10_final_path"

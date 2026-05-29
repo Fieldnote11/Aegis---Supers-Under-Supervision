@@ -1,6 +1,6 @@
 # Aegis: Supers Under Supervision
 
-A static JavaScript choices-matter game adapted from the provided Aegis source material.
+A static JavaScript branching narrative engine and playable prototype adapted from the provided Aegis source material.
 
 Open `index.html` in a browser to play. No build step is required.
 
@@ -8,21 +8,22 @@ Story editing notes are in `docs/story-authoring.md`, with copy/paste scene patt
 
 ## Technical Shape
 
-- Static browser app: `index.html`, `style.css`, `story.js`, `story-expansion.js`, `story-deepening.js`, `game.js`
+- Static browser app: `index.html`, `style.css`, modular story data, and `game.js`
+- Branching narrative engine with deterministic flags, conditional choices, stateful consequences, and replayable routes
+- Layered story modules: `story.js`, `story-expansion.js`, `story-deepening.js`, `story-hubs.js`, and `story-volume.js`
 - Open Game menu with autosave recovery, manual save selection, and New Game flow
-- Character creation: player name, gender presentation, light pronoun selection, 5 icon choices per presentation, scalable power selection, and optional mature-scene toggle
-- Character ages are explicit: the main character is fixed at 24, the trainee cohort is mid-to-late 20s, and older NPCs use mature age bands
-- Autosave after each choice using `localStorage`
-- Three manual save slots
+- Character creation: player name, gender presentation, light pronoun selection, 5 icon choices per presentation, scalable power selection, and optional expanded content toggle
+- Character ages are explicit: the main character is fixed at 24, the trainee cohort is mid-to-late 20s, and older NPCs use adult age bands
+- Persistent save state with autosave after each choice using `localStorage`
+- Three manual save slots plus autosave recovery
 - Chapter restart without free backtracking
 - Pause menu with save/load, autosave recovery, dark mode, repeatable free-time tasks, and story progress
 - Program clock: story movements consume 15-30 in-game minutes, training tasks take about an hour, and rest blocks take two hours
 - Fatigue system: pushing too long creates a temporary control/restraint/resolve penalty until the player rests
-- Story data separated from engine code
-- Deterministic flags, stats, relationships, hidden consequences, conditional choices
+- Story data separated from engine code for safer content iteration
 - Dispatch-style chapter-complete summaries with outcome, power growth, bond shifts, consequences, and status
-- Internal NPC dossiers with ages, pronouns, powers, relationship dimensions, romance status, memory, and agency notes; player-facing UI only shows vague bond signals
-- Relationship dimensions track trust, attraction, respect, friction, and concern alongside the legacy relationship score
+- Internal NPC dossiers with ages, pronouns, powers, relationship dimensions, personal-route status, memory, and agency notes; player-facing UI only shows broad bond signals
+- Relationship dimensions track trust, affinity, respect, friction, and concern alongside the legacy relationship score
 - NPC agency can create consequences when the player becomes too frightening, careless, lethal, or emotionally tangled
 - Power leveling through mandatory story training, optional story choices, and repeatable free-time drills, with milestone unlocks instead of a power tree
 - Repeatable tasks include control drills, restraint conditioning, overcharge testing, scenario review, recovery, and core-four relationship check-ins
@@ -30,15 +31,16 @@ Story editing notes are in `docs/story-authoring.md`, with copy/paste scene patt
 - Combat/after-action status reports after major fights
 - Comic-panel UI with reusable SVG backgrounds, local PNG portraits, and avatar slots
 - Portrait/avatar assets live in `assets/portraits` and `assets/avatars`; source uploads/sheets are preserved under `assets/source`
-- Story validation lives in `scripts/validate-story.js` and checks graph links, orphaned scenes, asset paths, service worker cache coverage, and randomized playthroughs
-- Relationship routes are choice-driven: Piper, Camille, Julian, and Theo all have romance flags, continuation choices, and ending payoffs, with Piper still available as slow-burn or trusted partner
-- Romance boundaries support sparks, slow burns, commitments, multi-romance tension, and route-specific ethical limits
+- PWA/offline support through `manifest.webmanifest`, `sw.js`, and service-worker cache coverage checks
+- Story validation tooling lives in `scripts/validate-story.js` and checks graph links, orphaned scenes, asset paths, service worker cache coverage, and randomized playthroughs
+- Relationship routes are choice-driven: Piper, Camille, Julian, and Theo have persistent route flags, continuation choices, and ending payoffs, with Piper also available as a slow-build or trusted-partner route
+- Route logic supports gradual trust, commitments, multi-route consequence handling, and character-specific agency constraints
 - Training choices affect later crisis options: heat, cold, absorption, restraint, containment, showmanship, and power level can unlock or reshape fight choices
 - Major power moments include bespoke flavor for energy, gravity, chronal, bio, tech, and spatial powers
 - Power choices have early training implications, crisis text, finale interpretation, and different pressure in key tests
-- The core relationship cast's powers visibly mature across later chapters when the player invests in them
+- The core relationship cast's powers visibly develop across later chapters when the player invests in them
 - Finale paths are gated by accumulated play: sanctioned hero, Aegis contractor, independent operator, foundation/corporate power, villainous self-rule, civilian control, or an unresolved open path
-- Endings include a "Why This Ending" report summarizing route pressure, strongest bond, romance state, power level, and key consequences
+- Endings include a "Why This Ending" report summarizing route pressure, strongest bond, personal-route state, power level, and key consequences
 
 ## Chapter Spine
 

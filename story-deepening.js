@@ -111,7 +111,7 @@
           location: "Orientation Queue",
           focus: "Piper",
           text: [
-            "The cohort is older than the word trainee suggests. Nobody here is a kid with a backpack and a permission slip. The visible age range sits in the twenties, which makes the nervous flirting, territorial glances, and carefully casual power displays feel less like school and more like a workplace where everyone could break the building during a bad lunch.",
+            "The cohort is older than the word trainee suggests. Nobody here is a kid with a backpack and a permission slip. The visible age range sits in the twenties, which makes the nervous rapport, territorial glances, and carefully casual power displays feel less like school and more like a workplace where everyone could break the building during a bad lunch.",
             "You clock categories before names: the speedster who cannot quite stand still, the listener pretending not to listen, the competitor with her jaw set, the composed woman flanked by two people who understand orbit. Aegis calls this intake. The room calls it a food chain and waits to see where you land.",
             "The smartest thing would be to stay quiet until the rules become visible. The human thing is wanting someone to make the room less sterile before it swallows you whole."
           ],
@@ -347,7 +347,7 @@
           location: "Main Walkway",
           focus: "Camille",
           text: [
-            "Camille's invitation to observe Sim Block C follows you through the next day like a second schedule. It is not romantic on its face. It is not hostile either. That is what makes it heavy. A clear threat would be easier. A clear flirtation would be simpler. This is an assessment wearing good manners.",
+            "Camille's invitation to observe Sim Block C follows you through the next day like a second schedule. It is not personal on its face. It is not hostile either. That is what makes it heavy. A clear threat would be easier. A clear agenda would be simpler. This is an assessment wearing good manners.",
             "Piper says Camille collects talented people the way other people collect expensive knives. Jordan says that is unfair because knives do not usually come with scholarship paperwork. Theo, overhearing from two tables away, says Camille does not collect people. She builds systems and gets annoyed when people insist on being variables.",
             "By evening, you know enough to understand that attending is a choice about more than training."
           ],
@@ -390,7 +390,7 @@
               { type: "stat", key: "exposure", delta: 1 },
               { type: "flag", key: "watchedWatchers", value: true }
             ]),
-            makeChoice("Focus on the exercise. Gossip can wait until after impact.", [
+            makeChoice("Focus on the exercise. Rumor can wait until after impact.", [
               { type: "stat", key: "control", delta: 1 },
               { type: "stat", key: "restraint", delta: 1 },
               { type: "flag", key: "ignoredGalleryGossip", value: true }
@@ -552,7 +552,7 @@
           location: "Sim Threshold",
           focus: "Piper",
           text: [
-            "Piper catches you before the chamber door. She is trying for casual and almost succeeds. The speed in her makes stillness look like a decision she has to keep making. \"If this gets stupid,\" she says, \"make it our kind of stupid. Survivable. Mockable later.\"",
+            "Piper catches you before the chamber door. She is trying for casual and almost succeeds. The speed in her makes stillness look like a decision she has to keep making. \"If this gets reckless,\" she says, \"make it our kind of reckless. Survivable. Mockable later.\"",
             "It is not a grand speech. It helps more than a grand speech would have.",
             "You realize everyone keeps offering versions of the same thing: Camille gives standards, Theo gives failure states, Julian gives distance through humor, Piper gives the promise that you can come back from being impressive and still be a person."
           ],
@@ -844,7 +844,7 @@
         },
         {
           slug: "table",
-          title: "Table Chemistry",
+          title: "Table Rapport",
           location: "Private Booth",
           focus: "Piper",
           text: [
@@ -1002,8 +1002,8 @@
           location: "Strategy Room",
           focus: "Theo",
           text: [
-            "Theo hates the bait plan before anyone finishes describing it. That is not cowardice. It is math with a conscience. The model says Rhea is most likely to strike when you are isolated, emotionally loaded, and apparently underprotected. The model also says giving her that condition on purpose is, in Theo's words, deeply, aggressively stupid.",
-            "Camille says stupid can be engineered into acceptable if the failure states are boxed correctly. Piper says acceptable is not the brand she would choose. Julian says bait always sounds less humiliating when someone else is the worm.",
+            "Theo hates the bait plan before anyone finishes describing it. That is not cowardice. It is math with a conscience. The model says Rhea is most likely to strike when you are isolated, emotionally loaded, and apparently underprotected. The model also says giving her that condition on purpose is, in Theo's words, deeply, aggressively reckless.",
+            "Camille says reckless can be engineered into acceptable if the failure states are boxed correctly. Piper says acceptable is not the brand she would choose. Julian says bait always sounds less humiliating when someone else is the worm.",
             "Everyone looks at you because the plan only works if your danger becomes the door."
           ],
           choices: [
@@ -1030,7 +1030,7 @@
           location: "Residence Hall",
           focus: "Seth",
           text: [
-            "Before the plan goes official, each person catches you privately in their own way. Piper with a joke that fails to hide the worry. Camille with a tactical correction that is also concern if you know how to read it. Julian with a dramatic warning disguised as gossip. Theo with a final probability branch he does not want to say aloud.",
+            "Before the plan goes official, each person catches you privately in their own way. Piper with a joke that fails to hide the worry. Camille with a tactical correction that is also concern if you know how to read it. Julian with a dramatic warning disguised as rumor. Theo with a final probability branch he does not want to say aloud.",
             "They are not asking you to be safe. Safe left the table when Rhea walked through the door. They are asking you to come back as yourself.",
             "That is a harder promise."
           ],
@@ -1179,7 +1179,7 @@
           text: [
             "By the time the speed climbs, everyone has moved farther back except the people too stubborn or too invested to pretend distance is neutral. Julian claps after one impact, then stops when Theo looks like he might throw the tablet at him.",
             "Camille does not tell you to stop. That means more than encouragement would. Piper rolls her shoulders at the far end of the runway, a bright point of motion against the evening light.",
-            "You understand suddenly that being trusted with someone's speed is intimate in a way nobody prepared you for. She is making herself a disaster and trusting you to make disaster survivable."
+            "You understand suddenly that being trusted with someone's speed is private in a way nobody prepared you for. She is making herself a disaster and trusting you to make disaster survivable."
           ],
           choices: [
             makeChoice("Tell Piper the next run only happens if she still wants it after breathing.", [
@@ -1664,7 +1664,7 @@
       focus: "Jordan",
       text: [
         "Jordan catches you in the stairwell instead of the hall, which tells you they are taking this seriously. The building is already turning the review board into rumor: some versions make you a hero, some make you a weapon, some make Vektor sound like weather instead of a decision.",
-        "\"People think gossip is noise,\" Jordan says. \"It is not. It is how institutions test which story they can get away with.\"",
+        "\"People think rumor is noise,\" Jordan says. \"It is not. It is how institutions test which story they can get away with.\"",
         "For once, their grin does not arrive first. Jordan looks tired, sharp, and very aware that a story about you can become a cage before anyone calls it policy."
       ],
       variants: [
@@ -1684,7 +1684,7 @@
             { type: "relationship", key: "Jordan", delta: 2 },
             { type: "stat", key: "foundationPath", delta: 1 },
             { type: "flag", key: "jordanTracesLeak", value: true },
-            { type: "npc", key: "Jordan", trust: 1, respect: 1, memory: "You treated their network as intelligence, not gossip." }
+            { type: "npc", key: "Jordan", trust: 1, respect: 1, memory: "You treated their network as intelligence, not rumor." }
           ],
           timeMinutes: 30,
           next: chapter8Start
@@ -1827,7 +1827,7 @@
             { type: "relationship", key: "Camille", delta: 2 },
             { type: "stat", key: "foundationPath", delta: 1 },
             { type: "flag", key: "camilleLastPrivateMoment", value: true },
-            { type: "npc", key: "Camille", trust: 1, attraction: 1, memory: "You gave her the private honesty she asked for before graduation." }
+            { type: "npc", key: "Camille", trust: 1, affinity: 1, memory: "You gave her the private honesty she asked for before graduation." }
           ],
           timeMinutes: 30,
           next: "c09_private_camille"
@@ -1844,7 +1844,7 @@
             { type: "relationship", key: "Julian", delta: 2 },
             { type: "stat", key: "audacity", delta: 1 },
             { type: "flag", key: "julianLastPrivateMoment", value: true },
-            { type: "npc", key: "Julian", trust: 1, attraction: 1, memory: "You met him somewhere the performance could finally rest." }
+            { type: "npc", key: "Julian", trust: 1, affinity: 1, memory: "You met him somewhere the performance could finally rest." }
           ],
           timeMinutes: 30,
           next: "c09_private_julian"
@@ -1861,7 +1861,7 @@
             { type: "relationship", key: "Theo", delta: 2 },
             { type: "stat", key: "restraint", delta: 1 },
             { type: "flag", key: "theoLastPrivateMoment", value: true },
-            { type: "npc", key: "Theo", trust: 1, attraction: 1, memory: "You gave his fear room without letting it own the night." }
+            { type: "npc", key: "Theo", trust: 1, affinity: 1, memory: "You gave his fear room without letting it own the night." }
           ],
           timeMinutes: 30,
           next: "c09_private_theo"
@@ -1932,13 +1932,13 @@
       focus: "Julian",
       text: [
         "Julian steals the balcony because of course he does. The city lights below give him a stage, but he leans on the rail like someone too tired to use it.",
-        "\"I have been thinking,\" he says, which is already alarming. \"If we do something stupid after graduation, people will call it spectacle because I am nearby. They will call it corruption because Camille is nearby. They will call it dangerous because you are nearby.\"",
+        "\"I have been thinking,\" he says, which is already alarming. \"If we do something reckless after graduation, people will call it spectacle because I am nearby. They will call it corruption because Camille is nearby. They will call it dangerous because you are nearby.\"",
         "The joke arrives late and gentle. \"Personally, I resent being the least legally complicated part of a plan.\""
       ],
       variants: [
         {
           conditions: [{ type: "flag", key: "julianCommitted" }],
-          text: ["The mask is still there, but around you he lets it sit crooked. That feels more intimate than any speech he could have made."]
+          text: ["The mask is still there, but around you he lets it sit crooked. That feels more private than any speech he could have made."]
         },
         {
           conditions: [{ type: "matureContent" }],
@@ -2023,7 +2023,7 @@
       text: [
         "You leave the hallway open. Not because nobody matters enough for privacy, but because the last night already has too many doors closing.",
         "Camille passes with a nod that contains three warnings and one almost-smile. Julian salutes you with a stolen graduation flower. Theo says he sent the checklist and then immediately tells you which parts to ignore.",
-        "It is not an intimate goodbye. It is a group refusing to make goodbye useful for Aegis."
+        "It is not an private goodbye. It is a group refusing to make goodbye useful for Aegis."
       ],
       choices: [
         {
@@ -2053,28 +2053,28 @@
           { type: "matureContent" },
           { type: "flag", key: "piperRomance" }
         ],
-        text: ["Mature romance thread: With Piper, the private life is still fast, reckless, and carefully chosen. The door closes before the world gets to make it content."]
+        text: ["Expanded relationship thread: With Piper, the private life is still fast, deliberate, and carefully chosen. The door closes before the world gets to turn it into commentary."]
       },
       {
         conditions: [
           { type: "matureContent" },
           { type: "flag", key: "camilleCommitted" }
         ],
-        text: ["Mature romance thread: Camille's intimacy is not surrender. It is precision offered willingly, a private architecture built where leverage cannot reach."]
+        text: ["Expanded relationship thread: Camille's closeness is not surrender. It is precision offered willingly, a private architecture built where leverage cannot reach."]
       },
       {
         conditions: [
           { type: "matureContent" },
           { type: "flag", key: "julianCommitted" }
         ],
-        text: ["Mature romance thread: Julian keeps one joke ready and does not need it. That is how you know the door has closed on a real thing."]
+        text: ["Expanded relationship thread: Julian keeps one joke ready and does not need it. That is how you know the door has closed on a real thing."]
       },
       {
         conditions: [
           { type: "matureContent" },
           { type: "flag", key: "theoCommitted" }
         ],
-        text: ["Mature romance thread: Theo stays present without translating the moment into risk. For him, that is not small. For you, it becomes part of the ending."]
+        text: ["Expanded relationship thread: Theo stays present without translating the moment into risk. For him, that is not small. For you, it becomes part of the ending."]
       }
     );
   }
@@ -2102,7 +2102,7 @@
         "\"The ocean seems melodramatic,\" says the dark-haired man as he stands. Up close he looks even more exact than he did from across the hall. Not fragile. Not vain. Just composed with expensive precision. \"A parking structure would be less effort.\" He offers his hand like the room is not fluorescent and full of latent panic. \"Julian Hart.\"",
         "The one with the watchful gaze hesitates half a beat, visibly deciding whether introducing himself is socially required or merely likely to reduce future friction. \"Theo Arden,\" he says. His voice is lower than you expected, controlled in the way some people sound when they have already edited three more candid versions of the sentence before allowing one out.",
         "Camille closes her tablet with a quiet click. \"If any of you are going to test boundaries on day one, at least have the self-respect to do it intelligently.\"",
-        "\"That,\" Piper says, pointing at her, \"is the most romantic thing anyone has said to me in six months.\"",
+        "\"That,\" Piper says, pointing at her, \"is the most personally useful thing anyone has said to me in six months.\"",
         "Camille does not blink. \"Your standards are feral.\"",
         "\"My standards,\" Piper says, standing in one fluid motion, \"are adaptive.\" Her attention swings back to you with shameless interest. \"You're new enough that this is still salvageable. Tell me you're at least entertaining ocean.\"",
         "Julian's mouth curves. \"I would like it noted for the record that I favor surviving the first afternoon before anyone commits to maritime rebellion.\"",
@@ -2226,7 +2226,7 @@
         "\"No,\" Julian says. \"This is adult institutional exile with amenities.\"",
         "\"That is much worse branding,\" Ben says.",
         "Even Camille's mouth shifts, not quite into a smile but near enough that the room notices.",
-        "The thing about shared spaces is that they create accidental intimacy. Someone gets tired and honest at the same time. Someone reveals a habit they did not know was visible. Someone chooses where to sit, and that choice turns out to matter. The chapter needs one scene where all of that starts.",
+        "The thing about shared spaces is that they create accidental closeness. Someone gets tired and honest at the same time. Someone reveals a habit they did not know was visible. Someone chooses where to sit, and that choice turns out to matter. The chapter needs one scene where all of that starts.",
         "Piper thumps the floor beside her in invitation. Julian tilts his head toward the open chair nearest him. Theo does not gesture, but the edge of the couch beside him is clear in the way a deliberate silence can be clear. Camille's attention stays on you with an unreadable steadiness that somehow feels more specific than any invitation in the room.",
         "Whatever else today has been, this moment is simple in one important way: you are choosing where to place yourself."
       ],
@@ -2354,12 +2354,12 @@
         "Ben is near the end of the queue, balancing a paper cup of coffee he clearly did not need but wanted anyway. Jordan is beside him, saying something under their breath that makes Ben fail not to smile.",
         "It is only the second morning and the place already has currents.",
         "Over the speaker, a calm voice announces, \"Baseline sequence two will begin in six minutes. Trainees, report in assigned order. Any uncontrolled manifestation must be reported immediately.\"",
-        "Piper leans closer. \"See? Beautiful. Nothing says romance like institutionalized surveillance and the promise of a possible migraine.\"",
+        "Piper leans closer. \"See? Beautiful. Nothing says trust like institutionalized surveillance and the promise of a possible migraine.\"",
         "Somewhere behind the glass, something bright flares and vanishes. The entire line goes still for a heartbeat, everyone trying not to look interested at once. Aegis Point, apparently, has decided the correct follow-up to yesterday is to line all of you up and ask what you do when watched."
       ],
       "choices": [
         {
-          "text": "Angle toward Piper and ask whether she always flirts this early or only when there are witnesses.",
+          "text": "Angle toward Piper and ask whether she always tests the tone this early or only when there are witnesses.",
           "effects": [
             {
               "type": "flag",
@@ -2447,7 +2447,7 @@
         "Camille does not interrupt. She exits last, exchanges a low sentence with the nearest staffer, and only then looks at you. There is thought in it. Calculation. Also, if you know how to read for it yet, the faintest implication that whatever happened in there moved you from abstract category to active concern.",
         "It all lands at once: the attention, the opinions, the way Aegis turns a single controlled demonstration into social weather.",
         "Jordan tilts their head. \"So,\" they say, \"do you want the official response, the honest response, or the one people are already telling each other in the cafeteria?\"",
-        "Piper taps two fingers against the railing. \"I vote honest. The official response has never kissed anyone in its life.\"",
+        "Piper taps two fingers against the railing. \"I vote honest. The official response has never made a brave personal choice in its life.\"",
         "\"Neither have some of the trainees here,\" Rina says without looking over.",
         "\"That was one time,\" Julian replies, scandalized, and then, because it clearly was not one time, he smiles.",
         "Ben finally extends the coffee cup he is holding. \"Take this before you fall over and give all of them a story they do not deserve.\"",
@@ -2462,7 +2462,7 @@
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -2491,7 +2491,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -2578,7 +2578,7 @@
       "focus": "Ensemble",
       "text": [
         "The recovery hall outside the control lab has been furnished by people who believe discomfort builds character. The benches are too narrow, the walls too white, the water dispenser too slow. Someone has tried to soften the place with a potted plant near the far door and only succeeded in giving the room one more witness.",
-        "By the time you get there, half the people who matter to your day are already occupying the space like pieces on a board that moved themselves into position. Piper is sitting on the back of a bench instead of the seat. Camille stands with her shoulder against the wall, arms folded, entirely too composed for someone who has clearly been thinking. Julian has somehow acquired two cups of tea from nowhere. Theo is pretending the clipboard in his lap is an objective reason not to keep looking at you. Ben is at the dispenser filling paper cones of water one after another like he expects the room to need them. Jordan hovers near the doorway, where they can leave quickly if the conversation gets stupid. Rina drifts in late enough to imply she almost didn't.",
+        "By the time you get there, half the people who matter to your day are already occupying the space like pieces on a board that moved themselves into position. Piper is sitting on the back of a bench instead of the seat. Camille stands with her shoulder against the wall, arms folded, entirely too composed for someone who has clearly been thinking. Julian has somehow acquired two cups of tea from nowhere. Theo is pretending the clipboard in his lap is an objective reason not to keep looking at you. Ben is at the dispenser filling paper cones of water one after another like he expects the room to need them. Jordan hovers near the doorway, where they can leave quickly if the conversation gets reckless. Rina drifts in late enough to imply she almost didn't.",
         "It would be too much if the facility had not trained all of you to orbit the same stress points already.",
         "Julian is the first to speak. \"I would like the record to show,\" he says, extending one of the cups toward you, \"that none of us were emotionally prepared for the degree of tension this corridor has apparently decided to host.\"",
         "\"That sounds like a you problem,\" Piper says, but she is smiling.",
@@ -2690,12 +2690,12 @@
         "By the time you drift in, the core of the room has already formed.",
         "Piper is sitting sideways in one of the chairs, knees hooked over the arm, impossible in a way that makes the furniture seem at fault. Julian has claimed the end of the table nearest the weak yellow lamp, where his face gets to have shadows. Theo is at the opposite side with a mug wrapped in both hands, looking like he did not mean to stay this long and then accidentally did. Camille arrives a minute later with a glass of water and the air of someone who would deny wanting company if asked directly. Ben is by the stove making grilled cheese for more people than he claims to have intended. Jordan wanders in and out with update fragments from the wider residence hall like a very selective news service. Rina passes through only long enough to steal half a sandwich and say something cutting enough to count as affection in her dialect.",
         "It is not a family. It is barely a cohort. It is something more interesting: the beginning of a room that may matter later.",
-        "The conversation moves in layers. Jordan reports that one of the second-years has already decided your baseline was either staged or prophetic. Julian declares both options aesthetically unsound. Piper asks what your prophetic baseline would even predict and immediately answers herself with, \"Property damage and very confusing kissing.\" Ben nearly chokes on his own laugh.",
+        "The conversation moves in layers. Jordan reports that one of the second-years has already decided your baseline was either staged or prophetic. Julian declares both options aesthetically unsound. Piper asks what your prophetic baseline would even predict and immediately answers herself with, \"Property damage and very confusing risk math.\" Ben nearly chokes on his own laugh.",
         "If you gave Piper room earlier, she uses it now. Not greedily. Confidently. She tosses you remarks like she expects you to catch them and is visibly pleased when you do.",
         "If you and Camille found a line together in the stairwell, it shows here not in overt attention but in a shift of gravity. She does not need to sit next to you to make the room aware she has an opinion.",
         "If Julian got something true from you in the lounge, he is lighter now, the performance no less polished but less defensive at the edges. He includes you differently. Theo does too, though his version is quieter. He asks one precise question halfway through the conversation that proves he has been tracking not just your power but your mood.",
         "Ben keeps feeding people. Jordan keeps noticing what everyone avoids saying. Even the room itself starts to feel complicit, warm from the stove and crowded enough that no one has to work too hard to justify staying.",
-        "At some point Piper steals a piece of cheese directly off Ben's spatula and survives only because he is too fond of her to commit the homicide he briefly considers. Julian tells a story about a trainee from three years ago who tried to fake mystery by refusing to answer basic questions about his power and accidentally convinced half the campus he transformed into birds. Camille, incredibly, contributes a dry one-liner sharp enough to make Jordan put a hand to their chest in mock injury. Theo laughs into his mug and looks startled by the fact of it.",
+        "At some point Piper steals a piece of cheese directly off Ben's spatula and survives only because he is too fond of her to make an issue of it. Julian tells a story about a trainee from three years ago who tried to fake mystery by refusing to answer basic questions about his power and accidentally convinced half the campus he transformed into birds. Camille, incredibly, contributes a dry one-liner sharp enough to make Jordan put a hand to their chest in mock injury. Theo laughs into his mug and looks startled by the fact of it.",
         "That may be the truest thing in the room all night.",
         "Later, when the conversation thins and the hours make everyone a little more honest, the table splits into smaller currents. Ben starts on the dishes. Jordan peels off to follow one last rumor down the hall. Rina vanishes. What remains is the core four around you and the shape their attention makes.",
         "Piper asks what you were like before all this, and for once the question lands without sounding like small talk. Julian wants the version that would embarrass you least gracefully. Theo wants the real answer. Camille says nothing, which in its own way means she wants one too.",
@@ -2876,7 +2876,7 @@
           "next": "c02_residence_after"
         },
         {
-          "text": "Do not let Chapter 2 private scenes ignore Chapter 1 chemistry or friction.",
+          "text": "Do not let Chapter 2 private scenes ignore Chapter 1 rapport or friction.",
           "effects": [
             {
               "type": "flag",
@@ -3067,9 +3067,9 @@
       "background": "aegis",
       "focus": "Ensemble",
       "text": [
-        "By night, the residence kitchen stops pretending to belong to the institution and starts pretending to belong to whoever got there first. The overhead lights are warmer than the rest of the wing. The refrigerator hums like a passive-aggressive witness. Somebody has left an unlabeled container on the top shelf that no one brave or stupid enough has claimed. The long table in the middle of the room has become the unofficial end point for people too wired to sleep and too tired to perform.",
+        "By night, the residence kitchen stops pretending to belong to the institution and starts pretending to belong to whoever got there first. The overhead lights are warmer than the rest of the wing. The refrigerator hums like a passive-aggressive witness. Somebody has left an unlabeled container on the top shelf that no one brave or reckless enough has claimed. The long table in the middle of the room has become the unofficial end point for people too wired to sleep and too tired to perform.",
         "Tonight, most of the important orbit ends up here.",
-        "Ben is making toast with the seriousness of a man rebuilding civilization from carbohydrates. Jordan is on the counter swinging one boot against the cabinet doors in tiny taps, cataloguing everybody with the ease of a person who can tell when a room wants to become confession. Julian has stolen one of the good mugs from somewhere mysterious. Theo is sitting with his tablet facedown for once, which is somehow more intimate than if he had started speaking first. Camille arrives last, still in training black, carrying a folder she finally leaves on the edge of the table instead of in her hands. Piper appears two seconds after her with no food and every opinion.",
+        "Ben is making toast with the seriousness of a man rebuilding civilization from carbohydrates. Jordan is on the counter swinging one boot against the cabinet doors in tiny taps, cataloguing everybody with the ease of a person who can tell when a room wants to become confession. Julian has stolen one of the good mugs from somewhere mysterious. Theo is sitting with his tablet facedown for once, which is somehow more private than if he had started speaking first. Camille arrives last, still in training black, carrying a folder she finally leaves on the edge of the table instead of in her hands. Piper appears two seconds after her with no food and every opinion.",
         "\"Look at us,\" Julian says. \"A support group for the administratively over-observed.\"",
         "\"We're not a support group,\" Piper says, dropping into the chair beside you or across from you depending on prior gravity. \"We're a complaint department with powers.\"",
         "Jordan lifts their mug. \"Accurate.\"",
@@ -3085,7 +3085,7 @@
         "Piper bumps your knee under the table if she's close enough. Or maybe your ankle. Or maybe nothing touches and the possibility is doing all the work. \"So,\" she says, eyes on you, \"what's the official verdict? Are you acclimating beautifully or becoming everyone's favorite committee fight?\"",
         "Jordan answers before you can. \"Both.\"",
         "\"Shocking,\" Julian says.",
-        "If you choose honesty here, the scene can tilt intimate. If you choose wit, it stays bright. If you choose distance, the room registers it. This is one of those ensemble scenes where later route outcomes start being seeded not by giant declarations but by where you spend your sincerity.",
+        "If you choose honesty here, the scene can tilt private. If you choose wit, it stays bright. If you choose distance, the room registers it. This is one of those ensemble scenes where later route outcomes start being seeded not by giant declarations but by where you spend your sincerity.",
         "Theo asks whether the med follow-up changed anything. Not casually; carefully. Ben asks if you're eating enough. Julian wants to know whether the gallery made you want to overthrow hierarchy or date it. Piper says both is allowed. Camille, after a pause long enough to mean something, says some forms of hierarchy are simply people mistaking attention for merit. Then she looks at you in a way that makes it impossible to miss that the sentence is both general principle and specific test.",
         "You answer. Maybe to one of them. Maybe to all.",
         "Jordan slides off the counter and opens the fridge. \"The thing I enjoy most,\" they say, \"is that three weeks from now half this table will claim they saw all of this coming.\"",
@@ -3198,7 +3198,7 @@
         "Jordan nods solemnly. \"Correct. We banned the phrase after your second week.\"",
         "\"Lies,\" Piper says.",
         "\"Only spiritually,\" Jordan says.",
-        "Ben looks at you instead of either of them. \"She's joking because she wants to know whether tomorrow is going to scare you enough to make you stupid. Different thing.\"",
+        "Ben looks at you instead of either of them. \"She's joking because she wants to know whether tomorrow is going to scare you enough to make you reckless. Different thing.\"",
         "For a second the room gets quieter in the way good rooms do when somebody says the real sentence plainly. Piper does not flinch from it. If anything, something in her face settles. This is what liking her starts to feel like, maybe. Not just speed and charm and the warm pressure of her orbit. The fact that she is easier to trust the second the performance drops and she lets the actual question stand there.",
         "Across the room, two upper-level residents are arguing quietly about containment protocols like divorced parents discussing a cursed dog. A server threads between tables with a tray balanced too expertly to be accidental. Somewhere near the back, somebody laughs too hard and gets shushed by a friend who still believes volume is what attracts trouble.",
         "Piper's eyes stay on you. \"So? Tomorrow. What kind of dangerous are you trying to be?\""
@@ -3268,7 +3268,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -3338,7 +3338,7 @@
         "Then the room tips from humor into something more useful. Not solemn. Just honest. Comments begin landing not like a pile-on, but like people setting their individual reads of you on the same table and waiting to see which ones survive contact.",
         "Piper wants to talk about speed of decision and whether hesitation looked like fear or recalculation. Camille wants to talk about repeatability and whether instinct without structure can ever be trusted by people standing nearby. Theo wants to talk about risk drift-small allowances turning into patterns. Julian, true to form, wants to talk about perception: what the room saw, what you meant, and how often those are quietly at war with each other.",
         "That is the shape of the real pressure now. Not just what you can do. How four different kinds of intelligence interpret what you do, and which of them you are foolish enough to ignore.",
-        "If you came into Chapter 4 already carrying sparks or bruises with any of them, the discussion sharpens around those lines. Piper pushes faster where there is chemistry, as if daring both of you to admit you are already orbiting on purpose. Camille becomes cleaner and more exact the more she has something personal to hide. Julian gets more dangerous when he is being kind because he notices exactly where to place the sentence. Theo's honesty becomes warmer or harsher depending on whether you have given him reasons to believe he is heard.",
+        "If you came into Chapter 4 already carrying sparks or bruises with any of them, the discussion sharpens around those lines. Piper pushes faster where there is rapport, as if daring both of you to admit you are already orbiting on purpose. Camille becomes cleaner and more exact the more she has something personal to hide. Julian gets more dangerous when he is being kind because he notices exactly where to place the sentence. Theo's honesty becomes warmer or harsher depending on whether you have given him reasons to believe he is heard.",
         "Nobody says any of that outright. Adults rarely do, not if they can help it. Instead they ask what you intended, what you learned, and what you plan to keep the next time the chamber offers you less time to be noble."
       ],
       "choices": [
@@ -3419,23 +3419,23 @@
       "background": "aegis",
       "focus": "Ensemble",
       "text": [
-        "The residence kitchen after official quiet hours is one of the few places on campus where fatigue consistently wins over presentation. The overheads are dimmed to night mode. One stove light is still on over a pan somebody abandoned to soak. The refrigerator hums with the confidence of an appliance that has seen adults with powers make worse midnight decisions than leftovers. A hand-lettered note on the counter says LABEL YOUR SHIT and underneath it someone has written or ascend beyond ownership.",
+        "The residence kitchen after official quiet hours is one of the few places on campus where fatigue consistently wins over presentation. The overheads are dimmed to night mode. One stove light is still on over a pan somebody abandoned to soak. The refrigerator hums with the confidence of an appliance that has seen adults with powers make worse midnight decisions than leftovers. A hand-lettered note on the counter says LABEL YOUR FOOD and underneath it someone has written or ascend beyond ownership.",
         "It would be funny in any other building. Here it feels like philosophy.",
         "By the time you drift in, the chapter has already started gathering itself into aftermath. Piper is perched on the counter with a mug she insists contains tea and everyone else insists contains reckless amounts of sugar. Julian is leaning against the fridge in rolled sleeves like a man who could turn making toast into a social event. Theo is at the table with his knees angled out and a spoon in one hand, looking like he sat down for thirty seconds and accidentally committed to existing there for an hour. Camille stands at the sink rinsing out a glass with the exact same focus she uses on tactical notes, which is somehow both absurd and compelling.",
         "This is the version of the group that only exists once enough pressure has happened for everyone to get a little careless with composure. Piper talks faster when she is tired. Julian gets quieter before he gets theatrical again. Theo stops pretending all his useful thoughts are purely professional. Camille, somehow, becomes easier to read in profile than face-on.",
-        "The conversation starts on training because of course it does. It starts there and then does the thing all real conversations do, sliding into what training actually means without admitting that's where it is headed. Ben passes through halfway with a towel over one shoulder and steals fruit from the bowl on the counter like a man who knows this room belongs equally to anyone upright enough to reach it. Jordan appears in the doorway long enough to contribute one terrifyingly accurate sentence about who in the cohort is already rewriting today's sim into tomorrow's gossip, then vanishes again before anyone can assign them emotional labor.",
+        "The conversation starts on training because of course it does. It starts there and then does the thing all real conversations do, sliding into what training actually means without admitting that's where it is headed. Ben passes through halfway with a towel over one shoulder and steals fruit from the bowl on the counter like a man who knows this room belongs equally to anyone upright enough to reach it. Jordan appears in the doorway long enough to contribute one terrifyingly accurate sentence about who in the cohort is already rewriting today's sim into tomorrow's rumor, then vanishes again before anyone can assign them emotional labor.",
         "No one is trying to impress anyone now. That may be the most dangerous condition of all.",
         "Camille sets the rinsed glass upside down by the sink. \"If today did anything useful,\" she says, \"it clarified that instinct is not your problem. Translation is.\"",
-        "Julian smiles faintly. \"God, that's intimate of you.\"",
+        "Julian smiles faintly. \"God, that's private of you.\"",
         "Piper points at him with the mug. \"See? This is why people keep wanting to date our problems.\"",
-        "Theo very nearly chokes on nothing. Camille closes her eyes for half a second in a way that suggests she is either praying for patience or measuring homicide in teaspoons. You cannot tell which. Julian, the bastard, looks delighted.",
+        "Theo very nearly chokes on nothing. Camille closes her eyes for half a second in a way that suggests she is either praying for patience or measuring consequences in teaspoons. You cannot tell which. Julian, amused, looks delighted.",
         "What saves the room from tipping into pure chaos is that underneath the jokes there is now something sturdy enough to hold weight. People here have seen each other under glass, in med, in anger, in embarrassment, in the quiet minutes after all of that. They have started building versions of one another that might actually survive contact with the next bad day.",
         "That is what Chapter 4 should leave behind. Not certainty. Density.",
         "If you have tilted hard toward one person already, the room registers it. Not with giant dramatic jealousy. With smaller, sharper things. The extra second before someone answers. The joke aimed half an inch more carefully. The way one person asks a direct question and another decides not to. If you have kept everyone on equal uncertain footing, the room reads that too. Adults are not less observant than teenagers about emotional gravity. They are just usually better at pretending observation counts as manners.",
         "Julian folds his arms. \"Well? Since we are all apparently trapped in a found-family pressure cooker with terrible institutional branding, what did today actually teach you?\"",
         "The question lands in the kitchen differently than it did in the gallery. Here it is less about evaluation and more about claim. About what version of the day you choose to carry forward into the night.",
         "Camille finally turns from the sink and rests one hip against the counter. Piper goes still in that quick alert way she has when something is about to matter. Theo looks down at his spoon and then back up, like even he knows the room has reached one of those small hinge moments people will pretend not to remember later. Julian, curse him, looks almost fond. Not entertained. Fond. It changes the temperature of the kitchen more than any joke has a right to.",
-        "That is what is different now from Chapter 1. Nobody here is just a first impression anymore. Everybody in the room has survived enough of one another to start becoming real, and reality is harder to keep tidy than chemistry."
+        "That is what is different now from Chapter 1. Nobody here is just a first impression anymore. Everybody in the room has survived enough of one another to start becoming real, and reality is harder to keep tidy than rapport."
       ],
       "choices": [
         {
@@ -3675,7 +3675,7 @@
       "background": "aegis",
       "focus": "Seth",
       "text": [
-        "Blackwater Infirmary is smaller than the med wing on campus and somehow less comforting for it. There are only four beds behind partial curtains, one humming diagnostics cart, a wall cabinet with labeled trauma kits, and a nurse practitioner who has clearly treated enough Aegis-adjacent nonsense to stop asking questions the second she clocks the burns, the soaked fabric, or the way residents joke too hard when adrenaline is still leaking out through their teeth.\nThe fluorescent lights here are meaner than the ones at Aegis. Maybe that is unfair. Maybe the real problem is that outside the fence, injury feels less curricular and more personal. One second you were over black water proving something to yourself. The next you are on exam paper that crackles under your shoulders while someone checks your pupils and asks whether your hands are shaking because of output, cold, or ego.\n\"All three is an available answer,\" the practitioner says without looking up from the tablet.\nFrom the next bay comes the low thud of Ben setting down a plastic cup and the gentler thud of somebody-probably Jordan-telling Piper to stop trying to pace through solid furniture. Theo is arguing with the telemetry readout in a whisper because public panic embarrasses him. Camille, if she is still here, is quiet in the way she gets when she has already processed the event into lessons and is waiting to see whether you will do the same or waste her attention. Julian's voice floats in once, low and smooth, charming the staff in exactly the amount required to keep everyone from locking the place down emotionally.\nThe practitioner presses two fingers under your jaw and studies your eyes. \"You're fine enough to be annoying,\" she says. \"Congratulations. Whatever this was, do less of it at full force unless your paperwork is better than your landing looked.\"\nThat should make you laugh. It nearly does. But now that the room is no longer moving, the emotional backlash starts arriving in discrete pieces. Piper's face when you went up. Theo's voice when the angle changed. The sharp relief in your own lungs when the fall became survivable instead of cinematic. The truth of off-campus practice is that everybody who likes you has to experience your choices with less institutional padding. That is the cost nobody puts on the briefing sheet.\nA curtain shifts. Depending on the path behind you, one of them appears first-Piper still bright but furious at the floor, Theo carrying concern like a concealed weapon, Camille with an unreadable expression that means she has ten real things to say and is choosing the order, Julian leaning on the doorframe like he refuses to enter a room without improving its visual composition. Whoever it is, the sight of them hits harder than the medic's hands did. This is what continuity actually costs: by Chapter Five, people are no longer reacting to a resident. They are reacting to you specifically.\nThe practitioner steps back at last. \"Five minutes,\" she says to the doorway, with the tone of someone granting visiting hours to a scene already in progress. \"If any of you turn this into a confessional, take it outside. I mop around blood, not unresolved attraction.\""
+        "Blackwater Infirmary is smaller than the med wing on campus and somehow less comforting for it. There are only four beds behind partial curtains, one humming diagnostics cart, a wall cabinet with labeled trauma kits, and a nurse practitioner who has clearly treated enough Aegis-adjacent nonsense to stop asking questions the second she clocks the burns, the soaked fabric, or the way residents joke too hard when adrenaline is still leaking out through their teeth.\nThe fluorescent lights here are meaner than the ones at Aegis. Maybe that is unfair. Maybe the real problem is that outside the fence, injury feels less curricular and more personal. One second you were over black water proving something to yourself. The next you are on exam paper that crackles under your shoulders while someone checks your pupils and asks whether your hands are shaking because of output, cold, or ego.\n\"All three is an available answer,\" the practitioner says without looking up from the tablet.\nFrom the next bay comes the low thud of Ben setting down a plastic cup and the gentler thud of somebody-probably Jordan-telling Piper to stop trying to pace through solid furniture. Theo is arguing with the telemetry readout in a whisper because public panic embarrasses him. Camille, if she is still here, is quiet in the way she gets when she has already processed the event into lessons and is waiting to see whether you will do the same or waste her attention. Julian's voice floats in once, low and smooth, charming the staff in exactly the amount required to keep everyone from locking the place down emotionally.\nThe practitioner presses two fingers under your jaw and studies your eyes. \"You're fine enough to be annoying,\" she says. \"Congratulations. Whatever this was, do less of it at full force unless your paperwork is better than your landing looked.\"\nThat should make you laugh. It nearly does. But now that the room is no longer moving, the emotional backlash starts arriving in discrete pieces. Piper's face when you went up. Theo's voice when the angle changed. The sharp relief in your own lungs when the fall became survivable instead of cinematic. The truth of off-campus practice is that everybody who likes you has to experience your choices with less institutional padding. That is the cost nobody puts on the briefing sheet.\nA curtain shifts. Depending on the path behind you, one of them appears first-Piper still bright but furious at the floor, Theo carrying concern like a concealed weapon, Camille with an unreadable expression that means she has ten real things to say and is choosing the order, Julian leaning on the doorframe like he refuses to enter a room without improving its visual composition. Whoever it is, the sight of them hits harder than the medic's hands did. This is what continuity actually costs: by Chapter Five, people are no longer reacting to a resident. They are reacting to you specifically.\nThe practitioner steps back at last. \"Five minutes,\" she says to the doorway, with the tone of someone granting visiting hours to a scene already in progress. \"If any of you turn this into a confessional, take it outside. I mop around blood, not unresolved affinity.\""
       ],
       "choices": [
         {
@@ -3755,7 +3755,7 @@
       "background": "aegis",
       "focus": "Ensemble",
       "text": [
-        "By the time you get back to the residence kitchen, the night has shifted out of operational time and into aftermath. The overhead lights are too bright for intimacy and not bright enough to stop it anyway. Somebody has abandoned toast in the oven long enough for the smell to become a warning. Jordan is perched on the counter with the ease of a person who has already decided they are not cleaning up anyone else's emotional debris unless offered snacks. Ben has changed into a clean shirt. Theo is drying his hair with a dish towel because apparently planning does not extend to remembering he got soaked helping with recovery on the dock. Julian has claimed the only chair in the room that looks like it belongs in a different, more forgiving building. Camille is standing at the sink with a mug she has not drunk from yet, and Piper is doing restless loops from table to fridge to table like if she stops moving the night might finally catch her.\nThis is the kind of scene a shorter story skips, which is precisely why it matters. Nobody here is in crisis anymore. That is different from being settled. Aegis keeps training residents to survive impact; the kitchen is where you find out what survival leaves in a room after adrenaline vacates the lease.\nJordan points at you with a spoon. \"Status report. Keep it under three lies.\"\n\"Is there a version of this where you ask normal questions?\" Theo says.\n\"No,\" Jordan says. \"And if there were, tonight would not qualify.\"\nPiper stops pacing long enough to lean both hands on the table and look at you with bright, furious relief she is pretending is still attitude. \"For the record,\" she says, \"if you ever decide to turn a landing into a near-spiritual experience over dark water again, I reserve the right to be dramatically offended first and supportive second.\"\n\"That's already your order for most things,\" Julian says.\nShe points at him without looking. \"You are not helping by being correct with cheekbones.\"\nJulian smiles into his cup. \"I rarely do.\"\nCamille finally drinks from the mug. \"The landing was not as bad as the correction before it,\" she says. \"Which is not praise. It is context. Learn to distinguish them if you want to survive adults.\"\nThat earns a laugh from Ben, a muttered complaint from Piper, and one of those tiny glances from Theo that means he appreciated the line even while disagreeing with its packaging. The kitchen holds the sound for a second. There it is again: the cohort hardening into something real enough to bruise each other honestly and still remain in the room.\nIf romance has been gathering anywhere, it sharpens here too-not in declarations, not necessarily, but in the specific way attention arranges itself after a scare. Who checks your hands. Who watches your mouth for the joke that means you are dodging. Who gives you space. Who refuses to. Who looks relieved in a way they will absolutely deny under oath.\nJordan swings one leg and asks, \"So was tonight proof that the institution underestimates us, proof that Theo should be allowed to assign adult supervision to all thrill-seekers, or proof that Piper should never be trusted near open water with a theory?\"\n\"Yes,\" Theo says at the exact same time Piper says, \"Rude,\" and Julian says, \"Deliciously all of the above.\"\nEven Camille's mouth twitches.\nOutside the kitchen windows the campus has gone mostly dark, but the water beyond the trees still throws back a faint borrowed shine. The world is bigger now than it was in Chapter One. That should be obvious. Tonight makes it intimate. Bigger means more witnesses, more consequences, more choices that cannot hide behind training architecture. Bigger also means more possible futures. The room can feel that without naming it yet.\nSomebody finally rescues the toast. Someone else opens a window. Piper ends one of her loops close enough to brush your arm in passing, either by accident or because the line between those things has become politically inconvenient. Theo's towel is still in his hands. Julian is watching everyone and pretending not to. Ben has settled into the kind of quiet that usually means he is making sure nobody gets left alone accidentally. Camille's mug is empty now. Jordan, of course, notices all of it.\nThis is not closure. It is better. It is the chapter teaching itself how to breathe after the bad idea survived contact with reality."
+        "By the time you get back to the residence kitchen, the night has shifted out of operational time and into aftermath. The overhead lights are too bright for closeness and not bright enough to stop it anyway. Somebody has abandoned toast in the oven long enough for the smell to become a warning. Jordan is perched on the counter with the ease of a person who has already decided they are not cleaning up anyone else's emotional debris unless offered snacks. Ben has changed into a clean shirt. Theo is drying his hair with a dish towel because apparently planning does not extend to remembering he got soaked helping with recovery on the dock. Julian has claimed the only chair in the room that looks like it belongs in a different, more forgiving building. Camille is standing at the sink with a mug she has not drunk from yet, and Piper is doing restless loops from table to fridge to table like if she stops moving the night might finally catch her.\nThis is the kind of scene a shorter story skips, which is precisely why it matters. Nobody here is in crisis anymore. That is different from being settled. Aegis keeps training residents to survive impact; the kitchen is where you find out what survival leaves in a room after adrenaline vacates the lease.\nJordan points at you with a spoon. \"Status report. Keep it under three lies.\"\n\"Is there a version of this where you ask normal questions?\" Theo says.\n\"No,\" Jordan says. \"And if there were, tonight would not qualify.\"\nPiper stops pacing long enough to lean both hands on the table and look at you with bright, furious relief she is pretending is still attitude. \"For the record,\" she says, \"if you ever decide to turn a landing into a near-spiritual experience over dark water again, I reserve the right to be dramatically offended first and supportive second.\"\n\"That's already your order for most things,\" Julian says.\nShe points at him without looking. \"You are not helping by being correct with confidence.\"\nJulian smiles into his cup. \"I rarely do.\"\nCamille finally drinks from the mug. \"The landing was not as bad as the correction before it,\" she says. \"Which is not praise. It is context. Learn to distinguish them if you want to survive adults.\"\nThat earns a laugh from Ben, a muttered complaint from Piper, and one of those tiny glances from Theo that means he appreciated the line even while disagreeing with its packaging. The kitchen holds the sound for a second. There it is again: the cohort hardening into something real enough to bruise each other honestly and still remain in the room.\nIf a personal route has been gathering anywhere, it sharpens here too-not in declarations, not necessarily, but in the specific way attention arranges itself after a scare. Who checks your hands. Who watches your mouth for the joke that means you are dodging. Who gives you space. Who refuses to. Who looks relieved in a way they will absolutely deny under oath.\nJordan swings one leg and asks, \"So was tonight proof that the institution underestimates us, proof that Theo should be allowed to assign adult supervision to all thrill-seekers, or proof that Piper should never be trusted near open water with a theory?\"\n\"Yes,\" Theo says at the exact same time Piper says, \"Rude,\" and Julian says, \"Deliciously all of the above.\"\nEven Camille's mouth twitches.\nOutside the kitchen windows the campus has gone mostly dark, but the water beyond the trees still throws back a faint borrowed shine. The world is bigger now than it was in Chapter One. That should be obvious. Tonight makes it private. Bigger means more witnesses, more consequences, more choices that cannot hide behind training architecture. Bigger also means more possible futures. The room can feel that without naming it yet.\nSomebody finally rescues the toast. Someone else opens a window. Piper ends one of her loops close enough to brush your arm in passing, either by accident or because the line between those things has become politically inconvenient. Theo's towel is still in his hands. Julian is watching everyone and pretending not to. Ben has settled into the kind of quiet that usually means he is making sure nobody gets left alone accidentally. Camille's mug is empty now. Jordan, of course, notices all of it.\nThis is not closure. It is better. It is the chapter teaching itself how to breathe after the bad idea survived contact with reality."
       ],
       "choices": [
         {
@@ -3994,7 +3994,7 @@
         "\"The fourth thing?\" Camille asks.",
         "His mouth shifts by half a degree. \"If my staff moves, you move with them unless you enjoy losing choices.\"",
         "That lands.",
-        "If you have already learned anything from Aegis, it is that rules reveal what a place has survived. The Event Horizon has survived people who confused invitation with control. It has survived people who thought neutral meant harmless. It has survived people who believed expensive rooms could not become violent if everyone inside used the right glassware.",
+        "If you have already learned anything from Aegis, it is that rules reveal what a place has survived. The Event Horizon has survived people who confused invitation with control. It has survived people who thought neutral meant harmless. It has survived people who believed expensive rooms could not become dangerous if everyone inside used the right glassware.",
         "The main floor opens beyond him in layers. A bar of dark mirrored stone. booths cut into shadow. a suspended walkway with clear sight down to the lower lounge. a balcony running along one side like a second set of intentions. The clientele is a mix of money, appetite, contractors, social predators, and people too smart to name themselves in public. A woman in silver laughs with her whole mouth and none of her eyes. A man by the far booth checks a message and tucks whatever emotion it caused him neatly back under his collar.",
         "You feel the room register your group in real time. Not loudly. Rooms like this do not gasp. They adjust.",
         "Kaito watches that happen and does not interfere. \"Your table is already regretting you,\" he says.",
@@ -4186,7 +4186,7 @@
               "key": "Camille",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -4276,13 +4276,13 @@
         "The city is all windows from up here, Blackwater thrown wide in glittering grids and harbor dark. The furniture is expensive without being fragile. The kitchen island holds three different bottles no one is touching and one aid kit somebody set down without admitting why. When Camille turns one wall display into a board of movements, names, photos, shell entities, and probable connections, the apartment stops being elegance and becomes infrastructure.",
         "Vektor fills the screen in fragments because organizations like that are easier to understand in patterns than in nouns. Lab fronts. procurement companies. security firms that are somehow never listed as security firms. government contracts with too much redaction and not enough shame. Missing assets. purchased silence. money moving through five hands so no one has to call it blood while it dries.",
         "Piper stands too close to the board and too far from everyone else until she catches herself doing it. Theo takes the end of the couch with his tablet and a face that says the probability trees are now personal enough to offend him. Camille remains upright because sitting would imply this is a conversation and not a necessary correction. Julian moves between the wall display and the kitchen like a host at his own disaster, which in fairness he sort of is.",
-        "The room has changed since Chapter One. You can feel that without anyone narrating it. These people know each other now through pressure, injury, embarrassment, attraction, arguments, rescue, competence, and the strange intimacy of being seen at bad moments without being left alone in them. The apartment holds the accumulated charge.",
+        "The room has changed since Chapter One. You can feel that without anyone narrating it. These people know each other now through pressure, injury, embarrassment, affinity, arguments, rescue, competence, and the strange closeness of being seen at bad moments without being left alone in them. The apartment holds the accumulated charge.",
         "\"What she did tonight,\" Theo says, \"was establish initiative.\"",
-        "Piper throws herself into one of the armchairs finally, restless energy still vibrating around the edges. \"What she did tonight was piss me off in custom lighting.\"",
+        "Piper throws herself into one of the armchairs finally, restless energy still vibrating around the edges. \"What she did tonight set me off in custom lighting.\"",
         "\"That too,\" Julian says.",
         "Camille taps one highlighted line on the display. \"She also wanted to know whether we would go to ground, report upward, freelance, or fracture.\" Her gaze flicks through the room, landing briefly on each of you. \"So decide quickly whether anyone intends to help her answer.\"",
         "That lands where it should.",
-        "If there is overt romance on any route, this room knows it even if nobody says the word. Not because people are gossiping. Because the group has become too observant and too invested not to notice who looks to whom first when danger turns deliberate.",
+        "If there is an overt personal route, this room knows it even if nobody says the word. Not because people are tracking rumors. Because the group has become too observant and too invested not to notice who looks to whom first when danger turns deliberate.",
         "Kaito appears on one corner of the wall display for exactly forty seconds via a secure call and gives you the kind of update only neutral-ground proprietors can deliver: not a favor, not a warning, something structured in between. Then he disappears again, leaving the apartment fractionally less plausible as ordinary domestic space.",
         "Ben is not in the room, but his absence is felt in the empty patch near the kitchen where a steadier body would normally anchor things. Jordan has texted Julian three separate rumor fragments from lower Blackwater, which he reads aloud only after filtering them through taste and panic. Rina, somewhere else in the city, has apparently already concluded the answer to this situation is \"hit it harder,\" which makes Piper briefly fond and Camille briefly murderous.",
         "The board grows. So does the silence around it.",
@@ -4579,7 +4579,7 @@
         "Piper is already there when you walk in, perched on the counter in socks and black training pants, one leg bouncing hard enough to turn the cupboard door against her calf into a steady metronome. She stops when she sees you. Not because she meant to. Because she did not know she was waiting for proof you were upright.",
         "Camille is standing at the sink, phone face-down beside her, sleeves rolled precisely to the same point on both forearms. She has made coffee strong enough to count as a position statement. Julian is leaning in the doorway with his shoulder against the frame, dressed too well for a crisis meeting before breakfast and somehow making that look less vain than defensive. Theo is at the table in yesterday's shirt, glasses low on his nose, building boxes around the unboxable with a mechanical pencil and the kind of concentration that usually means he is one question away from becoming dangerous to paperwork.",
         "Nobody says good morning. That would imply sleep happened in a meaningful way.",
-        "Piper breaks first. \"So,\" she says, voice lighter than her face. \"Options. One: we all pretend last night was normal and start discussing cereal. Two: we skip directly to who decided bait was a cute word for using you as a magnet.\"",
+        "Piper breaks first. \"So,\" she says, voice lighter than her face. \"Options. One: we all pretend last night was normal and start discussing cereal. Two: we skip directly to who decided bait was a polite word for using you as a magnet.\"",
         "\"It is not bait yet,\" Camille says without turning around. \"At the moment it is a review problem with too many people improvising morality at it.\"",
         "\"A review problem,\" Piper repeats. \"Fantastic. That's much better. If something tries to kill him again, I assume we can bury it in an administrative appeal.\"",
         "Theo drags the pencil under a line on his page. \"If we're going to do this, I need people to stop speaking like emotion and logistics are mutually exclusive. We have a targeted hostile, an external coordinator, incomplete surveillance confidence, and a facility that is about to respond by increasing proximity between the target and the thing doing the targeting because institutions are often powered by cursed symmetry.\"",
@@ -4592,7 +4592,7 @@
         "Piper slides off the counter. Up close, the energy around her reads less like recklessness and more like overspeed with nowhere decent to go. \"What I think is simple. Somebody aimed Rhea at us. Somebody wanted to see what he'd do.\" She flicks her gaze to you. \"What I want to know is whether we're going to stand here and let them keep treating that like a theory.\"",
         "The room shifts with that. Not physically. Relationally. It is one thing to survive contact. Another to admit the contact may have been designed.",
         "Theo finally looks up. \"We should not say 'us' when what they actually targeted was him.\"",
-        "\"Cute distinction,\" Piper says.",
+        "\"Convenient distinction,\" Piper says.",
         "\"No, important distinction,\" Theo says, more force than volume. \"Because if the system decides he is the variable, the system protects itself by isolating the variable. That is what systems do when they are frightened.\"",
         "Julian watches you over the rim of a mug he absolutely did not pour himself. \"And because several people in this room are about to make emotional decisions and pretend the decisions are analytical until somebody calls them on it. Which, for the record, I deeply respect as a lifestyle and still think we should notice.\"",
         "Camille's eyes settle on you now, direct and exact. \"Before Vance starts assigning narratives, decide what yours is. Did last night make you want walls, witnesses, or distance?\""
@@ -4691,11 +4691,11 @@
         "\"And if we don't do it?\"",
         "\"Then Rhea chooses the timing instead of us. Vektor keeps initiative. More civilians become math. I know.\" He exhales through his nose. \"I am not objecting because I don't understand the argument. I am objecting because I do.\"",
         "The honesty in that lands harder than alarm would have.",
-        "If your route with him has been deepening, this is one of the clearest places where overt romance can stop being theoretical. Not because he suddenly becomes bold in a cinematic way. Because he trusts you enough to let principle sound personal.",
+        "If your route with him has been deepening, this is one of the clearest places where personal commitment can stop being theoretical. Not because he suddenly becomes bold in a cinematic way. Because he trusts you enough to let principle sound personal.",
         "\"I can write the abort branch,\" he says. \"The real one. Not the version Vance puts on the board for people who need confidence. The one where I say your name and you stop, no matter what your power is telling you, no matter what Piper is doing, no matter what Rhea says, no matter how close you are to being right.\"",
         "\"And if I don't?\"",
         "Theo meets your eyes. \"Then I learn something about you I am trying very hard not to learn that way.\"",
-        "The line sits between you, severe and intimate in equal measure."
+        "The line sits between you, severe and private in equal measure."
       ],
       "choices": [
         {
@@ -4824,7 +4824,7 @@
         "That last part is what nobody can stop staring at for long.",
         "Vance stands at the head of the table without behaving like it. Camille has already marked three revisions on the map in red. Theo has six tabs open and the expression of a man trying to prevent mathematics from becoming an obituary. Julian is seated for once, which is how you know he is angry. Piper is walking lazy circles around the room with all the violence of someone trying to keep motion inside the category of acceptable.",
         "\"Final pass,\" Vance says. \"We run exactly once. No heroics. No improvisation that is not justified in the moment and survivable in the paperwork after.\"",
-        "\"Your gift for romance remains unmatched,\" Julian murmurs.",
+        "\"Your gift for making operational plans sound personal remains unmatched,\" Julian murmurs.",
         "Piper ignores him. \"I still hate that the center of the plan is 'let her touch him.'\"",
         "\"The center of the plan is layered response and zero solo gaps,\" Camille says.",
         "\"The center of the plan is him,\" Piper snaps.",
@@ -4927,7 +4927,7 @@
         "The room reacts to your presence immediately and in four different dialects.",
         "Piper's head lifts first. If you asked her to stay in med earlier, or chose her when the room was worst, that look lands warmer and rougher all at once. If you didn't, there is still relief in it, but the edge stays sharper.",
         "Theo finally blinks and stands like his body forgot sitting was an option. Julian turns off the faucet. Camille's shoulders drop half an inch, which is roughly equivalent to another person's hand slipping from a weapon.",
-        "\"Before anybody says anything stupid,\" Julian says, drying his hands on a towel that did not deserve this day, \"I would like to nominate the following truths for unanimous adoption. One: that was worse than the report will admit. Two: if anyone says 'within acceptable parameters' I will bite them. Three: everyone in this kitchen is too tired to be noble, so perhaps we could try honesty instead.\"",
+        "\"Before anybody says anything reckless,\" Julian says, drying his hands on a towel that did not deserve this day, \"I would like to nominate the following truths for unanimous adoption. One: that was worse than the report will admit. Two: if anyone says 'within acceptable parameters' I will bite them. Three: everyone in this kitchen is too tired to be noble, so perhaps we could try honesty instead.\"",
         "\"Seconded,\" Piper says immediately.",
         "Theo rubs at his eyes. \"Motion carried.\"",
         "Camille looks at you. \"Start with whether you remember everything.\"",
@@ -5024,7 +5024,7 @@
         "Aegis has pulled half a mobile operation out here. Medics with field kits move between folding stations. Techs kneel over portable sensors, cursing softly at cables that refuse to behave in the wind. Two observers on the catwalk argue over camera angles like they are setting up a sports broadcast for the end of the world. It would all look absurd if the atmosphere were not so taut.",
         "The cohort arrives in pieces. Piper is first to make the hangar feel smaller, pacing the painted line near the doors with a restless energy that somehow does not read as fear until you already know her. Camille is speaking with one of the airbase coordinators, not deferential, not hostile, simply impossible to ignore. Julian has adapted to the industrial lighting in the insulting way he adapts to everything. Theo is near the portable monitor bank, eyes moving between the live numbers and the people they could eventually belong to.",
         "Ben is helping a medic with a folded stretcher. Rina studies the chalked braking markers like a rival's handwriting. Jordan lingers near the shuttle doors with a paper cup and the expression of someone reading the whole room for structural weakness.",
-        "If the last few chapters changed how people look at you, it is all here now. Nobody announces that. Nobody needs to. The first days of attraction, friction, respect, caution, and misread confidence have hardened into operational habits. People make room for you faster. Or they do not. Their jokes bend sharper. Or kinder. They expect steadiness from you, or spectacle, or a problem disguised as a person. You can feel which one before anybody opens their mouth.",
+        "If the last few chapters changed how people look at you, it is all here now. Nobody announces that. Nobody needs to. The first days of affinity, friction, respect, caution, and misread confidence have hardened into operational habits. People make room for you faster. Or they do not. Their jokes bend sharper. Or kinder. They expect steadiness from you, or spectacle, or a problem disguised as a person. You can feel which one before anybody opens their mouth.",
         "A portable speaker cracks to life. \"Airbase review begins in nine minutes,\" a flat voice announces. \"All trainees remain in assigned zones until cleared by command.\"",
         "\"Assigned zones,\" Piper repeats, delighted and offended at once. \"Nothing good has ever followed that phrase.\"",
         "Julian glances toward the runway. \"On the contrary. Sometimes it is followed by money, helicopters, and one very regrettable gala.\"",
@@ -5137,7 +5137,7 @@
         "Vance stands at the head of the room with one palm braced on the table, the projector glow cutting across his shoulder and leaving the rest of him in hard-edged shadow. Behind him, runway maps show lane markers, abort points, medical stations, and a widening cone where the data team expects the worst of the pressure wake to go if things stop being theoretical.",
         "\"Today is not about proving how special you are,\" he says. \"It is about proving that you can remain useful when scale enters the room.\"",
         "There is a little movement at that. Rina shifts. Piper tilts her chair back on two legs until Camille looks at her and the chair comes down again without comment. Theo has already read the map and is now reading Vance instead. Julian's posture says casual; his attention says absolutely not casual.",
-        "Vance taps the board. \"The airbase gives us range, wind exposure, independent medical, and enough sensor distance to stop lying to ourselves about what high-output performance looks like. It does not forgive stupidity.\"",
+        "Vance taps the board. \"The airbase gives us range, wind exposure, independent medical, and enough sensor distance to stop lying to ourselves about what high-output performance looks like. It does not forgive recklessness.\"",
         "His eyes land on you then, not because he is singling you out theatrically but because everyone in the room already understands this chapter has you at the center of its geometry whether they say so or not. Whatever you have built with him so far-obedience, irritation, reluctant respect, the sense that he sees too much and says too little-travels with the look.",
         "\"If you experience instability, you report it.\" He lets the words sit. \"Immediately. I would rather write paperwork than watch a body hit concrete because somebody wanted to be impressive.\"",
         "\"Some of us can do both,\" Piper mutters.",
@@ -5150,7 +5150,7 @@
         "Ben gets crash response. Jordan is attached to shuttle and transit coordination. Rina slots into auxiliary pressure track and independent comparison runs.",
         "Vance looks back to you. \"Every chapter before this one has given me a slightly different argument about what to do with you,\" he says. \"Today is your chance to stop being an argument and become a decision.\"",
         "It is not encouraging, exactly. Coming from him, it is close.",
-        "He clicks to the next slide. A close-up of the runway appears with red hash marks at interval distances, black boxes marking dead zones, and one amber wedge labeled WATCHER BLEED. \"You have people out there who trust you,\" he says. \"You have people out there who don't. Act in a way that leaves both groups fewer reasons to be idiots.\"",
+        "He clicks to the next slide. A close-up of the runway appears with red hash marks at interval distances, black boxes marking dead zones, and one amber wedge labeled WATCHER BLEED. \"You have people out there who trust you,\" he says. \"You have people out there who don't. Act in a way that gives both groups fewer reasons to doubt you.\"",
         "The room stays quiet.",
         "\"If you have concerns,\" he adds, and now the look sweeps everyone, \"raise them before the concrete does.\"",
         "Camille is the first to speak, precise and low, already in motion mentally. Theo follows with a question about response lag. Piper asks whether she gets credit if she breaks physics politely. Julian asks about observer line contamination with the airbase crew watching from the catwalk. The conversation turns practical because that is what trained fear looks like: people offering the part of themselves that can be useful.",
@@ -5286,7 +5286,7 @@
       "text": [
         "The recovery corridor behind the airbase medical line is narrow enough to feel almost domestic after the runway. Canvas partitions mute the worst of the noise. Portable fans fight a losing battle against heat and adrenaline. Every few feet there is another folding chair occupied by somebody trying to convince themselves that standing would look stronger. Nobody buys it.",
         "The concrete under your feet is real in a way it was not ten minutes ago. That is the first thing you notice after something like this: texture comes back meaner.",
-        "A medic presses a cold pack into your hand with the brisk authority of someone who has watched enough gifted idiots postpone treatment until the body chooses for them. \"Sit,\" she says.",
+        "A medic presses a cold pack into your hand with the brisk authority of someone who has watched enough gifted people postpone treatment until the body chooses for them. \"Sit,\" she says.",
         "\"I'm fine.\"",
         "\"Then you can be fine from a chair.\"",
         "You sit.",
@@ -5305,9 +5305,9 @@
         "Before you can give one, Piper peels herself out of the blanket and crosses half the corridor in a few fast steps, silver foil swishing around her like she was knighted by emergency equipment. \"No,\" she says to Theo. \"I asked first with my eyes.\"",
         "\"You asked with a threat display.\"",
         "\"It was a caring threat display.\"",
-        "Julian, from the cabinet, says, \"This is the least romantic group of body language I've ever found extremely revealing.\"",
+        "Julian, from the cabinet, says, \"This is the least graceful group of body language I've ever found extremely revealing.\"",
         "Ben laughs once and regrets it.",
-        "The whole corridor shifts around you. Not gently. Not cruelly. Just honestly. If the last chapters built attraction, loyalty, friction, protectiveness, dependence, and the occasional disaster of all five at once, this is the moment those threads all start pulling in the same place.",
+        "The whole corridor shifts around you. Not gently. Not cruelly. Just honestly. If the last chapters built affinity, loyalty, friction, protectiveness, dependence, and the occasional disaster of all five at once, this is the moment those threads all start pulling in the same place.",
         "Vance steps closer, stopping where command can still technically call itself detached. \"You're done for the hour,\" he says.",
         "\"Done,\" Piper repeats. \"He says that like time is real.\"",
         "\"It is if medical writes it on a form.\"",
@@ -5511,7 +5511,7 @@
         "\"He is an exception,\" Piper says. \"Several, medically.\" ",
         "The banter buys the room a landing strip. What it does not buy is escape. Everyone is too aware, too tired, too changed for that. This is the moment before people peel off into private conversations or deliberate solitude or one last terrible decision in a hallway. The group knows it. The group is pretending not to know it for each other's comfort.",
         "This is what the place gave you that none of the handbooks could admit to promising: adults sharp enough to wound, loyal enough to matter, and strange enough to keep each other from calcifying. The group has never been simple. That is why it survived. Simpler people would have split cleaner or stayed shallow. This version learned how to absorb contradiction without pretending contradiction was the same thing as doom.",
-        "You can feel the routes branching under the floorboards: friendship spoken clearly, romance named or dodged, old tension granted dignity, promises made carefully enough to survive daylight. The chapter does not need fireworks. It needs courage with witnesses."
+        "You can feel the routes branching under the floorboards: friendship spoken clearly, commitment named or deferred, old tension granted dignity, promises made carefully enough to survive daylight. The chapter does not need fireworks. It needs courage with witnesses."
       ],
       "choices": [
         {
@@ -5732,8 +5732,8 @@
         "Graduation chairs are arranged in disciplined rows out on the lawn beyond the archway. Staff keep crossing back and forth with tablets, clipboards, rolled programs, badges, and the particular face adults make when they are pretending ceremony is a form of control instead of a socially acceptable panic attack. The cohort has broken into familiar gravitational patterns without discussing it. Piper is near the side doors because of course she found the nearest exit first. Camille stands in a slice of shade with a folder under one arm and the look of a woman who has already corrected two errors no one else noticed. Julian has somehow made leaning against a pillar look like an editorial decision. Theo is reading a program as if enough scrutiny will expose where the danger is hiding inside the font.",
         "Ben is helping carry boxes of bottled water from a service cart because someone asked once and now the institution has mentally filed him under useful for heavy things unless reminded otherwise. Jordan is posted against the admin wall with a lanyard between their fingers and the expression of someone tracking seven quiet social implosions for quality assurance. Nobody is acting casual well, which is almost comforting. Graduation has done what major thresholds always do: it has reduced every coping style to its clearest, least-deniable silhouette.",
         "You are not the same person who arrived here. That fact is visible even before anyone says your name. Some of it lives in the obvious places: the way staff look at you now, the way certain doors open without paperwork, the difference between being escorted and being expected. Some of it lives in subtler evidence. The core four no longer orbit you like strangers deciding whether to invest. They hold position like people with history. The shape of that history changes depending on what you have done with it, but it is there. Nobody in this courtyard is meeting you for the first time anymore.",
-        "Piper catches your eye first and flicks two fingers in a private gesture that could mean come here, don't get weird, or if you let this become emotionally sincere in public I will kill you. Julian lifts the folded ceremony program in a tiny salute. Theo glances up, sees you seeing him, then deliberately stops hiding behind the page. Camille takes one measured step toward the center of the courtyard and does not call your name. She never has to. The whole morning has the texture of a held breath no one wants to be responsible for releasing.",
-        "There is no single correct place to begin. That feels earned. Early on, choices at Aegis often meant picking the least bad hallway. Today the choices feel stranger and more intimate than that. Who you approach first changes the tone. What you say first changes the day. Even the staff can feel it. Vance is out by the admin steps talking to someone from central, but his gaze cuts across the courtyard once and settles on you for half a second longer than protocol requires. It is not surveillance anymore. It is witness."
+        "Piper catches your eye first and flicks two fingers in a private gesture that could mean come here, don't get weird, or if you let this become emotionally sincere in public I will object in writing. Julian lifts the folded ceremony program in a tiny salute. Theo glances up, sees you seeing him, then deliberately stops hiding behind the page. Camille takes one measured step toward the center of the courtyard and does not call your name. She never has to. The whole morning has the texture of a held breath no one wants to be responsible for releasing.",
+        "There is no single correct place to begin. That feels earned. Early on, choices at Aegis often meant picking the least bad hallway. Today the choices feel stranger and more private than that. Who you approach first changes the tone. What you say first changes the day. Even the staff can feel it. Vance is out by the admin steps talking to someone from central, but his gaze cuts across the courtyard once and settles on you for half a second longer than protocol requires. It is not surveillance anymore. It is witness."
       ],
       "choices": [
         {
@@ -5831,7 +5831,7 @@
         "\"It's also correct.\"",
         "Julian looks from one face to the next and then to you, the performance version of his charm briefly absent. \"I hate to be the one who says it, but there is no elegant way out of this moment. So. We should decide whether we are speaking like colleagues, accomplices, or people who will actually remain in one another's lives once the scheduling apps lose jurisdiction.\"",
         "Trust Julian to drag sentiment into the open by insulting its wardrobe. The corridor goes quiet around the line. Even Piper stills. Camille does not look away. Theo's mouth opens like he had three possible interventions prepared and none of them survive contact with the actual question. It lands hardest because all of you know the answer is not singular. The relationships here do not share one category. They never did.",
-        "The whole year is in the room at once. The intake fear. The stupid jokes. The first time someone stayed in med. The worse time someone stayed in med. The arguments. The field pressure. The people who saw you ugly and stayed. The people you disappointed and still had to stand next to. The nights that made friendship feel too small a word and romance feel too neat a word and loyalty feel like the only honest one for a while. Backstage, in the half-dark behind the ceremony, all of that refuses summary.",
+        "The whole year is in the room at once. The intake fear. The reckless jokes. The first time someone stayed in med. The worse time someone stayed in med. The arguments. The field pressure. The people who saw you ugly and stayed. The people you disappointed and still had to stand next to. The nights that made friendship feel too small a word and labels feel too neat, while loyalty felt like the only honest one for a while. Backstage, in the half-dark behind the ceremony, all of that refuses summary.",
         "Maybe that is why the moment feels bearable. No one here is asking for summary. They are asking whether the thread holds when the institution stops holding it for you."
       ],
       "choices": [
@@ -5892,9 +5892,9 @@
       "background": "city",
       "focus": "Ensemble",
       "text": [
-        "The private restaurant is quieter than the hall was, which only makes the emotional acoustics more dangerous. Warm wood, low light, discreet staff, cutlery arranged with enough care to threaten intimacy by architecture alone. The anteroom outside the reserved table holds the five of you in a moment that still has one foot in public ceremony and one foot in whatever comes next. Jackets come off. Sleeves get rolled. Graduation folders are set aside like documents that have done everything they can do for the day.",
+        "The private restaurant is quieter than the hall was, which only makes the emotional acoustics more dangerous. Warm wood, low light, discreet staff, cutlery arranged with enough care to threaten closeness by architecture alone. The anteroom outside the reserved table holds the five of you in a moment that still has one foot in public ceremony and one foot in whatever comes next. Jackets come off. Sleeves get rolled. Graduation folders are set aside like documents that have done everything they can do for the day.",
         "Julian is the only one who looks instantly plausible in a room this expensive, which should be annoying and is instead useful. Camille scans the table placements with one glance and visibly approves of the sight lines. Theo has already identified the two exits and the probable path a server will take with hot plates. Piper is pretending the mirror near the entry isn't catching all of you at once. In the reflection, the group looks almost unreal: too composed, too marked by history, too obviously on the edge of becoming something the institution did not fully script.",
-        "No one sits immediately. That is telling. Dinner has not started yet; the truth has. There is a difference. The room holds all the unresolved categories you have been carrying: friendship that stopped being simple, attraction that survived stress, loyalty with teeth, affection that went public in private ways long before any official ending acknowledged it. A stranger would read a stylish gathering of graduates. A better observer would know the atmosphere is denser than that.",
+        "No one sits immediately. That is telling. Dinner has not started yet; the truth has. There is a difference. The room holds all the unresolved categories you have been carrying: friendship that stopped being simple, affinity that survived stress, loyalty with teeth, affection that went public in private ways long before any official ending acknowledged it. A stranger would read a stylish gathering of graduates. A better observer would know the atmosphere is denser than that.",
         "Piper hooks a thumb under the collar of her jacket and says, \"If anyone says the phrase new chapter, I'm leaving money on the table and committing a misdemeanor.\"",
         "\"That would be theft adjacent, not technically a misdemeanor,\" Theo says automatically.",
         "\"I love that even now your idea of seduction is legal precision,\" Julian says.",

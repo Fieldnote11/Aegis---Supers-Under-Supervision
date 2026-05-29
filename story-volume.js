@@ -267,7 +267,7 @@
       detail: "Medical has questions the assignment screen does not.",
       returnScene: "c02_hub_return_observation",
       openText: [
-        "Medical has a quieter version of the baseline queue. People sit with clipboards, sleeves rolled, powers politely dormant or very much pretending to be. A medic hands you a consent form thick enough to count as light reading if you hate yourself.",
+        "Medical has a quieter version of the baseline queue. People sit with clipboards, sleeves rolled, powers politely dormant or very much pretending to be. A medic hands you a consent form thick enough to count as light reading if you enjoy policy.",
         "Vance is there too, not hovering, exactly. Supervising the distance between consent and pressure.",
         "\"You can ask questions,\" the medic says. \"If anyone made that sound optional, they were wrong.\""
       ],
@@ -285,7 +285,7 @@
         { conditions: [{ type: "flag", key: "volConsentFileQuestion" }], text: ["Because you asked about refusal, Vance makes sure the medic answers in front of a witness. The answer matters less than the witness."] }
       ],
       closeChoices: [
-        { text: "Tell Vance you want to learn the work without worshiping the incentives.", effects: [{ type: "relationship", key: "Vance", delta: 1 }, { type: "stat", key: "aegisTrust", delta: 1 }, { type: "flag", key: "volWatchIncentives", value: true }] },
+        { text: "Tell Vance you want to learn the work without overvaluing the incentives.", effects: [{ type: "relationship", key: "Vance", delta: 1 }, { type: "stat", key: "aegisTrust", delta: 1 }, { type: "flag", key: "volWatchIncentives", value: true }] },
         { text: "Ask the medic to flag any test step you can pause safely.", effects: [{ type: "stat", key: "control", delta: 1 }, { type: "status", key: "condition", value: "Prepared" }, { type: "flag", key: "volMedicalPauseFlag", value: true }] },
         { text: "Keep the warning private and carry it into the queue.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "flag", key: "volConsentPrivateWarning", value: true }] }
       ]
@@ -307,7 +307,7 @@
       ],
       openChoices: [
         { text: "Ask how your recovery line is likely to behave.", effects: [{ type: "relationship", key: "Theo", delta: 1 }, { type: "npc", key: "Theo", trust: 1, memory: "You asked Theo about recovery instead of spectacle before baseline." }, { type: "flag", key: "volTheoRecoveryLine", value: true }] },
-        { text: "Tell him people probably worship peak because recovery looks like fear.", effects: [{ type: "stat", key: "insight", delta: 1 }, { type: "npc", key: "Theo", respect: 1 }, { type: "flag", key: "volTheoPeakFear", value: true }] },
+        { text: "Tell him people probably mythologize peak because recovery looks like fear.", effects: [{ type: "stat", key: "insight", delta: 1 }, { type: "npc", key: "Theo", respect: 1 }, { type: "flag", key: "volTheoPeakFear", value: true }] },
         { text: "Ask whether knowing the number ever makes him less afraid.", effects: [{ type: "relationship", key: "Theo", delta: 1 }, { type: "npc", key: "Theo", trust: 1, concern: -1 }, { type: "flag", key: "volTheoLessAfraid", value: true }] }
       ],
       turnText: [
@@ -340,7 +340,7 @@
         "The trainer starts resetting the lane. Rina keeps breathing through her nose like she is trying to out-stubborn oxygen."
       ],
       openChoices: [
-        { text: "Tell her failed clean is better than successful stupid.", effects: [{ type: "relationship", key: "Rina", delta: 1 }, { type: "npc", key: "Rina", respect: 1, friction: 1 }, { type: "flag", key: "volRinaSuccessfulStupid", value: true }] },
+        { text: "Tell her a clean failure is better than a reckless success.", effects: [{ type: "relationship", key: "Rina", delta: 1 }, { type: "npc", key: "Rina", respect: 1, friction: 1 }, { type: "flag", key: "volRinaSuccessfulRisk", value: true }] },
         { text: "Ask what she learned before the board got rude.", effects: [{ type: "relationship", key: "Rina", delta: 1 }, { type: "npc", key: "Rina", trust: 1 }, { type: "flag", key: "volRinaLearnedQuestion", value: true }] },
         { text: "Say nothing until she decides whether you are audience or witness.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "npc", key: "Rina", respect: 1 }, { type: "flag", key: "volRinaWitnessSilence", value: true }] }
       ],
@@ -550,7 +550,7 @@
       ],
       turnText: [
         "Rina gives you the loose plank's location, two better foot placements, and one insultingly accurate read on where Piper would improvise and make everyone else panic.",
-        "\"Competition makes me honest,\" she says. \"The bad version makes me stupid. I am working on telling them apart before somebody else pays for the difference.\"",
+        "\"Competition makes me honest,\" she says. \"The bad version makes me reckless. I am working on telling them apart before somebody else pays for the difference.\"",
         "She says it like admitting growth has personally offended her."
       ],
       turnVariants: [
@@ -558,7 +558,7 @@
       ],
       closeChoices: [
         { text: "Tell her honesty is better than winning if people can survive it.", effects: [{ type: "relationship", key: "Rina", delta: 1 }, { type: "stat", key: "heroPath", delta: 1 }, { type: "flag", key: "volRinaHonestySurvival", value: true }] },
-        { text: "Ask her to call your stupid version before it gets expensive.", effects: [{ type: "relationship", key: "Rina", delta: 1 }, { type: "npc", key: "Rina", trust: 1 }, { type: "flag", key: "volRinaCallStupid", value: true }] },
+        { text: "Ask her to call your reckless version before it gets expensive.", effects: [{ type: "relationship", key: "Rina", delta: 1 }, { type: "npc", key: "Rina", trust: 1 }, { type: "flag", key: "volRinaCallRisk", value: true }] },
         { text: "Mark the plank again and make the warning visible.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "flag", key: "volDockPlankMarked", value: true }] }
       ]
     },
@@ -619,7 +619,7 @@
       ],
       turnText: [
         "Piper stops at the rail. For once, she looks at the water instead of the possible exits.",
-        "\"She edited out the part where I get to be new,\" Piper says. \"I was doing pretty well at pretending this place was just weird and stupid and maybe ours. Then an old threat walks in and reminds everybody the past has keys.\"",
+        "\"She edited out the part where I get to be new,\" Piper says. \"I was doing pretty well at pretending this place was just weird and reckless and maybe ours. Then an old threat walks in and reminds everybody the past has keys.\"",
         "She scrubs both hands over her face and laughs once, without humor."
       ],
       turnVariants: [
@@ -627,7 +627,7 @@
       ],
       closeChoices: [
         { text: "Tell her the past can have keys and still not own the room.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "npc", key: "Piper", trust: 1, concern: -1 }, { type: "flag", key: "volPiperPastKeys", value: true }] },
-        { text: "Ask what ours would look like if she got to keep building it.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "npc", key: "Piper", attraction: 1, trust: 1 }, { type: "flag", key: "volPiperOursQuestion", value: true }] },
+        { text: "Ask what ours would look like if she got to keep building it.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "npc", key: "Piper", affinity: 1, trust: 1 }, { type: "flag", key: "volPiperOursQuestion", value: true }] },
         { text: "Stay quiet and let the water carry the answer she does not have.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "npc", key: "Piper", trust: 1 }, { type: "flag", key: "volPiperWaterQuiet", value: true }] }
       ]
     },
@@ -688,14 +688,14 @@
       turnText: [
         "The nurse lists injuries like weather categories: concussion, joint trauma, thermal backlash, emotional shock that looks like attitude until it does not.",
         "Piper stops bouncing. Not because she is afraid. Because she is listening.",
-        "\"If it goes bad,\" she says, \"do not chase me first unless I am the actual problem. I know that sounds noble and gross. I hate it too.\""
+        "\"If it goes bad,\" she says, \"do not chase me first unless I am the actual problem. I know that sounds noble and unfair. I hate it too.\""
       ],
       turnVariants: [
         { conditions: [{ type: "matureContent" }], text: ["A tray beside the bed holds splints, sealant, bone foam, and a little blue packet labeled dental recovery. Piper notices you noticing and says, \"For the record, I like all my teeth where they are.\""] }
       ],
       closeChoices: [
         { text: "Promise to choose by need, not fear.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "stat", key: "heroPath", delta: 1 }, { type: "flag", key: "volChooseNeedNotFear", value: true }] },
-        { text: "Tell her she is allowed to be both teammate and person.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "npc", key: "Piper", trust: 1, attraction: 1 }, { type: "flag", key: "volPiperTeammatePerson", value: true }] },
+        { text: "Tell her she is allowed to be both teammate and person.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "npc", key: "Piper", trust: 1, affinity: 1 }, { type: "flag", key: "volPiperTeammatePerson", value: true }] },
         { text: "Ask the nurse to write that down before bravery edits it.", effects: [{ type: "stat", key: "control", delta: 1 }, { type: "npc", key: "Piper", respect: 1 }, { type: "flag", key: "volNurseWritesNeed", value: true }] }
       ]
     },
@@ -798,7 +798,7 @@
         { conditions: [{ type: "flag", key: "volCamilleHarderMisuse" }], text: ["This is another margin note, you realize. A precise sentence designed to survive misuse by refusing to be simple."] }
       ],
       closeChoices: [
-        { text: "Tell her personally inconvenient can still be worth choosing.", effects: [{ type: "relationship", key: "Camille", delta: 1 }, { type: "npc", key: "Camille", trust: 1, attraction: 1 }, { type: "flag", key: "volCamilleWorthChoosing", value: true }] },
+        { text: "Tell her personally inconvenient can still be worth choosing.", effects: [{ type: "relationship", key: "Camille", delta: 1 }, { type: "npc", key: "Camille", trust: 1, affinity: 1 }, { type: "flag", key: "volCamilleWorthChoosing", value: true }] },
         { text: "Ask her to build the next strategy with people in it on purpose.", effects: [{ type: "relationship", key: "Camille", delta: 1 }, { type: "stat", key: "foundationPath", delta: 1 }, { type: "flag", key: "volCamillePeopleStrategy", value: true }] },
         { text: "Leave before the open door becomes something she has to defend.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "npc", key: "Camille", trust: 1 }, { type: "flag", key: "volCamilleDoorRespect", value: true }] }
       ]
@@ -824,17 +824,17 @@
         { text: "Start sorting by emotional hazard instead of category.", effects: [{ type: "relationship", key: "Julian", delta: 1 }, { type: "npc", key: "Julian", trust: 1 }, { type: "flag", key: "volJulianEmotionalHazard", value: true }] }
       ],
       turnText: [
-        "Julian lets you handle the broken lens. That seems more intimate than the sash, somehow.",
+        "Julian lets you handle the broken lens. That seems more private than the sash, somehow.",
         "\"First field stage,\" he says. \"I cracked it making a decoy bigger than I was because I needed everyone looking at the lie instead of the evacuation route.\"",
         "He smiles without turning it into a punchline. The room feels briefly underlit and honest."
       ],
       turnVariants: [
-        { conditions: [{ type: "flag", key: "julianRomance" }], text: ["If there is romance between you, it sits here without needing announcement: in the offered object, the unguarded explanation, the joke he chooses not to make."] },
+        { conditions: [{ type: "flag", key: "julianRomance" }], text: ["If there is a personal route between you, it sits here without needing announcement: in the offered object, the unguarded explanation, the joke he chooses not to make."] },
         { conditions: [{ type: "flag", key: "volJulianStillCounts" }], text: ["You remember telling him usefulness without performance should count. This may be him testing whether you meant it."] }
       ],
       closeChoices: [
         { text: "Tell him the route mattered more than the size of the lie.", effects: [{ type: "relationship", key: "Julian", delta: 1 }, { type: "npc", key: "Julian", trust: 1 }, { type: "flag", key: "volJulianRouteMattered", value: true }] },
-        { text: "Ask what he wants to keep if nobody is watching.", effects: [{ type: "relationship", key: "Julian", delta: 1 }, { type: "npc", key: "Julian", trust: 1, attraction: 1 }, { type: "flag", key: "volJulianNobodyWatching", value: true }] },
+        { text: "Ask what he wants to keep if nobody is watching.", effects: [{ type: "relationship", key: "Julian", delta: 1 }, { type: "npc", key: "Julian", trust: 1, affinity: 1 }, { type: "flag", key: "volJulianNobodyWatching", value: true }] },
         { text: "Pack the lens carefully and label the box dangerous.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "npc", key: "Julian", respect: 1 }, { type: "flag", key: "volJulianDangerBox", value: true }] }
       ]
     },
@@ -864,11 +864,11 @@
         "The confession arrives flat and careful. It is still the bravest thing he has done all week."
       ],
       turnVariants: [
-        { conditions: [{ type: "flag", key: "theoRomance" }], text: ["If there is romance between you, the third want hangs in the air with your name nearby and Theo's eyes carefully not checking whether you heard it."] },
+        { conditions: [{ type: "flag", key: "theoRomance" }], text: ["If there is a personal route between you, the third want hangs in the air with your name nearby and Theo's eyes carefully not checking whether you heard it."] },
         { conditions: [{ type: "flag", key: "volTheoBothAnswers" }], text: ["He is holding both answers now: dangerous and hurt, useful and human, afraid and still here."] }
       ],
       closeChoices: [
-        { text: "Tell him unproven wise things are still allowed to be chosen.", effects: [{ type: "relationship", key: "Theo", delta: 1 }, { type: "npc", key: "Theo", trust: 1, attraction: 1 }, { type: "flag", key: "volTheoAllowedChosen", value: true }] },
+        { text: "Tell him unproven wise things are still allowed to be chosen.", effects: [{ type: "relationship", key: "Theo", delta: 1 }, { type: "npc", key: "Theo", trust: 1, affinity: 1 }, { type: "flag", key: "volTheoAllowedChosen", value: true }] },
         { text: "Ask him to let other adults stay in the room with him.", effects: [{ type: "relationship", key: "Theo", delta: 1 }, { type: "stat", key: "foundationPath", delta: 1 }, { type: "flag", key: "volTheoOtherAdults", value: true }] },
         { text: "Stand beside him and let neither of you optimize the silence.", effects: [{ type: "stat", key: "restraint", delta: 1 }, { type: "npc", key: "Theo", trust: 1 }, { type: "flag", key: "volTheoUnoptimizedSilence", value: true }] }
       ]
@@ -981,7 +981,7 @@
     {
       id: "vol_c03_jordan_admin_ethics",
       chapter: 3,
-      title: "Jordan, Gossip Ethics",
+      title: "Jordan, Rumor Ethics",
       location: "Admin Wing",
       locationId: "admin_wing",
       focus: "Jordan",
@@ -1000,7 +1000,7 @@
       ],
       turnText: [
         "Jordan rolls the tablet between their hands and does not turn it on.",
-        "\"Rumors should never choose for somebody,\" they say. \"Warn, soften, translate, distract. Fine. But the moment gossip steals agency, it becomes another institution with worse fonts.\"",
+        "\"Rumors should never choose for somebody,\" they say. \"Warn, soften, translate, distract. Fine. But the moment rumor steals agency, it becomes another institution with worse fonts.\"",
         "They glance at you sideways. \"Do not tell anyone I have principles. It would ruin my little brand.\""
       ],
       turnVariants: [
@@ -1125,7 +1125,7 @@
       detail: "She is cheerful in a way that has started to mean look closer.",
       returnScene: "c05_hub_dock",
       openText: [
-        "Piper sits on a concrete barrier with the bay behind her and one heel kicking the rhythm of a song only she can hear. The field test is still technically unofficial, which means everyone is acting like permission and bad judgment are cousins.",
+        "Piper sits on a concrete barrier with the bay behind her and one heel kicking the rhythm of a song only she can hear. The field test is still technically unofficial, which means everyone is acting like permission and questionable judgment are cousins.",
         "\"Today is simple,\" she says. \"You fly, ideally not into a boat. Theo worries. Camille judges us from a morally superior distance. I look incredible.\"",
         "The joke is polished. Too polished."
       ],
@@ -1340,7 +1340,7 @@
       ],
       turnText: [
         "Julian looks at the runway, not the light.",
-        "\"I am afraid she will be brilliant and everyone will clap so loudly they forget she is breakable,\" he says. \"Speed makes people stupid. Beauty too. Disaster, constantly.\"",
+        "\"I am afraid she will be brilliant and everyone will clap so loudly they forget she is breakable,\" he says. \"Speed makes people reckless. Beauty too. Disaster, constantly.\"",
         "He flicks one glamour marker on. It paints the safety boundary clearer, less pretty than useful."
       ],
       turnVariants: [
@@ -1364,7 +1364,7 @@
       returnScene: "c08_hub_airbase",
       openText: [
         "Vance stands at the airbase command table with three comm channels open. Medical, runway control, observation team. The test has so many safety layers it starts to feel like a dare.",
-        "\"Abort authority is mine,\" he says. \"Medical can force it. Piper can call it. You can call it. Camille can recommend it loudly enough that ignoring her becomes an act of stupidity.\"",
+        "\"Abort authority is mine,\" he says. \"Medical can force it. Piper can call it. You can call it. Camille can recommend it loudly enough that ignoring her becomes an act of recklessness.\"",
         "He checks the channel again. \"The problem is never who can call abort. The problem is who believes it in time.\""
       ],
       openChoices: [
@@ -1383,7 +1383,7 @@
       closeChoices: [
         { text: "Repeat it back without making it noble.", effects: [{ type: "relationship", key: "Vance", delta: 1 }, { type: "stat", key: "restraint", delta: 1 }, { type: "flag", key: "volAbortRepeated", value: true }] },
         { text: "Ask Piper to say it once without the joke.", effects: [{ type: "relationship", key: "Piper", delta: 1 }, { type: "npc", key: "Piper", trust: 1, friction: 1 }, { type: "flag", key: "volPiperNoJokeAbort", value: true }] },
-        { text: "Thank Camille in advance for being loud if everyone else gets stupid.", effects: [{ type: "relationship", key: "Camille", delta: 1 }, { type: "npc", key: "Camille", respect: 1 }, { type: "flag", key: "volCamilleLoudAbort", value: true }] }
+        { text: "Thank Camille in advance for being loud if everyone else gets reckless.", effects: [{ type: "relationship", key: "Camille", delta: 1 }, { type: "npc", key: "Camille", respect: 1 }, { type: "flag", key: "volCamilleLoudAbort", value: true }] }
       ]
     },
     {
@@ -1503,10 +1503,10 @@
         chronal: ["The sim asks you to slow an incoming strike without trapping yourself inside the anticipation. Each held second makes the next second hungrier."],
         bio: ["The biofeedback rig throws pain echoes at you: not real injuries, but close enough for the body to argue. You practice listening without obeying every alarm."],
         tech: ["The rig starts lying on purpose. Fault lights, false heat warnings, fake sensor loss. You practice fixing the system without making the system the only thing you can hear."],
-        space: ["The chamber makes distance unreliable: close targets far, far targets suddenly intimate. You practice returning the room to itself before anyone has to trust your guess."]
+        space: ["The chamber makes distance unreliable: close targets far, far targets suddenly private. You practice returning the room to itself before anyone has to trust your guess."]
       },
       text: [
-        "This drill has a medic in the room and no one pretends that is decorative. The instructor calls it damage-clock training: learning the interval between useful discomfort and stupid injury.",
+        "This drill has a medic in the room and no one pretends that is decorative. The instructor calls it damage-clock training: learning the interval between useful discomfort and reckless injury.",
         "Aegis wants the interval in your body, not just your head. That makes the lesson honest and deeply irritating."
       ],
       choices: [
@@ -1526,9 +1526,9 @@
       returnScene: "c06_hub_return_transit",
       power: {
         energy: ["The speakers layer laughter, alarms, and Piper saying your name from three directions. The reservoir does not care which stimuli are fake. You have to care enough for both of you."],
-        gravity: ["The crowd sim keeps moving through your field edge. Every careless shoulder becomes a question: support, stop, or let pass. Gravity wants clean authority. People are messy."],
+        gravity: ["The crowd sim keeps moving through your field edge. Every careless shoulder becomes a question: support, stop, or let pass. Gravity wants clean authority. People are complicated."],
         chronal: ["Conversation fragments arrive a half-beat out of order. The trick is not forcing the room to match you. The trick is letting time be noisy without making it yours."],
-        bio: ["The bio-sim floods you with false pulses and nervous systems that feel almost real. You practice refusing intimacy with data that did not consent to become yours."],
+        bio: ["The bio-sim floods you with false pulses and nervous systems that feel almost real. You practice refusing closeness with data that did not consent to become yours."],
         tech: ["Every device in the mock crowd requests attention: watches, comms, cameras, vending locks. You practice not becoming customer service for the entire building."],
         space: ["The sim changes personal distance without warning. Too close, too far, exits shifted by inches. You practice making space safe without making it empty."]
       },
@@ -1555,7 +1555,7 @@
       power: {
         energy: ["The runway rig feeds kinetic residue into your reservoir in controlled blasts. The hard part is not taking it. The hard part is not letting stored speed become mood."],
         gravity: ["The rig drops weight through false impacts, asking you to decide what gets heavier and what gets spared. Momentum tries to become judgment. You refuse the shortcut."],
-        chronal: ["The airbase sensors play impact moments back at ugly angles. You practice letting a violent second pass through you without letting it keep a room inside your nerves."],
+        chronal: ["The airbase sensors play impact moments back at ugly angles. You practice letting a dangerous second pass through you without letting it keep a room inside your nerves."],
         bio: ["The catch rehearsal maps stress through muscle, ligament, pulse, and breath. You practice reading strain before it becomes injury, including your own."],
         tech: ["Telemetry drones swarm the catch lane, each one begging to be believed. You practice listening to the system without letting the system replace your body."],
         space: ["The runway feels too long until the test begins, then not long enough. You practice folding distance into mercy instead of spectacle."]
@@ -1764,7 +1764,7 @@
         "The line should sound bleak. From him it sounds more like exhausted respect for reality.",
         "\"You always watch rooms like that?\"",
         "\"Only the ones with walls.\" He says it deadpan, then, perhaps because he can tell from your face that you are deciding whether he is joking, adds, \"Mostly yes.\"",
-        "Outside, two trainees cross the lawn arguing with the intimate ferocity of people who met yesterday and immediately decided to matter to each other. A grounds cart hums past. Somewhere overhead, the ventilation kicks harder into life.",
+        "Outside, two trainees cross the lawn arguing with the private ferocity of people who met yesterday and immediately decided to matter to each other. A grounds cart hums past. Somewhere overhead, the ventilation kicks harder into life.",
         "\"Everyone here acts like power is the big problem,\" Theo says. \"Usually the real problem is what people start believing they're allowed to do once they think they've become necessary.\"",
         "He says it without looking at you. Not accusing. Not warning exactly. Just placing a piece on the board between you.",
         "It would be easy to leave the line there, nod, and keep moving. It would also be easy to test what happens when you do not."
@@ -1827,7 +1827,7 @@
             },
             {
               "type": "flag",
-              "key": "c01_theo_friction_flirt",
+              "key": "c01_theo_friction_personal",
               "value": true
             }
           ],
@@ -1862,7 +1862,7 @@
         "One eyebrow lifts by a fraction. \"Then the paperwork becomes more interesting.\"",
         "That gets a laugh out of you before you can help it. The corner of her mouth shifts, not quite into a smile but close enough to prove the machinery exists.",
         "\"Aegis rewards people who can remain useful while frightened,\" she says. \"That matters more than bravado. Fear is normal. Sloppiness is a choice.\"",
-        "It is not a speech. It is not a warning. It is something more intimate than either, mostly because she is spending valuable honesty on you at all.",
+        "It is not a speech. It is not a warning. It is something more private than either, mostly because she is spending valuable honesty on you at all.",
         "\"And what if I don't enjoy being sorted into useful?\" you ask.",
         "\"Then decide early whether you intend to become difficult, exceptional, or both.\"",
         "She starts walking again, then glances back just long enough for the look to land like a knife set down gently on a table.",
@@ -1950,7 +1950,7 @@
         "\"No. Sometimes it's adrenaline. Sometimes denial. Sometimes the deeply spiritual power of refusing to let a bad system make me boring.\"",
         "She says everything like the sentence only just occurred to her and she trusts it anyway. It should read careless. Instead it feels practiced in the way some people practice not drowning.",
         "\"You hate it here already?\"",
-        "\"I hate being managed like an incident report with cheekbones.\" The grin flashes and is gone just fast enough to make you doubt you saw the edge under it. \"But the people are promising. That's harder to resent.\"",
+        "\"I hate being managed like an incident report with a badge.\" The grin flashes and is gone just fast enough to make you doubt you saw the edge under it. \"But the people are promising. That's harder to resent.\"",
         "The line lands between the two of you with enough directness that it would be a waste to pretend not to hear it.",
         "She watches your face, openly curious, not embarrassed in the slightest by her own interest. That may be honesty. It may be courage. It may be recklessness wearing better lighting.",
         "\"What's your move?\" she asks. \"Not the packet answer. The real one. You going to be good, difficult, useful, gorgeous, catastrophic? There are subcategories if you need them.\"",
@@ -1959,7 +1959,7 @@
         "Piper should feel chaotic. Instead she feels exact in a different direction than Camille: less measured, more immediate, but not less perceptive. She notices reactions with the body first. She clocks hesitation like velocity.",
         "\"And what's your category?\" you ask.",
         "\"Currently? Fast enough to be useful, charming enough to make that everyone's problem.\" She says it breezily, then studies you with sharp green interest. \"You can laugh. It was at least fifty percent serious.\"",
-        "There is air in this conversation for flirtation, for honesty, for mutual trouble, or for one of you to flinch first."
+        "There is air in this conversation for personal tension, for honesty, for mutual trouble, or for one of you to flinch first."
       ],
       "choices": [
         {
@@ -1972,7 +1972,7 @@
             },
             {
               "type": "flag",
-              "key": "c01_piper_flirt_open",
+              "key": "c01_piper_personal_open",
               "value": true
             },
             {
@@ -2264,7 +2264,7 @@
         "\"So what's your function?\" you ask.",
         "\"Depends who you ask. Officially? Pattern recognition with social emphasis. Unofficially? I know who's pretending to be fine, who's lying badly, and which arguments in this building are about ethics versus ego wearing ethics as a fake mustache.\"",
         "\"That sounds exhausting.\"",
-        "\"Only when people assume knowing things means I owe them the inventory.\" They set the tablet down face-first beside them. \"Which is the useful first-day boundary, by the way. If I tell you something because it affects your safety, that's one thing. If you start treating me like a gossip faucet with excellent pronouns, I become much less charming.\"",
+        "\"Only when people assume knowing things means I owe them the inventory.\" They set the tablet down face-first beside them. \"Which is the useful first-day boundary, by the way. If I tell you something because it affects your safety, that's one thing. If you start treating me like a rumor faucet with excellent pronouns, I become much less charming.\"",
         "The line is said lightly enough to invite laughter, but not lightly enough to excuse misunderstanding.",
         "Across the room, Piper is losing a low-stakes argument about card games with Ben. Theo is pretending not to monitor it. Julian enters, surveys the room once, and chooses a chair that gives him both visibility and aesthetics. Camille is absent, which somehow still changes the room by absence alone.",
         "\"You and Camille get along?\" you ask before you can stop yourself.",
@@ -2316,7 +2316,7 @@
             {
               "type": "memory",
               "key": "Jordan",
-              "text": "You accepted their boundary without trying to be cute about it."
+              "text": "You accepted their boundary without turning it into a performance."
             }
           ],
           "next": "c01_hub_after_orientation"
@@ -2469,7 +2469,7 @@
         "\"No,\" she says, and there it is again, that almost-smile, gone fast. \"But I do have to decide whether you are careless. That part is time-sensitive.\"",
         "A few beats pass. The silence is not awkward. With her, silence feels like a surface you can step onto if you are careful.",
         "\"Tuesday and Thursday, Sim C,\" she says at last, referencing the invitation hanging between you since yesterday or offering its earlier shape if you deflected it. \"You can observe. Or prove me wrong in a more interesting way.\"",
-        "She starts down the steps, then stops one landing below and glances back. \"And for the record,\" she says, \"if you decide to flirt with me, do not do it lazily.\"",
+        "She starts down the steps, then stops one landing below and glances back. \"And for the record,\" she says, \"if you decide to banter with me, do not do it lazily.\"",
         "Then she continues down the stairwell like she did not just say that at all."
       ],
       "choices": [
@@ -2600,13 +2600,13 @@
         "\"Exactly. Very rude to me personally.\"",
         "She starts walking before you answer, forcing you to either fall into step or make a point of not doing it. The track curves around a scrubbed rectangle of artificial turf and low observation cameras. Beyond the fencing, morning light turns the glass of the main facility pale and clean. Somewhere overhead, a drone shifts position with the quiet insect hum of constant supervision.",
         "Piper walks like she is half a second from accelerating even when she is trying not to. There is energy coiled in everything she does, even the way she glances over at you. Yesterday may have started something between you or not. Either way, today she is less interested in first impression and more interested in whether you can keep the rhythm.",
-        "\"So,\" she says, \"what are we? Tragic cautionary tale? Facility favorite? Unlicensed fire hazard with suspicious cheekbones?\"",
+        "\"So,\" she says, \"what are we? Tragic cautionary tale? Facility favorite? Unlicensed fire hazard with suspicious confidence?\"",
         "\"Do those categories overlap?\"",
         "\"With enough confidence, absolutely.\"",
         "She cuts a look at you that goes sharp for a beat. \"You had the room,\" she says, meaning the baseline, the landing after, maybe more than that. \"Some people go weird when that happens. Bigger. Louder. Or they do that very annoying thing where they start pretending they never wanted attention in the first place.\"",
         "\"And which one are you hoping for?\"",
-        "She laughs. \"I'm hoping you're fun and not stupid. That is an incredibly narrow market around here.\"",
-        "If you gave her flirtation yesterday, she meets it now without coyness. If you did not, the edge is still there, just easier to call banter. What matters is that she is inviting you to decide whether this is an atmosphere or a direction.",
+        "She laughs. \"I'm hoping you're fun and not reckless. That is an incredibly narrow market around here.\"",
+        "If you gave her personal tension yesterday, she meets it now without coyness. If you did not, the edge is still there, just easier to call banter. What matters is that she is inviting you to decide whether this is an atmosphere or a direction.",
         "She stops at the curve and turns, walking backward for a few steps with the casual insolence of someone who trusts her body more than architecture. \"Race me to the gate,\" she says.",
         "\"That seems rigged.\"",
         "\"It is. Life is cruel. Keep up.\"",
@@ -2625,14 +2625,14 @@
       ],
       "choices": [
         {
-          "text": "Tell her dinner depends on whether she's planning to spend it flirting or trying to outrun the conversation.",
+          "text": "Tell her dinner depends on whether she's planning to spend it trading jokes or trying to outrun the conversation.",
           "effects": [
             {
               "type": "npc",
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -2654,7 +2654,7 @@
           "next": "c02_hub_return_courtyard"
         },
         {
-          "text": "Say yes to dinner and ask what she counts as 'fun and not stupid.'",
+          "text": "Say yes to dinner and ask what she counts as 'fun and not reckless.'",
           "effects": [
             {
               "type": "npc",
@@ -2689,7 +2689,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -2762,7 +2762,7 @@
         "If you treated him seriously yesterday, there is less lacquer over the conversation now. If you only traded wit, he stays graceful and just off-center. If there was unmistakable interest, he lets it breathe without pressing.",
         "\"You know what the problem with dazzling people early is?\" he says.",
         "\"That there are worse problems?\"",
-        "\"That they stop seeing the work and start seeing the myth. Then they either worship it, resent it, or ask it to save them from their own poor decisions. All very exhausting.\"",
+        "\"That they stop seeing the work and start seeing the myth. Then they either mythologize it, resent it, or ask it to save them from their own poor decisions. All very exhausting.\"",
         "He says it lightly. The exhaustion under it is real.",
         "You look around the lounge: the abandoned cards on the side table, the half-folded blanket somebody forgot on the chair, the bulletin board with three handwritten notices and one official memo no one bothered reading. Lived-in space always makes honesty easier. It gives lies more furniture to bump into.",
         "Julian follows your gaze. \"There's a very specific humiliation in realizing people here have already started assigning everyone roles,\" he says. \"The hot mess. The future hero. The cautionary tale. The one who'll burn out. The one who'll break somebody's heart by accident and then call it a scheduling issue.\"",
@@ -2904,10 +2904,10 @@
         "\"I pulled the telemetry because the official summary is useless,\" Theo says. \"They write those like the system itself passed judgment and no one made choices inside the room.\"",
         "You lean against the door frame instead of sitting immediately. \"And what did the telemetry say?\"",
         "He gives a short breath that could almost be a laugh. \"That depends on which moment you mean. The readouts liked your control. They hated your margin. There's a difference.\"",
-        "He turns the monitor slightly toward you. Heat maps, motion traces, timing graphs-your morning translated into lines and colors that make it look both less personal and more intimate. Theo points without touching the screen. \"Here,\" he says. \"This is where the system expected drift. You didn't give it any. Here is where it thought you were going to compensate too hard. You didn't. And here...\" He pauses. \"Here is where it lost confidence because you stopped behaving like the average model.\"",
+        "He turns the monitor slightly toward you. Heat maps, motion traces, timing graphs-your morning translated into lines and colors that make it look both less personal and more private. Theo points without touching the screen. \"Here,\" he says. \"This is where the system expected drift. You didn't give it any. Here is where it thought you were going to compensate too hard. You didn't. And here...\" He pauses. \"Here is where it lost confidence because you stopped behaving like the average model.\"",
         "\"That sounds flattering in a very stressful way.\"",
         "\"It is.\"",
-        "If you took him seriously in Chapter 1, he is steadier now, less likely to hedge every statement until it dies of caution. If you flirted with him, the room holds a different kind of charge-less bright than Piper, less sharpened than Camille, but unmistakable in how carefully he chooses words that suddenly matter more.",
+        "If you took him seriously in Chapter 1, he is steadier now, less likely to hedge every statement until it dies of caution. If you kept the tone personal with him, the room holds a different kind of charge-less bright than Piper, less sharpened than Camille, but unmistakable in how carefully he chooses words that suddenly matter more.",
         "\"The problem,\" Theo says, \"is that people here love anomalies right up until the anomaly means the safety assumptions are wrong.\"",
         "He looks at you then, properly. Not just at your numbers. At you.",
         "\"I don't want them to treat you like a thesis,\" he says. \"Or worse, like a future emergency they can get ahead of if they label it early.\"",
@@ -2918,7 +2918,7 @@
         "\"Yes,\" he says immediately. Then, after half a beat: \"Not actually. Probably.\"",
         "That gets you closer to a smile than anything in the telemetry graphs.",
         "He rubs a thumb across the edge of the tablet. \"I'm serious,\" he says, quieter now. \"People are already deciding what you mean. Try not to help the worst ones.\"",
-        "It is concern, respect, fear, attraction, or some combination of all four depending on what the two of you have already made possible. That is what makes it feel alive."
+        "It is concern, respect, fear, affinity, or some combination of all four depending on what the two of you have already made possible. That is what makes it feel alive."
       ],
       "choices": [
         {
@@ -2985,7 +2985,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -3014,7 +3014,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -3157,7 +3157,7 @@
         "\"That was your first mistake.\"",
         "There is no softness in her, not yet. But there is honesty, which in some situations is better.",
         "If you met her eyes on the landing after baseline, this feels like the second beat of the same exchange. If you ignored her then, she makes you pay for the delay by being harder to read now.",
-        "Rina throws another strike into the rig. The scoring lights flare. \"You've got everyone acting weird,\" she says. \"The careful ones are pretending they aren't impressed. The reckless ones are deciding whether to worship you or race you into a wall. Very flattering. Deeply annoying.\"",
+        "Rina throws another strike into the rig. The scoring lights flare. \"You've got everyone acting weird,\" she says. \"The careful ones are pretending they aren't impressed. The reckless ones are deciding whether to mythologize you or race you into a wall. Very flattering. Deeply annoying.\"",
         "\"And you?\"",
         "She finally turns fully toward you. \"I'm deciding whether you're actually good or just built for one very specific room.\"",
         "That lands fair enough to respect.",
@@ -3486,7 +3486,7 @@
           "next": "c03_hub_gallery"
         },
         {
-          "text": "Stand with Camille and ask what the room usually misses when it worships outcomes.",
+          "text": "Stand with Camille and ask what the room usually misses when it mythologizes outcomes.",
           "effects": [
             {
               "type": "flag",
@@ -3550,7 +3550,7 @@
         "\"Your metaphors get more expensive when you're in a good mood.\"",
         "\"They get more accurate.\"",
         "He glances sideways. If Chapter 1 and 2 gave the two of you ease, it is already there. Not forced. Not coy. The pleasant danger of somebody who noticed your timing and kept it. If the route has leaned more cautious so far, the scene plays differently: less spark, more testing. Either way, Julian does not approach people by accident.",
-        "He hooks a thumb toward the gallery behind you. \"Camille is going to pretend today was about standards. Theo is going to pretend it was about methodology. Piper is going to pretend it was about proving Aegis does not own the patent on velocity. All of them are lying a little. The room was about desire.\"",
+        "He hooks a thumb toward the gallery behind you. \"Camille is going to pretend today was about standards. Theo is going to pretend it was about methodology. Piper is going to pretend it was about proving Aegis does not own the patent on velocity. All of them are lying a little. The room was about ambition.\"",
         "\"That feels like a broad category.\"",
         "\"It is a broad category. One of my favorites.\"",
         "You laugh despite yourself. Julian smiles like he had that outcome at favorable odds.",
@@ -3561,7 +3561,7 @@
         "\"I am the guidebook. Please admire my binding.\"",
         "A door at the far end opens and closes. The corridor returns to quiet.",
         "Julian's tone shifts, not all the way serious, but close enough to touch it. \"You don't owe anyone a single coherent persona,\" he says. \"But you should decide which contradictions are yours on purpose. If you don't, this place will assign you some.\"",
-        "That lands harder than it should. Maybe because it sounds like advice he had to learn the expensive way. Maybe because he doesn't dress it up as concern. He offers it like a tool, and somehow that is more intimate.",
+        "That lands harder than it should. Maybe because it sounds like advice he had to learn the expensive way. Maybe because he doesn't dress it up as concern. He offers it like a tool, and somehow that is more private.",
         "You study him. The immaculate posture. The polished humor. The way he never quite stops performing even when the performance turns honest. \"And what contradictions are yours on purpose?\"",
         "He laughs softly, eyes on the mirrored panel instead of you. \"What a deeply unfair follow-up.\"",
         "\"So that's a lot.\"",
@@ -3610,7 +3610,7 @@
               "key": "Julian",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -3639,7 +3639,7 @@
               "key": "Julian",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -3697,7 +3697,7 @@
       "background": "aegis",
       "focus": "Theo",
       "text": [
-        "The records annex is one of those side spaces Aegis accidentally makes intimate by trying too hard to make them functional. Narrow shelving. Locked drawers. a wall terminal that hums louder than it should. Two task chairs and no decorative choices at all. The overhead light is slightly warmer than the hall outside, which makes the room feel like it belongs to somebody even though it clearly belongs to the system.",
+        "The records annex is one of those side spaces Aegis accidentally makes private by trying too hard to make them functional. Narrow shelving. Locked drawers. a wall terminal that hums louder than it should. Two task chairs and no decorative choices at all. The overhead light is slightly warmer than the hall outside, which makes the room feel like it belongs to somebody even though it clearly belongs to the system.",
         "Theo is there with three open windows on the terminal and the expression of a man midway through an argument with data. He looks up when you step in, surprised enough that it almost reads as guilt.",
         "\"I wasn't looking for your file,\" he says immediately.",
         "\"Comforting that you needed to clarify.\"",
@@ -3728,7 +3728,7 @@
         "Theo looks down at the terminal, then back up. \"The first one,\" he says quietly. \"The second one is how people end up trapped in jobs they mistake for identities.\"",
         "The line lands hard because it feels practiced. Maybe because it is.",
         "He reaches past you to close the metadata window. Not brushing you. Not quite avoiding it either. \"If you go into their rooms already desperate to prove yourself,\" he says, \"they don't even need to manipulate the outcome. You do it for them.\"",
-        "There is care in the sentence. Care and warning. With Theo, that may be the earliest form of intimacy.",
+        "There is care in the sentence. Care and warning. With Theo, that may be the earliest form of closeness.",
         "When you step back toward the door, he does not stop you. He also doesn't return to the terminal immediately. He just watches you, measured and human in the same breath."
       ],
       "choices": [
@@ -3824,7 +3824,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -3878,7 +3878,7 @@
         "\"Maybe I just enjoy collecting difficult women.\"",
         "\"Then your filing habits are poor.\"",
         "You laugh. She lets herself watch you do it for a second longer than is necessary.",
-        "Then the smile is gone and the tablet is back between you like a shield she remembered she was holding. \"Tuesday and Thursday. Sim C. Observation first. Participation later if I decide you understand the shape of the room.\" Her gaze flicks to your face. \"And if you are going to flirt with me in government lighting, make it count.\"",
+        "Then the smile is gone and the tablet is back between you like a shield she remembered she was holding. \"Tuesday and Thursday. Sim C. Observation first. Participation later if I decide you understand the shape of the room.\" Her gaze flicks to your face. \"And if you are going to banter with me in government lighting, make it count.\"",
         "There it is again: impossible to confuse with accident, impossible to mistake for surrender.",
         "She taps one margin note into place. Not safe. Not unsafe. High consequence under social pressure. Improves when asked for intent before output.",
         "The sentence is not warm. It is better than warm. It is specific.",
@@ -4012,10 +4012,10 @@
         "\"There is always doubt. That's what makes things fun.\"",
         "It is a joke. Mostly. Under it you can hear the leftover edge from the baseline rooms, the gallery, Camille's invitation, the slow institutional way Aegis has of sorting people into lanes and pretending the lanes were there first.",
         "You take the seat opposite her or beside her depending on how brave the day has made you. Piper notices which. Piper notices everything; she just weaponizes denial as a social hobby.",
-        "She tosses a pretzel in the air, catches it badly, and glares at physics. \"They're clocking my recovery gaps now,\" she says. \"Not dangerous. Not dramatic. Just enough for people with badges to start saying stupidly careful things near me.\"",
+        "She tosses a pretzel in the air, catches it badly, and glares at physics. \"They're clocking my recovery gaps now,\" she says. \"Not dangerous. Not dramatic. Just enough for people with badges to start saying overly careful things near me.\"",
         "\"So that's why you're in such a peaceful mood.\"",
-        "\"Right? I'm basically serenity with better cheekbones.\"",
-        "If the two of you have built overt chemistry already, she doesn't bother pretending this is neutral. If you haven't, the scene still hums with the possibility of becoming something. That is the Piper trick: she can make a couch feel like a threshold.",
+        "\"Right? I'm basically serenity with better timing.\"",
+        "If the two of you have built overt rapport already, she doesn't bother pretending this is neutral. If you haven't, the scene still hums with the possibility of becoming something. That is the Piper trick: she can make a couch feel like a threshold.",
         "You ask what they said.",
         "Piper huffs out a laugh. \"Officially? That repeated high-speed deployment produces small but measurable recovery vulnerability windows. Unofficially? That if I keep acting like a human railgun with opinions, one day somebody's going to try and bench me for my own good.\"",
         "\"And what did you say?\"",
@@ -4027,7 +4027,7 @@
         "\"If you start doing that,\" she says, \"don't do it with me.\"",
         "The line lands harder than it should because it sounds practiced. Not a generic moral. A private wound.",
         "You lean in, just enough to meet her halfway. \"What if I start doing it with everyone?\"",
-        "\"Then I will tell you you're being stupid in increasingly creative language.\"",
+        "\"Then I will tell you you're being reckless in increasingly creative language.\"",
         "\"Comforting.\"",
         "\"I'm here to help.\"",
         "At the far table, one of the residents gives up on pretending not to listen and gets up to leave. Piper watches them go, waits until the room settles again, then looks back at you with the bright edge gone for one unguarded second.",
@@ -4050,7 +4050,7 @@
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -4107,7 +4107,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -4166,8 +4166,8 @@
       "focus": "Seth",
       "text": [
         "The medical recovery bay looks kinder than it is. Softer lights. Pale curtains. Cabinets with rounded corners. Machines that make concern sound efficient. It is the kind of room institutions design when they want to reassure you they know exactly how damaged you are allowed to be.",
-        "A medic whose name badge says NORA but whose tone says she has seen three dozen people try to flirt their way out of follow-up scans motions you toward the chair without much interest in your pride. \"Residual check,\" she says. \"Command wants confirmation that yesterday's adaptation and today's stress markers are not escalating each other.\"",
-        "\"Romantic.\"",
+        "A medic whose name badge says NORA but whose tone says she has seen three dozen people try to banter their way out of follow-up scans motions you toward the chair without much interest in your pride. \"Residual check,\" she says. \"Command wants confirmation that yesterday's adaptation and today's stress markers are not escalating each other.\"",
+        "\"Efficient.\"",
         "\"Try not to make me write that down.\"",
         "You sit. The chair is warmer than expected. Sensors clip at wrist, collarbone, temple. The monitor wakes in pale green ladders of data that mean everything to someone and not much to you besides the general insult of becoming visible in a room designed for it.",
         "If Chapter 1 or 2 put your body on display in front of staff or friends, that residue is here. Not in melodrama. In familiarity. The med bay already knows the shape of you under pressure better than it should this early in the story.",
@@ -4184,7 +4184,7 @@
         "\"You hate this,\" Nora says.",
         "\"I hate being translated by expensive furniture.\"",
         "\"Reasonable.\"",
-        "She peels the temple sensor off and replaces it with a deeper-read strip. \"Listen carefully. A lot of residents make the same mistake once the building starts paying attention. They assume visibility means they must choose between control and honesty. That's nonsense. Control without honesty becomes performance. Honesty without control becomes a warning label. Our whole job is teaching you not to split yourself that stupidly.\"",
+        "She peels the temple sensor off and replaces it with a deeper-read strip. \"Listen carefully. A lot of residents make the same mistake once the building starts paying attention. They assume visibility means they must choose between control and honesty. That's nonsense. Control without honesty becomes performance. Honesty without control becomes a warning label. Our whole job is teaching you not to split yourself that carelessly.\"",
         "For a second the room goes very still. Not because the machine beeps. Because somebody finally said a true thing without dressing it up as doctrine.",
         "You ask if the chart is bad.",
         "Nora snorts. \"Bad charts are loud. Yours is argumentative.\"",
@@ -4295,7 +4295,7 @@
         "He smiles at that, small and tired. \"Can,\" he says. \"Not always without becoming the problem instead of the solution.\"",
         "Fair again.",
         "He tosses the resistance band into the basket and leans forward, forearms on knees. \"You should decide early what people are allowed to consistently take from you,\" he says. \"Because if you're good at it, they won't ask forever. They'll just start building schedules around your willingness.\"",
-        "That line belongs in the same drawer as Theo's warnings and Camille's margin notes: not warm exactly, but intimate because of how useful it is.",
+        "That line belongs in the same drawer as Theo's warnings and Camille's margin notes: not warm exactly, but private because of how useful it is.",
         "He studies you for a second. \"You're under the microscope now,\" he adds. \"That means some people are going to come closer because they like you. Some because they think you change their odds. Learn the difference while it's still cheap.\"",
         "A trainer sticks their head in, sees the ice pack, and thinks better of whatever request they were going to make. Ben watches them leave and laughs once, without humor. \"See? Growth.\"",
         "You grin.",
@@ -4437,7 +4437,7 @@
         "You have no idea whether this is praise or a preliminary warning.",
         "Vance spares you for a beat, which is as close as he gets to mercy. \"That can make you useful,\" he says. \"It can also make you ambitious in ways people around you will encourage for the wrong reasons.\"",
         "There it is. The institutional version of concern. Less about whether you can survive power. More about what happens once other people decide you can.",
-        "Depending on how you have treated him so far-honest, challenging, evasive, professional-the conversation bends. But he does remember. That matters. Vance is not warm, yet he is one of the few people in the building whose attention can feel steadier than the gossip.",
+        "Depending on how you have treated him so far-honest, challenging, evasive, professional-the conversation bends. But he does remember. That matters. Vance is not warm, yet he is one of the few people in the building whose attention can feel steadier than the rumor.",
         "\"You've already drawn reactions,\" he says. \"Lane likes acceleration in all forms. Fairchild respects discipline and hunts inconsistency like a blood sport. Vale will turn social weather into a private art project if you let him. Mercer is trying to decide whether to trust what he sees when you're not under direct measurement.\"",
         "\"You do flattering group portraits.\"",
         "\"I do useful ones.\"",
@@ -4725,13 +4725,13 @@
         "She angles the tablet toward herself again. \"Today's point is not output. If I wanted output, I could get that from you by insulting your competence in front of a crowd and waiting sixty seconds.\"",
         "That earns the smallest pause from you before she continues, which is probably exactly why she said it.",
         "\"Today's point,\" she says, \"is whether you can remain legible when your instincts are under pressure. A stable operator is not someone who never reaches fast. It is someone whose fast choices can still be understood, trusted, and repeated.\"",
-        "There is no audience here yet, which makes the corridor more dangerous in its own way. Privacy sharpens people. It means every word can afford to be more precise. If there has been tension between you before now-flirtation, friction, admiration, the very specific irritation of wanting her approval enough to notice when she withholds it-it fits strangely well in rooms like this. Rooms where nothing is being staged for the benefit of a third party.",
+        "There is no audience here yet, which makes the corridor more dangerous in its own way. Privacy sharpens people. It means every word can afford to be more precise. If there has been tension between you before now-personal tension, friction, admiration, the very specific irritation of wanting her approval enough to notice when she withholds it-it fits strangely well in rooms like this. Rooms where nothing is being staged for the benefit of a third party.",
         "She locks the tablet and sets it aside. \"I do not care whether you impress them today.\"",
         "The lie is almost elegant. She sees the reaction cross your face and corrects with exacting honesty. \"I care less about that than whether you give them something sloppy to remember.\"",
         "That is more honest. More her.",
         "For a moment she studies you in silence. Not your power. You. The pressure you are carrying. The shape of your attention. The answer, apparently, satisfies some hidden threshold, because when she speaks again her voice is quieter.",
         "\"You have more instinct than discipline right now,\" she says. \"That is not an insult. It is a volatile resource. If you want me to help you sharpen it instead of merely survive it, then listen exactly once and decide whether you trust me enough to obey in public.\"",
-        "That sentence does several things at once and she knows it. It offers instruction. It asks for trust without dressing the request up. It places both of you in the same future sentence. If there has been an overt current between you already, it hums harder here-not because she says anything soft, but because she does not bother pretending there is no intimacy in choosing who gets to direct your attention under pressure.",
+        "That sentence does several things at once and she knows it. It offers instruction. It asks for trust without dressing the request up. It places both of you in the same future sentence. If there has been an overt current between you already, it hums harder here-not because she says anything soft, but because she does not bother pretending there is no closeness in choosing who gets to direct your attention under pressure.",
         "Beyond the inner door, the chamber lights shift from white to warning amber and back again. Somewhere overhead the ventilation changes pitch. The whole corridor seems to tighten around the moment before a test begins, and Camille-of all people-looks most herself there. Not gentler. Not easier. Just unmistakably alive in a way she rarely lets the public parts show. You get the sense that she trusts pressure more than she trusts charm. The dangerous thing is that you are beginning to understand why."
       ],
       "choices": [
@@ -4799,7 +4799,7 @@
               "key": "Camille",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -4860,9 +4860,9 @@
         "The observation gallery rail is waist-high brushed steel polished by years of trainees leaning against it while pretending not to care how the next person performs. Below, the chamber lights cycle through pre-sim checks in sterile white bands. The room looks less like a classroom and more like an argument waiting for weather.",
         "Julian is already at the rail with one elbow hooked over it like he belongs in every room that could possibly contain drama. He has, somehow, made Aegis-issued casualwear look intentional. There is a paper cup in his hand that claims to contain coffee and probably mostly contains sugar. He glances sideways when you stop beside him and smiles without any of the brightness he uses when he wants to entertain a room.",
         "\"Look at us,\" he says. \"Adults with opinions near industrial glass. This is exactly what my guidance counselor pictured.\"",
-        "Below, a technician wheels target units into place. Somewhere behind you, someone is making a very committed argument about safety thresholds and saying nothing remotely sexy despite the tone trying its best.",
+        "Below, a technician wheels target units into place. Somewhere behind you, someone is making a very committed argument about safety thresholds and saying nothing remotely personal despite the tone trying its best.",
         "Julian sips from the cup, makes a face that suggests the drink has offended him personally, and continues. \"There is a specific kind of day where everyone suddenly becomes fascinated by what kind of person you are under pressure. Mostly because they would prefer not to examine what kind of person they are under pressure. Congratulations on generating one.\"",
-        "He says it lightly, but this is not throwaway banter. Nothing with him ever is once the room thins enough. If Chapters 1 through 3 put the two of you on a wavelength-through wit, flirtation, being unexpectedly honest in the right window of time-there is an ease here that feels less accidental than it did before. If not, the ease is still available. It just has more test to it.",
+        "He says it lightly, but this is not throwaway banter. Nothing with him ever is once the room thins enough. If Chapters 1 through 3 put the two of you on a wavelength-through wit, personal tension, being unexpectedly honest in the right window of time-there is an ease here that feels less accidental than it did before. If not, the ease is still available. It just has more test to it.",
         "\"You know what I think Camille likes about this block?\" he asks. \"Not that she gets to correct people. She likes getting evidence. You can only argue with vibes for so long. Under pressure, everyone becomes proof of concept.\"",
         "He turns the cup in his hand. \"The trick is deciding what you are comfortable proving in public.\"",
         "There is a way to answer that that keeps this scene sparkling and safe. There is also a way to answer it that changes the air between you. Julian leaves both doors unlocked on purpose. That is part of his talent. He knows how to make an exchange feel elegant enough that you can step deeper into it without feeling cornered.",
@@ -5097,7 +5097,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5127,7 +5127,7 @@
       "background": "aegis",
       "focus": "Seth",
       "text": [
-        "The scan bay lighting is too soft to be kind. It is the sort of curated low-glare brightness designed to calm people who have already figured out they are being studied intimately. A narrow exam chair waits in the center of the room with more restraint options folded discreetly into its arms than anyone should find reassuring. The diagnostic rig hums overhead. Somewhere beyond the sliding partition, somebody laughs once and then winces hard enough to make the laugh sound like a mistake.",
+        "The scan bay lighting is too soft to be kind. It is the sort of curated low-glare brightness designed to calm people who have already figured out they are being studied closely. A narrow exam chair waits in the center of the room with more restraint options folded discreetly into its arms than anyone should find reassuring. The diagnostic rig hums overhead. Somewhere beyond the sliding partition, somebody laughs once and then winces hard enough to make the laugh sound like a mistake.",
         "The medic on duty tonight has the same neutral expression every Aegis medical professional seems to graduate with after enough months treating powers as both health event and liability category. She checks your pupils, asks whether the output left ringing in the ears, metallic taste, phantom temperature shift, pressure behind the eyes. She says all of it in a tone that suggests there are no wrong answers, only answers that will increase paperwork.",
         "There is always a moment during these scans where the body stops feeling like yours and starts feeling like a set of persuasive documents. The machine maps stress signatures, microtears, thermal drift, recovery lag. It turns effort into visible pattern. If earlier chapters taught you anything, it is that Aegis trusts pattern more than reassurance and measurable damage more than impossible resilience.",
         "\"Your system still spikes cleaner than we'd prefer,\" the medic says, eyes on the display. \"That is better than damage, but not simpler.\"",
@@ -5136,7 +5136,7 @@
         "The medic notices you noticing the queue and says, \"We can pause if you need a minute.\"",
         "Need is an interesting word in a place like this. Need can mean medically indicated. It can mean emotionally obvious. It can mean the point at which performance starts costing more than the building considers efficient. The bay smells faintly of antiseptic, plastic tubing, and cold mineral water. The curtain track above the next station rattles as someone is wheeled out under a blanket and still arguing with staff that they are fine.",
         "That is maybe the most Aegis sentence possible: I am fine, spoken while horizontal.",
-        "The scanner shifts and throws a fresh wash of pale light over your hands. For a moment every tiny tremor in your fingers feels too visible to belong to you. The medic watches the readout instead of your face, which is somehow kinder and less kind at the same time. The machine does not care whether strain came from ambition, fear, attraction, or the humiliating desire to prove the room wrong. It only cares that strain leaves signatures. Around here, signatures become records, and records become versions of you that other people trust more than your own description.",
+        "The scanner shifts and throws a fresh wash of pale light over your hands. For a moment every tiny tremor in your fingers feels too visible to belong to you. The medic watches the readout instead of your face, which is somehow kinder and less kind at the same time. The machine does not care whether strain came from ambition, fear, affinity, or the humiliating ambition to prove the room wrong. It only cares that strain leaves signatures. Around here, signatures become records, and records become versions of you that other people trust more than your own description.",
         "The medic lowers the scanner arm. \"I am required to ask whether you want the sanitized explanation, the useful explanation, or the one I would give someone I expected to come back in worse condition next week.\"",
         "The fact that she asks it with a straight face almost makes you laugh.",
         "\"None of these answers are secret,\" she adds. \"But they are different.\"",
@@ -5227,7 +5227,7 @@
         "Vance either notices that thought or predicts it from experience. \"That was not reassurance,\" he says. \"That was classification.\"",
         "At least he is honest.",
         "He gestures to the chair across from the desk. \"Camille says your corrections are getting faster. Medical says your body continues to make that both promising and annoying. The gallery says half the cohort now thinks they understand your instincts. They do not. But they have started building stories. I care about what stories you are helping them build.\"",
-        "That is the Vance version of intimacy: not softness, exactly, but taking your future seriously enough to be severe about it.",
+        "That is the Vance version of closeness: not softness, exactly, but taking your future seriously enough to be severe about it.",
         "If earlier chapters have tilted your relationship with him one way or another, it colors the room now. Maybe he is seeing a recruit worth investing in. Maybe he is seeing a volatility case with good manners. Maybe he is seeing exactly the kind of talented adult Aegis was built to stop from becoming the center of a regional incident report. With him, positive attention and professional concern are often the same sentence with a different tie knot.",
         "He folds his hands. \"Pressure strips performance choices down to preference. Preference becomes habit. Habit becomes reputation. Reputation becomes policy. You understand the sequence?\"",
         "You do. That is the problem.",
@@ -5492,14 +5492,14 @@
       "text": [
         "The indoor track after hours feels like a conspiracy with overhead lighting. The facility dims everything except the lane markers and the emergency path strips, leaving the oval washed in cool blue-white and shadow. Your footsteps sound clearer here. So does anyone else's. Piper is halfway around the curve when you step in, jogging at the lazy speed she uses when she is trying to convince herself she is resting.",
         "She spots you, rolls her eyes at being caught, and slows into a backward jog for three steps before turning fully. \"Before you start,\" she says, \"I know what rest is. I just disagree with most people's boring interpretation of it.\"",
-        "Her hair is damp at the temples. Her breathing is light. There is a flush high on her cheekbones that makes her look younger for exactly one second before the usual sharp humor reasserts itself.",
+        "Her hair is damp at the temples. Her breathing is light. There is a flush high on her face that makes her look younger for exactly one second before the usual sharp humor reasserts itself.",
         "For half a lap neither of you says anything. It is not awkward. It is the opposite of awkward, which is probably why it feels dangerous. Piper at full volume is easy to read. Piper choosing not to fill the air means she is letting the moment stand there without makeup. Her gaze flicks to you, away, back again, quick as a reflex she has not decided whether to trust.",
         "\"Also,\" she adds, falling into step beside you if you keep moving, \"Camille was absolutely insufferable today in the way only people being correct enjoy being.\"",
         "The track smells faintly of rubber, machine oil, and cool night air leaking in every time the side access door opens. Somewhere below, weights clank once in the strength room. The whole building is full of people pretending their bodies are not speaking louder than they are.",
         "Piper glances sideways. \"You were good today,\" she says, and because it is her the sentence arrives wearing a smirk as camouflage. \"Annoyingly. I liked you better when I had more room to condescend.\"",
-        "If there has been overt flirtation already, the line tilts into it naturally. If there has not, the affection is still obvious enough to be a risk. Piper does not do sterile interest well. Even her caution tends to show up in motion.",
-        "She cuts across lane one and hops lightly onto the inner curb. \"You know what sucks? Watching somebody get better and realizing that at some point the thing you're excited by is also the thing that could scare the hell out of you if it goes wrong.\"",
-        "That lands heavier than most of what she says on purpose. She lets it stay there for a beat, then kicks at the rubber edge of the lane. \"Anyway. That's a gross sentence. Delete it from your memory.\"",
+        "If there has been overt personal tension already, the line tilts into it naturally. If there has not, the affection is still obvious enough to be a risk. Piper does not do sterile interest well. Even her caution tends to show up in motion.",
+        "She cuts across lane one and hops lightly onto the inner curb. \"You know what is hard? Watching somebody get better and realizing that at some point the thing you're excited by is also the thing that could scare you if it goes wrong.\"",
+        "That lands heavier than most of what she says on purpose. She lets it stay there for a beat, then kicks at the rubber edge of the lane. \"Anyway. That's a unfair sentence. Delete it from your memory.\"",
         "The invitation not to take her seriously is an old trick by now. So is the decision whether to honor it.",
         "You pace another stretch together. The lights hum. Her shoulder almost brushes yours once and then actually does on the next curve like the difference might plausibly be an accident. It is not. The air between you has crossed too many smaller lines already to pretend that one is random.",
         "\"I keep trying to figure out what your instinct is when nobody grades it,\" she says. \"Not in the chamber. Not in front of Camille. Not under glass. Just... you.\"",
@@ -5514,7 +5514,7 @@
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5639,7 +5639,7 @@
               "key": "Camille",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5717,14 +5717,14 @@
           "next": "c05_hub_return_prom"
         },
         {
-          "text": "Flirt cleanly: tell her she makes surveillance sound almost intimate.",
+          "text": "Banter cleanly: tell her she makes surveillance sound almost private.",
           "effects": [
             {
               "type": "npc",
               "key": "Camille",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5754,7 +5754,7 @@
       "background": "city",
       "focus": "Julian",
       "text": [
-        "Julian claims the corner booth like he was born to make weak lighting flattering and cheap lacquer look deliberate. The Rusty Anchor is busy without being crowded, full of ferry workers, off-shift staff, students pretending not to stare at Aegis residents, and exactly the kind of locals who can smell sanctioned trouble from half a room away. Music hums beneath the conversations. Glass knocks against wood. Someone near the bar is losing an argument about sports with the confidence of a man who has never once been corrected by facts in time to matter.\nJulian slides a second drink menu toward you and then ignores it completely. \"There is a particular kind of evening,\" he says, \"where everyone pretends this is social and not pre-operational. You can tell because no one has relaxed enough to become stupid.\"\n\"Give Piper eight minutes,\" you say.\nHe smiles. \"Cruel. Fair. Slightly optimistic.\"\nIt is easier now than it was on day one to fall into his rhythm. That is part of the danger with Julian. He is fun in the way sharp things can be fun: elegant, quick, unexpectedly useful, and liable to leave you cut if you mistake polish for harmlessness. If earlier chapters taught him anything about you, you can feel him using it here. He does not ask broad questions. He picks lines that test how honest you are willing to be while still sitting in public.\nHe glances past you toward the room. \"Theo is on a transit platform turning exits into a religion. Camille is somewhere outside judging architecture by whether it can be weaponized into awareness. Piper is making tonight sound like a dare in heels. And you are here with me, which means one of three things.\"\n\"Only three?\"\n\"I believe in manageable theories.\" He ticks them off on two fingers. \"One: you wanted a quiet minute before the dock. Two: you wanted somebody who can tell you what this looks like from the outside. Three: you are beginning to suspect my company is unusually good for your emotional complexion.\"\nThere is enough humor in it to keep the air light, but only enough. Underneath the line, the real offer sits there: tell me what this is, or tell me what you need, or tell me how close you intend to stand without making me guess badly. The reason Julian works as a route at all is that he understands mood as infrastructure. He knows when a room is safe for wit and when wit is how someone survives the unsafe room. He also knows when he is being used as relief instead of chosen as a person. You can feel the distinction mattering now.\nHe leans back against the booth and watches you with that bright, merciless kindness of his. \"So. Which of the three saves your reputation tonight?\""
+        "Julian claims the corner booth like he was born to make weak lighting flattering and cheap lacquer look deliberate. The Rusty Anchor is busy without being crowded, full of ferry workers, off-shift staff, students pretending not to stare at Aegis residents, and exactly the kind of locals who can smell sanctioned trouble from half a room away. Music hums beneath the conversations. Glass knocks against wood. Someone near the bar is losing an argument about sports with the confidence of a man who has never once been corrected by facts in time to matter.\nJulian slides a second drink menu toward you and then ignores it completely. \"There is a particular kind of evening,\" he says, \"where everyone pretends this is social and not pre-operational. You can tell because no one has relaxed enough to become reckless.\"\n\"Give Piper eight minutes,\" you say.\nHe smiles. \"Cruel. Fair. Slightly optimistic.\"\nIt is easier now than it was on day one to fall into his rhythm. That is part of the danger with Julian. He is fun in the way sharp things can be fun: elegant, quick, unexpectedly useful, and liable to leave you cut if you mistake polish for harmlessness. If earlier chapters taught him anything about you, you can feel him using it here. He does not ask broad questions. He picks lines that test how honest you are willing to be while still sitting in public.\nHe glances past you toward the room. \"Theo is on a transit platform turning exits into a religion. Camille is somewhere outside judging architecture by whether it can be weaponized into awareness. Piper is making tonight sound like a dare in heels. And you are here with me, which means one of three things.\"\n\"Only three?\"\n\"I believe in manageable theories.\" He ticks them off on two fingers. \"One: you wanted a quiet minute before the dock. Two: you wanted somebody who can tell you what this looks like from the outside. Three: you are beginning to suspect my company is unusually good for your emotional read.\"\nThere is enough humor in it to keep the air light, but only enough. Underneath the line, the real offer sits there: tell me what this is, or tell me what you need, or tell me how close you intend to stand without making me guess badly. The reason Julian works as a route at all is that he understands mood as infrastructure. He knows when a room is safe for wit and when wit is how someone survives the unsafe room. He also knows when he is being used as relief instead of chosen as a person. You can feel the distinction mattering now.\nHe leans back against the booth and watches you with that bright, merciless kindness of his. \"So. Which of the three saves your reputation tonight?\""
       ],
       "choices": [
         {
@@ -5765,7 +5765,7 @@
               "key": "Julian",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5787,7 +5787,7 @@
           "next": "c05_hub_return_anchor"
         },
         {
-          "text": "Tell him his company is excellent for your emotional complexion, unfortunately.",
+          "text": "Tell him his company is excellent for your emotional read, unfortunately.",
           "effects": [
             {
               "type": "npc",
@@ -5822,7 +5822,7 @@
               "key": "Julian",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5880,7 +5880,7 @@
       "background": "city",
       "focus": "Theo",
       "text": [
-        "The transit platform turns waiting into an architectural style. White line. Metal bench. Schedule display. Wind coming off the water hard enough to make paper decisions feel unserious. Theo stands under the route map with his tablet in one hand and the expression of somebody trying not to become the villain in his own evening by being correct too early.\nHe does not look up immediately when you step beside him. \"Before you ask,\" he says, \"yes, I know this is still technically supervised. No, 'technically' is not a comforting adverb.\"\nOn the tablet, the dock layout is carved into colored lanes: likely approach, bad approach, emergency route, emergency route if human beings behave like algorithms, emergency route if human beings behave like human beings. The last one has more annotations. That tracks.\n\"You did this for an unofficial test?\" you ask.\nTheo finally looks at you. \"I did this because if something goes wrong, I would prefer the post-incident argument not include the sentence no one thought about the ferry lane.\"\nThere are people around you in civilian clothes holding takeout, checking messages, leaning into each other, living lives that do not know your file number. That is the thing Chapter Five changes fastest: it reminds everyone that the world outside Aegis is not made of blank background extras waiting to be saved or endangered on schedule. Theo feels that more acutely than most. He always has. It makes him seem tense. It also makes him right a lot.\nIf earlier chapters gave the two of you any quiet trust, it gathers here easily. Theo is one of the few people in this cohort who becomes more open when taken seriously, not less. He does not need you to tell him not to worry. He needs to know worry is not the only thing he is allowed to bring to the table.\nHe taps the service lane with the stylus. \"Best-case exit if we have to clear fast. Worst-case bottleneck if anybody panics. And yes, I hear how glamorous I sound.\"\n\"You sound prepared.\"\nThat actually lands. His shoulders drop by about half an inch. On Theo, that counts as an emotional gesture.\n\"Prepared is just fear that learned enough math,\" he says. Then, a little quieter: \"I know tonight matters to Piper in a way she is trying not to state directly. I know it matters to you in a different way. I just need both of you to remember that momentum is not the same thing as control because it feels good in your lungs.\"\nOnly Theo could say something that clinical and make it sound like concern instead of a lecture. Or maybe the truth is that you already know what his concern sounds like now, and that is its own form of intimacy."
+        "The transit platform turns waiting into an architectural style. White line. Metal bench. Schedule display. Wind coming off the water hard enough to make paper decisions feel unserious. Theo stands under the route map with his tablet in one hand and the expression of somebody trying not to become the villain in his own evening by being correct too early.\nHe does not look up immediately when you step beside him. \"Before you ask,\" he says, \"yes, I know this is still technically supervised. No, 'technically' is not a comforting adverb.\"\nOn the tablet, the dock layout is carved into colored lanes: likely approach, bad approach, emergency route, emergency route if human beings behave like algorithms, emergency route if human beings behave like human beings. The last one has more annotations. That tracks.\n\"You did this for an unofficial test?\" you ask.\nTheo finally looks at you. \"I did this because if something goes wrong, I would prefer the post-incident argument not include the sentence no one thought about the ferry lane.\"\nThere are people around you in civilian clothes holding takeout, checking messages, leaning into each other, living lives that do not know your file number. That is the thing Chapter Five changes fastest: it reminds everyone that the world outside Aegis is not made of blank background extras waiting to be saved or endangered on schedule. Theo feels that more acutely than most. He always has. It makes him seem tense. It also makes him right a lot.\nIf earlier chapters gave the two of you any quiet trust, it gathers here easily. Theo is one of the few people in this cohort who becomes more open when taken seriously, not less. He does not need you to tell him not to worry. He needs to know worry is not the only thing he is allowed to bring to the table.\nHe taps the service lane with the stylus. \"Best-case exit if we have to clear fast. Worst-case bottleneck if anybody panics. And yes, I hear how glamorous I sound.\"\n\"You sound prepared.\"\nThat actually lands. His shoulders drop by about half an inch. On Theo, that counts as an emotional gesture.\n\"Prepared is just fear that learned enough math,\" he says. Then, a little quieter: \"I know tonight matters to Piper in a way she is trying not to state directly. I know it matters to you in a different way. I just need both of you to remember that momentum is not the same thing as control because it feels good in your lungs.\"\nOnly Theo could say something that clinical and make it sound like concern instead of a lecture. Or maybe the truth is that you already know what his concern sounds like now, and that is its own form of closeness."
       ],
       "choices": [
         {
@@ -5891,7 +5891,7 @@
               "key": "Theo",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5920,7 +5920,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5949,7 +5949,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -5971,14 +5971,14 @@
           "next": "c05_hub_return_transit"
         },
         {
-          "text": "Flirt carefully: say fear that learned math is still one of the better qualities in a person.",
+          "text": "Banter carefully: say fear that learned math is still one of the better qualities in a person.",
           "effects": [
             {
               "type": "npc",
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6143,7 +6143,7 @@
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6172,7 +6172,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6201,7 +6201,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6223,14 +6223,14 @@
           "next": "c05_hub_dock"
         },
         {
-          "text": "Flirt openly: tell her you are trying to prove you listen better when she gets this close.",
+          "text": "Banter openly: tell her you are trying to prove you listen better when she gets this close.",
           "effects": [
             {
               "type": "npc",
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6260,7 +6260,7 @@
       "background": "aegis",
       "focus": "Rina",
       "text": [
-        "The service ramp that runs behind the boathouse is all damp concrete, stacked crates, coiled hoses, and the practical side of the dock nobody photographs. Rina is there tightening the wraps on one wrist like the act personally offended her. She glances up once, registers you, and decides not to waste time pretending either of you is accidental.\n\"Before you ask, no, I'm not helping,\" she says. \"I'm observing the kind of decision that turns into cautionary legends by midterms.\"\nThere is spray in the air from the waves hitting pylons below. Somewhere on the other side of the wall, Piper laughs too loudly at something Theo clearly meant as a warning. Rina listens to the sound with the expression of somebody who has known exactly three people in her life capable of making recklessness sound persuasive and trusts none of them.\n\"You know what's funny?\" she says. \"Everyone talks about field instincts like they're noble. Half the time field instincts are just the version of your habits that had less time to put on shoes.\"\nIt is such a specifically Rina sentence that you almost smile before deciding whether that would annoy or delight her. Hard to tell. Probably both.\nShe winds the wrap once more around her wrist and checks the tension with her teeth. \"If you panic, panic clean. If you show off, at least have the self-respect to do it on purpose. And if Piper talks you into acting like consequences are a later-you problem, remember later-you still has your face.\"\nThere is a rough respect hidden under the abrasion. Rina does not like wasted potential, and by now you qualify as exactly the kind of variable she hates leaving to bad luck. She is not here to comfort you. She is here to remind you that adults can ruin themselves in extremely professional ways if nobody says the sentence first.\nShe jerks her chin toward the water. \"Anyway. Try not to make the rest of us look boring by dying with flair.\""
+        "The service ramp that runs behind the boathouse is all damp concrete, stacked crates, coiled hoses, and the practical side of the dock nobody photographs. Rina is there tightening the wraps on one wrist like the act personally offended her. She glances up once, registers you, and decides not to waste time pretending either of you is accidental.\n\"Before you ask, no, I'm not helping,\" she says. \"I'm observing the kind of decision that turns into cautionary legends by midterms.\"\nThere is spray in the air from the waves hitting pylons below. Somewhere on the other side of the wall, Piper laughs too loudly at something Theo clearly meant as a warning. Rina listens to the sound with the expression of somebody who has known exactly three people in her life capable of making recklessness sound persuasive and trusts none of them.\n\"You know what's funny?\" she says. \"Everyone talks about field instincts like they're noble. Half the time field instincts are just the version of your habits that had less time to put on shoes.\"\nIt is such a specifically Rina sentence that you almost smile before deciding whether that would annoy or delight her. Hard to tell. Probably both.\nShe winds the wrap once more around her wrist and checks the tension with her teeth. \"If you panic, panic clean. If you show off, at least have the self-respect to do it on purpose. And if Piper talks you into acting like consequences are a later-you problem, remember later-you still has your face.\"\nThere is a rough respect hidden under the abrasion. Rina does not like wasted potential, and by now you qualify as exactly the kind of variable she hates leaving to bad luck. She is not here to comfort you. She is here to remind you that adults can ruin themselves in extremely professional ways if nobody says the sentence first.\nShe jerks her chin toward the water. \"Anyway. Try not to make the rest of us look boring by turning recovery into a spectacle.\""
       ],
       "choices": [
         {
@@ -6508,7 +6508,7 @@
       "background": "city",
       "focus": "Camille",
       "text": [
-        "By the time Camille reaches you on the dock, the worst of the immediate motion is over and the worst of the emotional aftershock has just enough room to start being honest. Theo is still arguing with the telemetry under his breath. Piper is pacing a groove into the boards she will later deny creating. Somebody from dock operations is photographing the scorch pattern or splash radius with the bleak efficiency of a person who plans to email three departments and be annoyed by all of them tomorrow.\nCamille does not hurry. That is not because she does not care. With her, speed is usually what happens after the decision, not instead of it. She stops within arm's reach, takes in your shoulders, your breath, the angle of your weight over one leg, the state of the rail behind you, and only then speaks.\n\"Can you stand without lying?\" she asks.\nIt would sound cruel from almost anyone else. From her it lands as precision. She is not asking whether you can perform dignity. She is asking whether your body is still in usable dialogue with reality.\nWhen you answer, she nods once and looks out over the water where the black surface has already gone back to pretending the night belonged to it first. \"Good,\" she says. \"Then listen while you still dislike me enough to remember it accurately.\"\nThat gets a rough breath of laughter out of you before the ache shuts it down. Camille registers both pieces of the reaction. She always does. One day you are going to stop being surprised by how much she notices. Not today, apparently.\n\"The launch was not the problem,\" she says. \"The second correction nearly was. You tried to solve uncertainty with more force before you solved it with better information. That instinct will keep making sense to you right up until it kills the wrong person. So either unlearn it now or become disciplined enough that you can justify keeping it.\"\nIt is a brutal sentence. It is also, infuriatingly, one of the cleanest gifts in the room. Camille has never been interested in making the truth feel nice enough to keep. She is interested in making it useful enough to survive. By Chapter Five, that quality has started to matter differently. Not less sharp. More intimate. The closer she gets to caring what happens to you, the less she is willing to flatter the version of you that would fail under pressure.\nThe dock light catches in the gold at the edge of her irises when she finally looks straight at you again. \"You did something real tonight,\" she says, quieter now. \"That is precisely why the weaknesses inside it matter. Do not confuse my criticism with dismissal. If I thought you were unserious, I would have delegated the speech.\"\nThere it is: the nearest thing Camille gives to reassurance before she decides you have earned anything softer. The cold air off the bay turns every second more specific. Somewhere behind her, Piper swears at Theo for saying 'avoidable trajectory error' with the wrong amount of emotional tact. Jordan, if they are still nearby, is probably filing the whole tableau for later use. Ben is making sure nobody with a concussion gets theatrical. The room around you keeps moving. Camille's attention does not.\n\"Do you want the cleaner version for the report,\" she asks, \"or the truer one for yourself?\""
+        "By the time Camille reaches you on the dock, the worst of the immediate motion is over and the worst of the emotional aftershock has just enough room to start being honest. Theo is still arguing with the telemetry under his breath. Piper is pacing a groove into the boards she will later deny creating. Somebody from dock operations is photographing the scorch pattern or splash radius with the bleak efficiency of a person who plans to email three departments and be annoyed by all of them tomorrow.\nCamille does not hurry. That is not because she does not care. With her, speed is usually what happens after the decision, not instead of it. She stops within arm's reach, takes in your shoulders, your breath, the angle of your weight over one leg, the state of the rail behind you, and only then speaks.\n\"Can you stand without lying?\" she asks.\nIt would sound cruel from almost anyone else. From her it lands as precision. She is not asking whether you can perform dignity. She is asking whether your body is still in usable dialogue with reality.\nWhen you answer, she nods once and looks out over the water where the black surface has already gone back to pretending the night belonged to it first. \"Good,\" she says. \"Then listen while you still dislike me enough to remember it accurately.\"\nThat gets a rough breath of laughter out of you before the ache shuts it down. Camille registers both pieces of the reaction. She always does. One day you are going to stop being surprised by how much she notices. Not today, apparently.\n\"The launch was not the problem,\" she says. \"The second correction nearly was. You tried to solve uncertainty with more force before you solved it with better information. That instinct will keep making sense to you right up until it kills the wrong person. So either unlearn it now or become disciplined enough that you can justify keeping it.\"\nIt is a brutal sentence. It is also, infuriatingly, one of the cleanest gifts in the room. Camille has never been interested in making the truth feel nice enough to keep. She is interested in making it useful enough to survive. By Chapter Five, that quality has started to matter differently. Not less sharp. More private. The closer she gets to caring what happens to you, the less she is willing to flatter the version of you that would fail under pressure.\nThe dock light catches in the gold at the edge of her irises when she finally looks straight at you again. \"You did something real tonight,\" she says, quieter now. \"That is precisely why the weaknesses inside it matter. Do not confuse my criticism with dismissal. If I thought you were unserious, I would have delegated the speech.\"\nThere it is: the nearest thing Camille gives to reassurance before she decides you have earned anything softer. The cold air off the bay turns every second more specific. Somewhere behind her, Piper swears at Theo for saying 'avoidable trajectory error' with the wrong amount of emotional tact. Jordan, if they are still nearby, is probably filing the whole tableau for later use. Ben is making sure nobody with a concussion gets theatrical. The room around you keeps moving. Camille's attention does not.\n\"Do you want the cleaner version for the report,\" she asks, \"or the truer one for yourself?\""
       ],
       "choices": [
         {
@@ -6547,7 +6547,7 @@
               "key": "Camille",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6597,14 +6597,14 @@
           "next": "c05_relationship"
         },
         {
-          "text": "Flirt with bad judgment and steady eye contact: tell her delegated speeches sound like a threat.",
+          "text": "Banter with questionable judgment and steady eye contact: tell her delegated speeches sound like a threat.",
           "effects": [
             {
               "type": "npc",
               "key": "Camille",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6634,7 +6634,7 @@
       "background": "city",
       "focus": "Piper",
       "text": [
-        "The walk back from the infirmary starts with the kind of silence that only exists after everybody has run out of permission to joke. Blackwater Promenade is thinner now than it was before the dock. The food carts are closing. The busker has gone home. Wind pushes napkins and receipt slips along the pavement like tiny surrendered flags. Out over the rail, the bay is still black and patient, carrying no visible evidence that it nearly taught you something uglier than intended.\nPiper keeps pace beside you instead of ahead of you for once. That by itself says more than half the jokes she has not made yet. Her hands are stuffed in the pockets of her jacket. Her jaw keeps setting and unsetting as if she is in an argument with the version of herself that normally turns fear into momentum before anyone can inspect it too closely.\nWhen she finally speaks, it comes out low and direct enough to make the whole evening feel briefly defenseless. \"You scared me,\" she says.\nNo grin. No shrug. No decorative chaos around the sentence. Just the truth, clean and bare and impossible to misfile. This is why Piper works when she works. Not because she is fun, though she is. Not because she is fast, though she very much is. Because every now and then the performance burns off and what is underneath is so simple it takes your balance with it.\nYou walk three more steps before answering. She lets you. That matters too. Earlier chapters taught both of you some version of each other already: that she hates being managed, that you hate being translated incorrectly, that attraction can sound like teasing until the moment it has to survive something real. Tonight is where the route stops being hypothetical. Not committed, not resolved, not solved. Just impossible to keep calling accidental.\nPiper exhales hard through her nose. \"I know, I know. Dock. Risk. We all chose it. Theo had a spreadsheet. Camille had judgment prepared in six different calibers. I even had backup jokes. That's not the point.\" She kicks lightly at the seam where one paving stone meets the next. \"The point is I looked up and for one second it wasn't training anymore. It was just you, over water, and whether I was about to learn some absolute garbage about how replaceable people are.\"\nThe vulnerability in it is almost rude. Not because it is too much. Because she says it like you are adult enough to hold it without making her regret the honesty. That is its own challenge.\nA tram light rolls past at the far end of the promenade, painting both of you in brief moving silver. Piper glances at you then away again. \"So whatever version of tonight you're going to keep,\" she says, trying for lighter and not getting all the way there, \"make room for the part where I am very annoyed that I meant any of that.\"\nShe is close enough now that if you turned your wrist a little you could brush the back of her hand. Maybe that is why neither of you does. Maybe it is exactly why one of you will. The route can move here if you want it to. Friendship can, too. The difference is no longer theoretical. It is in the angle of the air between you and whether either of you decides to pretend that is still nothing.\nPiper tilts her head, one brow up. The old spark is coming back around the edges, but it is carrying more honesty than camouflage now. \"Well? Are you going to say something useful, or am I forced to survive being emotionally sincere on a public walkway for free?\""
+        "The walk back from the infirmary starts with the kind of silence that only exists after everybody has run out of permission to joke. Blackwater Promenade is thinner now than it was before the dock. The food carts are closing. The busker has gone home. Wind pushes napkins and receipt slips along the pavement like tiny surrendered flags. Out over the rail, the bay is still black and patient, carrying no visible evidence that it nearly taught you something uglier than intended.\nPiper keeps pace beside you instead of ahead of you for once. That by itself says more than half the jokes she has not made yet. Her hands are stuffed in the pockets of her jacket. Her jaw keeps setting and unsetting as if she is in an argument with the version of herself that normally turns fear into momentum before anyone can inspect it too closely.\nWhen she finally speaks, it comes out low and direct enough to make the whole evening feel briefly defenseless. \"You scared me,\" she says.\nNo grin. No shrug. No decorative chaos around the sentence. Just the truth, clean and bare and impossible to misfile. This is why Piper works when she works. Not because she is fun, though she is. Not because she is fast, though she very much is. Because every now and then the performance burns off and what is underneath is so simple it takes your balance with it.\nYou walk three more steps before answering. She lets you. That matters too. Earlier chapters taught both of you some version of each other already: that she hates being managed, that you hate being translated incorrectly, that affinity can sound like teasing until the moment it has to survive something real. Tonight is where the route stops being hypothetical. Not committed, not resolved, not solved. Just impossible to keep calling accidental.\nPiper exhales hard through her nose. \"I know, I know. Dock. Risk. We all chose it. Theo had a spreadsheet. Camille had judgment prepared in six different calibers. I even had backup jokes. That's not the point.\" She kicks lightly at the seam where one paving stone meets the next. \"The point is I looked up and for one second it wasn't training anymore. It was just you, over water, and whether I was about to learn a bad lesson about how replaceable people are.\"\nThe vulnerability in it is almost rude. Not because it is too much. Because she says it like you are adult enough to hold it without making her regret the honesty. That is its own challenge.\nA tram light rolls past at the far end of the promenade, painting both of you in brief moving silver. Piper glances at you then away again. \"So whatever version of tonight you're going to keep,\" she says, trying for lighter and not getting all the way there, \"make room for the part where I am very annoyed that I meant any of that.\"\nShe is close enough now that if you turned your wrist a little you could brush the back of her hand. Maybe that is why neither of you does. Maybe it is exactly why one of you will. The route can move here if you want it to. Friendship can, too. The difference is no longer theoretical. It is in the angle of the air between you and whether either of you decides to pretend that is still nothing.\nPiper tilts her head, one brow up. The old spark is coming back around the edges, but it is carrying more honesty than camouflage now. \"Well? Are you going to say something useful, or am I forced to survive being emotionally sincere on a public walkway for free?\""
       ],
       "choices": [
         {
@@ -6701,7 +6701,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6772,8 +6772,8 @@
         "That earns a look from Julian that could almost count as admiration if he were less committed to making admiration look decorative.",
         "Your own attention keeps catching on small things. The strategic placement of mirrors. The way two different patrons make eye contact with Kaito's staff instead of snapping fingers. The fact that a couple at the neighboring booth is clearly in the middle of an argument and still not raising their voices because this is a place where volume is a confession. If you were ever going to understand the difference between Aegis power and outside power, it might be in a room like this, where nobody is pretending the hierarchy came from ethics.",
         "Piper leans in close enough that you feel it before you register it. \"You good?\" she asks, low enough to make it private despite the room.",
-        "Depending on the ground between you, the question lands differently. If the two of you have been building heat, it carries that with no apology. If you have been circling honesty more than flirtation, it lands like care trying very hard not to become vulnerability in public. If the road has been rougher, the fact that she asks at all matters.",
-        "Across from you, Julian is talking to a server as if they are old allies from a crime he has not committed yet. He is not flirting exactly. He is conducting social weather. The result is that the entire table gets better service and less scrutiny, and he somehow makes that look effortless.",
+        "Depending on the ground between you, the question lands differently. If the two of you have been building heat, it carries that with no apology. If you have been circling honesty more than personal tension, it lands like care trying very hard not to become vulnerability in public. If the road has been rougher, the fact that she asks at all matters.",
+        "Across from you, Julian is talking to a server as if they are old allies from a crime he has not committed yet. He is not just being charming exactly. He is conducting social weather. The result is that the entire table gets better service and less scrutiny, and he somehow makes that look effortless.",
         "Theo finally picks up his glass, studies the liquid as if one of its molecules may be lying, and says, \"I hate being right about a room.\"",
         "\"You're usually right about rooms?\" Piper asks.",
         "\"Not usually,\" Julian says before Theo can answer. \"Only when it would be most inconvenient for the rest of us.\"",
@@ -6804,7 +6804,7 @@
           "next": "c06_hub_event"
         },
         {
-          "text": "Tell Piper you're good because she's here, then decide whether the line lands as flirtation or trust.",
+          "text": "Tell Piper you're good because she's here, then decide whether the line lands as personal tension or trust.",
           "effects": [
             {
               "type": "flag",
@@ -6870,7 +6870,7 @@
         "\"I like rooms like this,\" he says. \"Not because they are honest. Because they are honest about being dishonest.\"",
         "\"Comforting.\"",
         "\"It can be.\" He glances at you. \"Aegis lies about what it is for your own good. Places like this lie because they respect appetite. Very different flavor.\"",
-        "He says it lightly, but the sentence has a seam in it. If you have been paying attention since earlier chapters, you already know the shape of his armor: glamour, humor, perfect timing, a sense for where to stand when a room wants to become violent in a prettier font. You also know that none of that makes him shallow. If anything it makes him expensive to misunderstand.",
+        "He says it lightly, but the sentence has a seam in it. If you have been paying attention since earlier chapters, you already know the shape of his armor: glamour, humor, perfect timing, a sense for where to stand when a room wants to become dangerous in a prettier font. You also know that none of that makes him shallow. If anything it makes him expensive to misunderstand.",
         "If you gave him an easier line in earlier chapters, he uses it now, letting the conversation stay buoyant until you decide otherwise. If you have seen him more sharply-if you have met performance with real attention instead of just admiration-there is less cushion in the silence between you. He is not simpler. He is less defended.",
         "Inside, behind the glass, you can still see the table. Piper's profile in motion. Theo speaking with one hand wrapped around his glass and the other sketching anxious geometry in the air. Camille looking like she was built to sit at the center of controlled danger and insult its standards by surviving it.",
         "Julian follows your gaze. \"People always say they want to be seen,\" he says. \"What they usually want is to be read correctly by one person before the room gets there first.\"",
@@ -6879,7 +6879,7 @@
         "\"You worried you won't?\"",
         "He laughs, too soft to count as deflection. \"No. I'm worried I will, and the room will decide that tells it everything.\"",
         "The line lands harder than he intended or perhaps exactly as hard. Either way, it is yours now.",
-        "If you flirt, this is a good place to do it because the balcony makes privacy out of angle and glass. If you stay honest, it is a better place for that than the table was. If you push too hard, the city gives him a thousand beautiful ways to turn the conversation and you may not get another opening like this until much later.",
+        "If you banter, this is a good place to do it because the balcony makes privacy out of angle and glass. If you stay honest, it is a better place for that than the table was. If you push too hard, the city gives him a thousand beautiful ways to turn the conversation and you may not get another opening like this until much later.",
         "Inside, someone cheers. Outside, a boat horn cuts across the harbor with the melancholy confidence of something built to travel in bad weather.",
         "Julian turns toward you fully then, one elbow still on the rail. \"So,\" he says. \"Do I seem at home here, or merely well-lit?\""
       ],
@@ -6948,7 +6948,7 @@
               "key": "Julian",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -6977,7 +6977,7 @@
               "key": "Julian",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7007,20 +7007,20 @@
       "background": "city",
       "focus": "Piper",
       "text": [
-        "The back bar is quieter than the main floor by exactly the amount needed to make poor decisions sound intimate.",
-        "Piper drifts there when the table gets too watched, trailing the last of her drink in one hand and restless energy in every other part of her. The bar itself runs dark and glossy under a line of low pendants that leave everyone's eyes easier to misread. Shelves of impossible bottles rise against mirror-black stone. A server slides past with a tray balanced on two fingers and never once glances at the argument taking shape in a nearby booth. Blackwater professionalism, apparently, includes pretending not to hear desire or blackmail until one of them tips.",
+        "The back bar is quieter than the main floor by exactly the amount needed to make poor decisions sound private.",
+        "Piper drifts there when the table gets too watched, trailing the last of her drink in one hand and restless energy in every other part of her. The bar itself runs dark and glossy under a line of low pendants that leave everyone's eyes easier to misread. Shelves of impossible bottles rise against mirror-black stone. A server slides past with a tray balanced on two fingers and never once glances at the argument taking shape in a nearby booth. Blackwater professionalism, apparently, includes pretending not to hear ambition or leverage until one of them tips.",
         "Piper leans both elbows on the bar and looks at the mirror instead of at you first. In the reflection, you get the version of her she does not stage for the whole room: less motion, more edge. The speed is still there. It always will be. But here it feels held instead of deployed.",
         "\"You ever get the sense,\" she says, \"that half these people are one bad sentence away from setting a yacht on fire?\"",
         "\"Only half?\"",
         "\"Fair.\"",
-        "If the two of you have been flirting openly, the scene begins with existing heat. Not breathless. Not sudden. Accumulated. If the route has bent more toward trust, then what lives here is not spectacle but the peculiar intensity of being chosen privately in a room built for public attention. Either way, she brought you here because she wanted less witness, not more.",
+        "If the two of you have been building rapport openly, the scene begins with existing heat. Not breathless. Not sudden. Accumulated. If the route has bent more toward trust, then what lives here is not spectacle but the peculiar intensity of being chosen privately in a room built for public attention. Either way, she brought you here because she wanted less witness, not more.",
         "Piper finally looks at you directly. \"I hate places like this,\" she says, too matter-of-fact for the line to be fake.",
         "That is not what her body says. Her body says she could own the room if she decided to, that she knows exactly how she scans in black and teal and a dangerous smile, that she could turn every polished surface into an accomplice if she were in the mood. The honesty is in the contradiction. She hates what rooms like this ask people to become. She is also very good at becoming it for fifteen minutes at a time.",
         "\"You hide it well,\" you say.",
         "\"Yeah.\" She tips the glass once, watching the liquid slide. \"That's not always the flex people think it is.\"",
         "Out on the floor, a burst of laughter ripples and dies. Piper's shoulders shift. Not tension exactly. Memory of it. The kind the body keeps after too many moments where speed was the only reason fear looked optional.",
         "If Chapter Five or earlier left her shaken in ways she joked through, you can feel the residue here. If you have steadied her before, there is less performance in this conversation. If you have only ever met her at full speed, this may be the first time she lets you see the other side of the trick.",
-        "\"Everybody here is doing math,\" she says. \"How dangerous, how useful, how fun, how expensive, how likely to be worth the fallout. Aegis does it with forms. Blackwater does it with cheekbones.\"",
+        "\"Everybody here is doing math,\" she says. \"How dangerous, how useful, how fun, how expensive, how likely to be worth the fallout. Aegis does it with forms. Blackwater does it with presentation.\"",
         "\"Which version do you hate more?\"",
         "Piper smiles without softness. \"Depends who I think I can outrun.\"",
         "She says it like a joke. She does not entirely mean it as one.",
@@ -7041,7 +7041,7 @@
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7063,14 +7063,14 @@
           "next": "c06_hub_event"
         },
         {
-          "text": "Tell her she looks like trouble with excellent timing and see whether she takes the flirt or the warning.",
+          "text": "Tell her she looks like trouble with excellent timing and see whether she takes the banter or the warning.",
           "effects": [
             {
               "type": "npc",
               "key": "Piper",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7099,7 +7099,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7165,21 +7165,21 @@
         "\"So did you.\"",
         "\"You found the least decorative place in the building.\"",
         "\"I found the part of the building that would still function if the decorative part caught fire.\"",
-        "That almost counts as humor. Here, in the fluorescence, it counts as intimacy.",
+        "That almost counts as humor. Here, in the fluorescence, it counts as closeness.",
         "The service corridor does something useful to her. The polished danger of the main room is gone. In its place is a narrower frame, concrete under the expensive coat of the venue, a hum from the refrigeration system at the far end, the smell of citrus and detergent instead of perfume and money. Camille belongs anywhere she chooses to stand, but places like this strip away enough noise that you can hear the structure of her attention.",
         "She studies you for a moment. \"You are handling tonight better than I expected.\"",
-        "Depending on your road together, the sentence can land as praise, challenge, or concern in formal clothes. If you have earned respect, it carries that openly. If the route between you is more friction than ease, then what shows is that she is still here checking instead of choosing indifference. If the chemistry has already sharpened, the air in the corridor does the rest without either of you needing to name it.",
+        "Depending on your road together, the sentence can land as praise, challenge, or concern in formal clothes. If you have earned respect, it carries that openly. If the route between you is more friction than ease, then what shows is that she is still here checking instead of choosing indifference. If the rapport has already sharpened, the air in the corridor does the rest without either of you needing to name it.",
         "\"You expected me badly?\"",
         "\"I expected Blackwater to tempt you into becoming louder than your judgment.\"",
         "\"Maybe it still will.\"",
         "Camille takes a sip of water, gaze never leaving you. \"Then I prefer to know whether I am accounting for a liability or a partner.\"",
-        "There are a dozen ways to answer. Teasing works with her only if it has a spine. Honesty works best when it does not beg. Flirting works if it is deliberate enough to feel like a choice, not a spill.",
+        "There are a dozen ways to answer. Teasing works with her only if it has a spine. Honesty works best when it does not beg. Banter works if it is deliberate enough to feel like a choice, not a spill.",
         "On the far side of the service door, two staffers pass with a crate between them, speaking quietly in a language you do not catch. The moment they are gone, the corridor goes private again.",
         "\"I do not trust rooms like this,\" Camille says, as if continuing a conversation she started alone two minutes before you arrived. \"They encourage appetite without demanding accountability. People confuse polish for restraint. It gets others hurt.\"",
         "\"And yet you're here.\"",
         "Her mouth shifts. \"So are you.\"",
         "It is not a dodge. It is a challenge to be specific.",
-        "Maybe that is what sits between you most cleanly: specificity. She does not want the generic version of your courage. Or your care. Or your attraction. She wants to know what, exactly, you are doing and whether you will still be doing it when the room stops flattering you for it.",
+        "Maybe that is what sits between you most cleanly: specificity. She does not want the generic version of your courage. Or your care. Or your affinity. She wants to know what, exactly, you are doing and whether you will still be doing it when the room stops flattering you for it.",
         "When she moves, it is only to set her glass on the nearest shelf. The motion takes her half a step closer. Not enough to close the distance. Enough to make the distance matter.",
         "\"If tonight goes wrong,\" she says, \"I need to know which direction you run.\"",
         "You can hear the music through the wall again, thinner here, all pulse and no melody. The service corridor waits. The building waits. Camille, who rarely asks anything without already having a reason, waits too."
@@ -7318,11 +7318,11 @@
         "Theo sets his drink on the desk untouched. \"I do not like rooms where everyone is performing motive and pretending that counts as disclosure.\"",
         "\"That's most rooms.\"",
         "\"Yes,\" he says, with all the tired gratitude of a man who hates being proved right by architecture. \"Which is part of the problem.\"",
-        "If the two of you have already built something quieter together through earlier chapters, it pays off here. Theo is not easier, exactly, but he is more willing to let you see the machinery. If there has been attraction, the side office makes it more dangerous by making it gentle. If there has only been trust, then the scene still matters because Theo letting you into the recalibration space is not a casual choice.",
+        "If the two of you have already built something quieter together through earlier chapters, it pays off here. Theo is not easier, exactly, but he is more willing to let you see the machinery. If there has been affinity, the side office makes it more dangerous by making it gentle. If there has only been trust, then the scene still matters because Theo letting you into the recalibration space is not a casual choice.",
         "He rubs his thumb over the edge of the glass once. \"I keep trying to figure out whether tonight is the kind of thing people survive by relaxing into or by noticing too much.\"",
         "\"Those are annoyingly different skill sets.\"",
         "\"Theo specialty. Being bad at the useful version.\"",
-        "You lean against the desk or stay standing or take the second chair-whatever you do, the room reacts by becoming more intimate than it has any right to be.",
+        "You lean against the desk or stay standing or take the second chair-whatever you do, the room reacts by becoming more private than it has any right to be.",
         "\"That's not true,\" you say.",
         "He looks at you, cautious. \"Which part?\"",
         "\"The being bad at useful.\"",
@@ -7331,13 +7331,13 @@
         "\"That does help, actually.\"",
         "The line settles between you. He studies it like he is checking whether he is allowed to keep it.",
         "If he trusted you earlier, this is where that trust deepens. If he did not, this is where the scene can still move because you came looking instead of waiting for him to make himself easier to approach. Theo notices effort. He also notices whether it is sincere.",
-        "Through the frosted panel, movement ripples across the lower floor. Somebody important just arrived or somebody stupid just stood up. Theo's eyes flick there and back.",
+        "Through the frosted panel, movement ripples across the lower floor. Somebody important just arrived or somebody reckless just stood up. Theo's eyes flick there and back.",
         "\"I know what this place does,\" he says. \"It makes everyone choose a version of themselves they can defend in public. I am not great at choosing mine quickly.\"",
         "\"You don't have to be quick in here.\"",
         "He goes very still after that.",
         "It is a small sentence. It lands like a hand offered slowly enough not to spook anything.",
         "Theo's voice is quieter when he answers. \"That is not usually true.\"",
-        "You could flirt now and it would work if you kept it careful. You could stay steady and the route would deepen another way. You could push too hard and watch him retreat behind politeness and analysis before you got the full answer to anything.",
+        "You could banter now and it would work if you kept it careful. You could stay steady and the route would deepen another way. You could push too hard and watch him retreat behind politeness and analysis before you got the full answer to anything.",
         "Outside the door, heels pass and fade. The room remains a pocket in the evening where nothing glamorous can save either of you from honesty.",
         "Theo lifts his glass finally, takes one cautious sip, and grimaces. \"This tastes like expensive regret.\"",
         "\"Blackwater specialty.\"",
@@ -7353,7 +7353,7 @@
               "key": "Theo",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7403,14 +7403,14 @@
           "next": "c06_hub_event"
         },
         {
-          "text": "Tell him expensive regret suits the evening and see whether he meets you halfway into flirtation.",
+          "text": "Tell him expensive regret suits the evening and see whether he meets you halfway into personal tension.",
           "effects": [
             {
               "type": "npc",
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7586,7 +7586,7 @@
         "He opens another panel. This one is uglier. Training observation notations. cross-reference requests. one flagged phrase repeated often enough to become insulting: scalable event potential.",
         "Julian's expression changes at that. Barely. The difference is in the mouth. A line instead of a smile.",
         "\"There are words institutions use when they're afraid of a person and still want to sound reasonable about it,\" he says. \"Potential. volatility. asset. concern. They become very fond of nouns when they don't want to admit they mean someone with a pulse.\"",
-        "If your route with him has been flirt-forward, this is the part where the air changes. Not because he suddenly turns intimate. Because he stops performing distance. If your route has been friend-leaning, the same moment lands as trust instead of charge.",
+        "If your route with him has been rapport-forward, this is the part where the air changes. Not because he suddenly turns private. Because he stops performing distance. If your route has been friend-leaning, the same moment lands as trust instead of charge.",
         "\"What do you need from me?\" he asks, and for once it is not phrased to entertain either of you.",
         "You tell him. Or you don't. But the room listens to the choice.",
         "\"I need honesty, even if it hurts.\" you say.",
@@ -7747,7 +7747,7 @@
               "key": "Piper",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7776,7 +7776,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 1,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7833,7 +7833,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -7879,7 +7879,7 @@
         "You look up. She doesn't blink.",
         "\"I need to know which of my judgments I can trust today. The tactical one that says you can hold. Or the human one that says if you slip, you'll hear us before you disappear into whatever this power wants when it stops asking permission.\"",
         "That is the closest she has come all chapter to saying she is afraid. She would probably deny it under oath and with excellent diction. It still counts.",
-        "If you have been flirting in a way she recognizes as deliberate rather than messy, the air around the scene is charged without becoming soft. If your route is more trust-driven, the same exchange reads as brutal intimacy of another kind.",
+        "If you have been building direct rapport in a way she recognizes as deliberate rather than careless, the air around the scene is charged without becoming soft. If your route is more trust-driven, the same exchange reads as brutal closeness of another kind.",
         "\"Camille,\" you say.",
         "\"No,\" she says. \"Precise answers.\""
       ],
@@ -8016,7 +8016,7 @@
         "\"The board is split,\" Vance says. \"Not on whether you were targeted. On what that means. One camp believes external attention confirms your strategic value. The other believes it confirms you're a liability multiplier. Both camps are made of cowards in different suits.\"",
         "That earns the smallest flicker of life from him, which is what passes for generosity here.",
         "\"And you?\" you ask.",
-        "\"I think fear makes institutions stupid unless someone in the room has the discipline to embarrass it.\" He folds his hands behind his back. \"I also think you are approaching the point where raw power will not be your defining problem. Interpretation will.\"",
+        "\"I think fear makes institutions reckless unless someone in the room has the discipline to embarrass it.\" He folds his hands behind his back. \"I also think you are approaching the point where raw power will not be your defining problem. Interpretation will.\"",
         "The word lands because it is not abstract. It means narrative. classification. who gets to say what your actions meant after the room stops shaking.",
         "Vance nods toward the packet. \"If we run this operation, I need to know what you will privilege when it gets ugly. Team cohesion. civilian protection. personal control. mission success. Don't give me hero slogans. Give me the order.\"",
         "It is not a trap. Which makes it worse. He wants the truth because he intends to use it."
@@ -8296,7 +8296,7 @@
         "Ben shrugs one shoulder. \"I think smart is a scam word. I think it's the least bad option with too many ways to turn ugly. I think Piper's mad because she cares. Theo's mad because he cares and wants the caring documented in triplicate. Camille's mad because the plan offends her standards and she's doing it anyway. Julian's mad because institutions always get weird when people stop being decorative to them.\"",
         "He takes a drink. \"And I think you're mad because all of them are right in different directions.\"",
         "That one lands.",
-        "Ben gives you a crooked little smile. \"See? I can do menace too.\""
+        "Ben gives you a crooked little smile. \"See? I can be intimidating too.\""
       ],
       "choices": [
         {
@@ -8425,7 +8425,7 @@
         "\"You know,\" she says without turning, \"if someone from command says 'controlled escalation' one more time, I'm going to make them jog ten laps in a pencil skirt.\"",
         "\"That would improve the culture.\"",
         "\"Exactly. Reform.\"",
-        "She glances over then, and because this is no longer day one, the look carries all the charge of whatever the two of you have and have not done with each other so far. If you flirted early and stayed brave about it, the current is clean and obvious. If you circled each other more carefully, it still lives there, just hidden under easier lines. If you have repeatedly chosen her in motion and then gone quiet when things got serious, she knows that too. Piper always knows when she is the version of you that only exists while the room is fun.",
+        "She glances over then, and because this is no longer day one, the look carries all the charge of whatever the two of you have and have not done with each other so far. If you kept the tone personal early and stayed brave about it, the current is clean and obvious. If you circled each other more carefully, it still lives there, just hidden under easier lines. If you have repeatedly chosen her in motion and then gone quiet when things got serious, she knows that too. Piper always knows when she is the version of you that only exists while the room is fun.",
         "\"Do you ever get tired,\" she asks, \"of being the thing everyone rearranges themselves around?\"",
         "The question lands so directly it takes a second to recognize it. Coming from anyone else it might sound like envy, accusation, concern. From her it sounds like all three and none cleanly separated.",
         "\"Do you?\" you ask.",
@@ -8439,15 +8439,15 @@
         "She smiles without humor. \"In the deeply inconvenient place where you might actually understand it.\"",
         "A transport plane taxis far off on a parallel strip, all distant weight and disciplined power. Piper watches it for a second, then looks at you again. \"I know what you do in rooms,\" she says. \"I'm less interested in that now. I want to know what you do when the room goes away.\"",
         "That is practically a confession from her.",
-        "If you answer lightly, she will play there. If you answer honestly, she will let you. If you flirt, she will not run from it. Not here. Not now. The runway has eaten too much pretense already.",
+        "If you answer lightly, she will play there. If you answer honestly, she will let you. If you banter, she will not run from it. Not here. Not now. The runway has eaten too much pretense already.",
         "\"You look like you want me to say something meaningful,\" you say.",
         "\"No,\" she says. \"I want you to say something true. Meaningful is what people say when they want to sound expensive.\"",
         "The laugh that gets out of you this time is real. She notices that too, and softens around the edges before catching herself.",
-        "Then she leans closer and says, \"Also, if I hit Mach Five and live, you are legally required to be impressed in a way that borders on worship.\"",
+        "Then she leans closer and says, \"Also, if I hit Mach Five and live, you are legally required to be impressed in a way that borders on unreasonable.\"",
         "\"I'll see what the paperwork allows.\"",
         "She bumps your shoulder with hers, quick and deliberate. \"Coward.\"",
         "Her grin returns, warmer now. \"Tell me one thing,\" she says. \"If this goes badly, what are you going to do? Not command. Not policy. You.\"",
-        "You know from the way she asks that the answer matters more than the line itself. Whether you reassure, challenge, promise, flirt, or tell her a hard truth, she will remember which version you chose."
+        "You know from the way she asks that the answer matters more than the line itself. Whether you reassure, challenge, promise, banter, or tell her a hard truth, she will remember which version you chose."
       ],
       "choices": [
         {
@@ -8514,7 +8514,7 @@
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -8536,14 +8536,14 @@
           "next": "c08_hub_airbase"
         },
         {
-          "text": "Step closer and tell her that if she wants worship, she could start by surviving long enough to collect it.",
+          "text": "Step closer and tell her that if she wants applause, she could start by surviving long enough to collect it.",
           "effects": [
             {
               "type": "npc",
               "key": "Piper",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -8577,8 +8577,8 @@
         "Camille is leaning over the rail, one hand resting on a clipboard covered in stop vectors and abort routes. The catwalk lights leave one side of her face in shadow and sharpen the other into clean planes. She does not turn when you approach. She already knows your footstep.",
         "\"I asked for a third abort net,\" she says. \"They gave me two and a lecture about confidence.\"",
         "\"That sounds like a love language here.\"",
-        "\"It is. A deeply stupid one.\"",
-        "Only then does she glance your way. Whatever the two of you have built so far-respect, tension, challenge, flirtation with edges on it, the feeling that every conversation is also a test and neither of you minds-that all arrives in the look before she says anything else.",
+        "\"It is. A deeply reckless one.\"",
+        "Only then does she glance your way. Whatever the two of you have built so far-respect, tension, challenge, personal tension with edges on it, the feeling that every conversation is also a test and neither of you minds-that all arrives in the look before she says anything else.",
         "Below, Piper blurs one practice line and brakes clean, technicians lifting hands instinctively even though nothing went wrong. Theo is at medical for now, conferring with a field medic and pretending not to hover. Julian has found a place between the catwalk cameras where he can be useful without becoming scenery for the observers. Ben is checking the crash mats again because being reliable is apparently his hobby and his burden both.",
         "Camille taps the clipboard. \"Everyone thinks the main danger is output,\" she says. \"It isn't. The main danger is when people fall in love with the idea that one strong performance makes a system they can trust.\"",
         "She means power. She also means people. She almost certainly means both about you.",
@@ -8590,9 +8590,9 @@
         "That gets you the faintest actual smile, quick and dangerous as a blade turning in light. \"You should be less observant,\" she says.",
         "\"You should stop leaving evidence.\"",
         "\"I don't leave evidence. I leave structure.\"",
-        "There it is again, the reason conversations with her feel better than most people's declarations. She is direct without being messy. Even when she is defensive, it comes sharpened.",
+        "There it is again, the reason conversations with her feel better than most people's declarations. She is direct without being careless. Even when she is defensive, it comes sharpened.",
         "She finally turns fully toward you and sets the clipboard against the rail. \"This chapter is full of people who want you to become legible,\" she says. \"I'm less interested in that. I'm interested in whether you stay precise once other people start projecting what they need onto you.\"",
-        "If you have already flirted with her openly, the line hums. If you have only circled, it still lands too close to the chest to be purely professional.",
+        "If you have already kept the tone personal with her openly, the line hums. If you have only circled, it still lands too close to the chest to be purely professional.",
         "\"You think I get imprecise when watched?\" you ask.",
         "\"I think people enjoy being misunderstood when the misunderstanding flatters them.\" Her gaze drops briefly to your mouth and returns to your eyes before it can be called anything accidental. \"I think that habit becomes expensive.\"",
         "Below you, an air horn sounds twice and a new crew clears the lane. The whole airbase seems to take one measured breath.",
@@ -8600,8 +8600,8 @@
         "It would be easy to answer with charm. It would work, up to a point. The problem with Camille is that she always knows the exact point.",
         "\"If I answer that honestly,\" you say, \"what do I get?\"",
         "She tilts her head just enough to acknowledge the terms. \"The same thing you always get from me,\" she says. \"A better question.\"",
-        "It is somehow more intimate than a softer person would manage.",
-        "Then, after a pause deliberate enough to count, she says, \"Also: if you intend to kiss me someday, don't make the mistake of doing it because you survived something dramatic. I would hate to discover your timing is sentimental.\"",
+        "It is somehow more private than a softer person would manage.",
+        "Then, after a pause deliberate enough to count, she says, \"Also: if you intend to make this personal someday, don't make the mistake of doing it because you survived something dramatic. I would hate to discover your timing is sentimental.\"",
         "The sentence lands with perfect calm. The silence after it does not.",
         "She turns away first, which does not feel like retreat so much as trust that the line can live between you without collapsing under its own weight."
       ],
@@ -8727,11 +8727,11 @@
       "background": "aegis",
       "focus": "Theo",
       "text": [
-        "The medical tent at the airbase has all the intimacy of a battlefield and all the bedside charm of a spreadsheet. Folding partitions try and fail to create privacy. Portable monitors click and chirp with tireless indifference. Somebody has labeled every tray twice, which means Theo looks slightly less miserable here than he would in a room with fewer attempts at order.",
+        "The medical tent at the airbase has all the closeness of a battlefield and all the bedside charm of a spreadsheet. Folding partitions try and fail to create privacy. Portable monitors click and chirp with tireless indifference. Somebody has labeled every tray twice, which means Theo looks slightly less miserable here than he would in a room with fewer attempts at order.",
         "He is standing near the far monitor rack with a tablet in one hand and a disposable cup of tea in the other, the tea almost certainly forgotten. A field medic is showing him a live threshold chart and regretting it because Theo is already asking the kind of question that forces people to admit whether their assumptions are decorative.",
         "When the medic is pulled away, Theo exhales through his nose and only then notices you close enough to count as a conversation instead of background.",
         "\"You look intact,\" he says.",
-        "\"Your standards are romantic.\"",
+        "\"Your standards are precise.\"",
         "\"I'm serious.\"",
         "\"I know.\"",
         "That is the thing with him now. By Chapter 8, if you have let him matter, you can hear the difference immediately between his dry voice and his actual fear. The line between them is still thin. It is just no longer invisible.",
@@ -8741,14 +8741,14 @@
         "A pause. He adjusts his grip on the tablet. \"And Piper,\" he adds, because he is not territorial enough to lie by omission. \"And frankly everyone here, but mostly the two of you.\"",
         "Outside the tent, somebody wheels a case across the concrete. The rattling sound rises and fades. The canvas walls snap softly in the wind.",
         "Theo lowers his voice. \"There's a version of this day where nothing dramatic happens and we still pay for it later,\" he says. \"People act like clean outcomes mean low cost. They don't.\"",
-        "If you have treated him like a person rather than a warning system across the earlier chapters, the tension in his shoulders reads less like annoyance and more like trust straining against fear. If you flirted with him carefully and kept it honest, that too lives in the space between you now. Theo is not the kind of person who stops feeling because circumstances get bigger. He is the kind who feels more and tells you less unless you make it safe.",
+        "If you have treated him like a person rather than a warning system across the earlier chapters, the tension in his shoulders reads less like annoyance and more like trust straining against fear. If you kept the tone personal with him carefully and kept it honest, that too lives in the space between you now. Theo is not the kind of person who stops feeling because circumstances get bigger. He is the kind who feels more and tells you less unless you make it safe.",
         "You lean against the supply table. \"You came all the way to an airbase to tell me my bad decisions might have delayed consequences?\"",
         "\"No. I came all the way to an airbase because apparently this institution only respects advice once it's attached to a portable trauma unit.\"",
         "The dryness catches both of you by surprise. You laugh first. Theo looks startled by the fact that he managed it and then, grudgingly, pleased.",
         "\"That was almost a joke,\" you say.",
         "\"Don't spread it around.\"",
         "His hand hovers over the tablet screen. \"I don't need you to promise me something unrealistic,\" he says. \"I know what this chapter is. I know what you're going to be asked to hold. I just...\" He stops, recalibrates, starts again. \"I need you not to mistake surviving the event for having been fine.\"",
-        "There is an intimacy in that sentence he will probably deny under oath.",
+        "There is an closeness in that sentence he will probably deny under oath.",
         "If earlier chapters established a quieter current between you, this is where it tightens. Not in spectacle. In the fact that Theo's version of tenderness sounds almost exactly like excellent risk communication until you listen closely enough to hear the person inside it.",
         "\"You assume I'm bad at recovery,\" you say.",
         "\"I assume you're good at enduring. Those aren't the same skill.\"",
@@ -8768,7 +8768,7 @@
               "key": "Theo",
               "trust": 1,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -8853,7 +8853,7 @@
               "key": "Theo",
               "trust": 0,
               "respect": 0,
-              "attraction": 1
+              "affinity": 1
             },
             {
               "type": "relationship",
@@ -8893,9 +8893,9 @@
         "\"That, yes. Also the way they pretend visibility is neutral. As if being watched by the right people somehow cleanses the violence out of it.\"",
         "That is why he matters. Beneath the style, he is one of the few people here who notices soft harm when it dresses itself in systems language.",
         "A wind gust rattles the catwalk mesh. He catches the rail and doesn't break his train of thought. \"Everyone's nerves are dressing differently today,\" he says. \"Piper's are all sparkle and contempt. Theo's are disguised as ethics. Camille's are pretending to be geometry. Yours...\" He lets the sentence hover. \"I'm still taking notes.\"",
-        "If there has been flirtation between you, it glides through the line like a blade under silk. If there has only been the quieter closeness of being properly seen, this still lands intimate because Julian rarely offers undivided attention without charging interest later.",
+        "If there has been personal tension between you, it glides through the line like a blade under silk. If there has only been the quieter closeness of being properly seen, this still lands private because Julian rarely offers undivided attention without charging interest later.",
         "\"What have you got so far?\" you ask.",
-        "He studies you for a second, not mocking, not soft, simply exact. \"You become more honest the less decorative a room is,\" he says. \"Which is terrible news for anyone who enjoys flirting with you under chandeliers.\"",
+        "He studies you for a second, not mocking, not soft, simply exact. \"You become more honest the less decorative a room is,\" he says. \"Which is terrible news for anyone who enjoys trading barbs with you under chandeliers.\"",
         "\"Good thing there are no chandeliers.\"",
         "His mouth curves. \"Tragic.\"",
         "He pushes off the rail and walks a few steps down the catwalk, forcing you to follow if you want the conversation to continue. Down below, two airbase staffers are arguing by a signal case. Jordan is speaking to one of the shuttle drivers with the expression of someone rescuing the rest of you from a preventable social error. The runway takes all of it and turns it into pattern.",
@@ -9034,7 +9034,7 @@
       "focus": "Ben",
       "text": [
         "Ben is knee-deep in crash mats because apparently nobody in command looked at a stack taller than a car and thought maybe it should be a two-person job. He has one shoulder under the top pad, guiding it into place against a low brace with the patient concentration of somebody determined not to let inconvenience become somebody else's emergency.",
-        "\"You know,\" he says when he notices you, \"there are easier ways to flirt with danger than helping set up the part where we catch it.\"",
+        "\"You know,\" he says when he notices you, \"there are easier ways to banter with danger than helping set up the part where we catch it.\"",
         "\"Speak from experience?\"",
         "\"My whole power set is speaking from experience.\"",
         "He lets the mat fall into place and straightens with a soft grunt. Even here, even now, Ben manages to bring the temperature of a room down by refusing to be impressed with his own capacity to take punishment. That steadiness matters more by Chapter 8 than it did earlier, because now the whole cohort understands exactly how often stability gets mistaken for consent.",
@@ -9197,7 +9197,7 @@
         "Camille, still at the edge of the platform, says, \"Today clarified several things.\"",
         "Piper snorts. \"You say the hottest possible sentences like they're audit memos.\"",
         "Camille glances back over one shoulder. \"And yet you keep listening.\"",
-        "\"Yeah, because sometimes you say terrifyingly useful things in that serial-killer tax-auditor voice.\"",
+        "\"Yeah, because sometimes you say terrifyingly useful things in that audit-committee voice.\"",
         "Julian presses one hand dramatically to his chest. \"Please never stop talking to each other. It gives the rest of us texture.\"",
         "That earns another small laugh, even from Theo.",
         "Rina is not with the group. You notice that because everybody notices absences after a day like this. Vance is somewhere farther down the platform with an airbase officer, locked into one of those conversations that are either administrative or life-changing and often both. Kaito is nowhere in sight because this is not his chapter. Rhea is nowhere visible because chapters like this are scary enough without inviting more ghosts in by name. The important thing is the people who are here and the lines the day has tightened between them.",
@@ -9216,7 +9216,7 @@
         "Camille folds her arms tighter. \"Caring is not the operational problem,\" she says. \"The operational problem is what people do because of it.\"",
         "That sentence hangs there because she is right and because none of you are strangers anymore.",
         "You look down the platform, then back at the group. The shuttle lights appear far off, two white points growing cleaner as they approach. Aegis Point waits on the other end with its clean beds, ugly coffee, cameras, med forms, and the exact same people who are standing here now, just with less runway around them.",
-        "Jordan finally pockets their phone. \"For the record,\" they say, \"if any of you try to process this entire day by silently staring at walls and then making one cryptic romantic decision, I will become violent.\"",
+        "Jordan finally pockets their phone. \"For the record,\" they say, \"if any of you try to process this entire day by silently staring at walls and then making one cryptic personal decision, I will become difficult.\"",
         "\"That sounds like support,\" Julian says.",
         "\"It is support.\"",
         "The shuttle nears. Doors hiss in preparation before the vehicle even stops. The platform light turns all of you a little paler than you are. Nobody rushes. Nobody hangs back. The choice is subtler than that: who stands nearest whom when there is finally a door home."
@@ -9329,7 +9329,7 @@
         "Camille closes her eyes briefly, either in exhaustion or prayer. \"You're all impossible.\"",
         "\"And yet here you are,\" Julian says.",
         "That lands harder than the joke deserves. Camille opens her eyes and does not answer because there is nothing false in it.",
-        "If you have spent chapters building toward one person more than the others, the kitchen lets that show. Not in declarations. In where people stand, who they look for first when a joke lands, who they choose to ask the practical question that is not really practical. The room does not care whether the path is friendship or romance yet. It only cares whether it is honest.",
+        "If you have spent chapters building toward one person more than the others, the kitchen lets that show. Not in declarations. In where people stand, who they look for first when a joke lands, who they choose to ask the practical question that is not really practical. The room does not care whether the path is friendship or commitment yet. It only cares whether it is honest.",
         "Piper slides the ice tray toward you with one finger. \"Trade offer,\" she says. \"You take these before your face starts lying, and I won't tell anyone you looked terrifyingly noble out there.\"",
         "\"You tell everyone I looked terrifyingly noble.\"",
         "\"That can absolutely be arranged.\"",
@@ -9337,7 +9337,7 @@
         "Julian considers you from across the table. \"Disagree. You did have a sort of expensive ruin to you for thirty full seconds.\"",
         "\"Thirty?\" Camille says. \"You're low.\"",
         "That stops the room because even Camille seems faintly surprised she said it aloud.",
-        "Piper recovers first, delighted. \"Oh, huge day for me. Not only am I alive, Fairchild is doing comparative thirst math in the kitchen.\"",
+        "Piper recovers first, delighted. \"Oh, huge day for me. Not only am I alive, Fairchild is doing comparative priority math in the kitchen.\"",
         "Camille takes the mug Jordan just set down, drinks from it without asking, and says, \"You remain exhausting.\"",
         "Jordan, deeply betrayed, says, \"That was my good mug.\"",
         "\"Then protect it better.\"",
@@ -9454,7 +9454,7 @@
         "\"Do you know what Aegis is very good at?\" she asks.",
         "\"Documentation?\" ",
         "\"No. Documentation is a symptom. Aegis is very good at convincing frightened capable people that being legible to power is the same thing as being safe inside it. Sometimes that is true. Often enough to keep the machine moral in its own reflection. Not often enough to relax around it.\" ",
-        "The stairwell light is ugly and does her no favors; somehow that makes the moment feel more intimate, not less. There is no performance surface here. No audience. No tactical room-reading to hide inside. Just the fact that she came looking for you with a pen, a warning, and more emotional exposure than she would ever call it by name.",
+        "The stairwell light is ugly and does her no favors; somehow that makes the moment feel more private, not less. There is no performance surface here. No audience. No tactical room-reading to hide inside. Just the fact that she came looking for you with a pen, a warning, and more emotional exposure than she would ever call it by name.",
         "\"Why this one?\" you ask quietly, lifting the contract. \"Why me?\" ",
         "She should have an easy answer. Operational prudence. Team continuity. Future risk mitigation. Instead she goes still in a way that means the easier answers were available and discarded.",
         "\"Because,\" she says, and stops. Starts again. \"Because you are very good at making dangerous futures sound temporary. It would be inconvenient if I let you do that without opposition.\" ",
@@ -9540,7 +9540,7 @@
         "\"Tell me honestly,\" he says, lifting a charcoal shirt from the chair. \"Does choosing what version of yourself deserves to survive graduation count as growth, or merely vanity with a clipboard?\" ",
         "\"With you? Both.\" ",
         "He laughs, grateful in a way he does not try very hard to hide. The joke leaves a thin clean silence behind it. Outside, the hall carries the muffled rhythm of closing drawers and delayed goodbyes. The whole residence wing sounds like adults pretending to organize objects when the real work is deciding which selves can be carried without rupture.",
-        "Julian sits on the edge of the desk instead of the bed. Safer geometry. Less implication. It does nothing to blunt the intimacy. \"I spent a lot of time here learning what kind of visibility felt survivable,\" he says. \"Aegis likes confidence when it photographs well and ambiguity when it can file it under promising but manageable. It has very little patience for a person who is visible on purpose.\" ",
+        "Julian sits on the edge of the desk instead of the bed. Safer geometry. Less implication. It does nothing to blunt the closeness. \"I spent a lot of time here learning what kind of visibility felt survivable,\" he says. \"Aegis likes confidence when it photographs well and ambiguity when it can file it under promising but manageable. It has very little patience for a person who is visible on purpose.\" ",
         "\"And what are you on purpose?\" you ask.",
         "\"More than they budgeted for.\" ",
         "It lands with wit first, truth immediately after. You know enough now to hear both. Julian picks up one cufflink, turns it between thumb and forefinger, and smiles without ease. \"I dislike final nights,\" he says. \"They trick people into performing sincerity so aggressively they forget the gentler version exists.\" ",
@@ -9548,7 +9548,7 @@
         "\"For a very selective market. You, unfortunately, have become eligible.\" ",
         "The room goes smaller around the sentence. Not cramped. Focused. The distance between you now feels like a decision rather than a measurement. Whatever this has been building toward, it is not abstract anymore.",
         "\"You can laugh,\" he says. \"I will survive it beautifully and complain in private.\" ",
-        "There is a version of this conversation he could still turn into theater if he wanted. He could flirt harder, brighten the edges, make the whole thing feel like an exchange of elegant lines between pretty people with time to waste. He doesn't. That restraint does more to reveal him than any confession would. Julian without polish is not less deliberate. He is simply more expensive.",
+        "There is a version of this conversation he could still turn into theater if he wanted. He could banter harder, brighten the edges, make the whole thing feel like an exchange of elegant lines between polished people with time to waste. He doesn't. That restraint does more to reveal him than any confession would. Julian without polish is not less deliberate. He is simply more expensive.",
         "The fact that he offers you the exit so elegantly is almost worse than if he demanded an answer."
       ],
       "choices": [
@@ -9730,7 +9730,7 @@
         "You turn your head. She is smiling again, but this time the smile is a blade she is holding by the right end.",
         "\"I'm serious,\" she says. \"I can do jokes all night, but I'm too tired to pretend I don't want an answer to the real version. Tomorrow changes who gets to assume things about us. I would prefer to get there first.\" ",
         "There it is. No speed to hide in. No mission to use as cover. Just Piper, the city, the roof, and the fact that some feelings become insulting if you keep calling them momentum.",
-        "\"If you want this to be a thrill with great chemistry and terrible planning, say that. If you want friendship with reckless paperwork and no heartbreak, say that. If you want the version where I actually let it matter, then don't make me infer it from exit routes.\" ",
+        "\"If you want this to be a thrill with great rapport and terrible planning, say that. If you want friendship with reckless paperwork and no heartbreak, say that. If you want the version where I actually let it matter, then don't make me infer it from exit routes.\" ",
         "She reaches for the can again and misses it slightly before correcting. Anyone else would not notice. You do, because Piper's body has always been too exact for clumsy motion to mean nothing. The fear is real then, unmistakably. Not fear of you. Fear of naming something and having the naming make it vulnerable to daylight. Piper, who would rather hit a wall at Mach speed than stand still long enough to be interpreted, is giving you stillness on purpose.",
         "Nothing about the ask is casual. Nothing about it is manipulative either. She is not cornering you. She is refusing to run a half-truth into graduation because speed made it easy. It is one of the bravest things you have ever seen her do."
       ],
@@ -9884,7 +9884,7 @@
         "\"Oh, it is deeply unhealthy. I'm not endorsing it. I'm curating around it.\" Their grin softens. \"I'm telling you because people are already writing the summary version in their heads, and summary versions are where everyone gets flattened into the role that made other people comfortable.\" ",
         "Jordan leans back, studies you without cruelty, and adds, \"You don't actually belong in a summary. Which is great for you and terrible for anyone trying to keep score.\" ",
         "\"So what's the warning?\" you ask.",
-        "\"Don't leave here by accident,\" they say immediately. \"Not emotionally. Not narratively. If there's something you mean to say to one of them, say it before distance turns everybody noble and stupid. Friendship counts, by the way. People forget that because romance photographs better.\" ",
+        "\"Don't leave here by accident,\" they say immediately. \"Not emotionally. Not narratively. If there's something you mean to say to one of them, say it before distance turns everybody noble and reckless. Friendship counts, by the way. People forget that because labels photograph better.\" ",
         "They nudge the candy bowl toward you. \"Also, if you hurt any of my favorites in a way I could have forecast from body language alone, I reserve the right to become artistically unbearable about it.\" "
       ],
       "choices": [
@@ -10017,13 +10017,13 @@
       "background": "aegis",
       "focus": "Seth",
       "text": [
-        "The med wing at night is all soft light and terrible truths. Daytime makes the place look procedural. Night makes it look intimate by force. A nurse at the front desk nods you through without commentary; by Chapter Nine, even your bad ideas have established precedent.",
+        "The med wing at night is all soft light and terrible truths. Daytime makes the place look procedural. Night makes it look private by force. A nurse at the front desk nods you through without commentary; by Chapter Nine, even your bad ideas have established precedent.",
         "The scan room is half-dark except for the monitor glow and the blue-white strip over the sink. You sit on the exam table in a paper gown that does absolutely nothing for dignity and wait for the machine to finish translating your recent life into visible damage. The room hums. Your pulse answers. Somewhere outside, a cart wheel catches on a seam in the floor and thumps twice before moving on.",
         "When the technician leaves you alone with the printout for a minute, you make the mistake of looking too hard. Stress markers. Healing lag. microtears that never quite got the memo about rest. A body that adapted because it had to, not because adaptation was clean.",
         "There is something clarifying about seeing consequence in grayscale. The story in your head is always more flattering. The body keeps more accurate minutes.",
         "You think about the first day you ended up here because your power wanted too much from ordinary life. You think about the people who saw it happen, the ones who kept seeing after that, the ones who learned the difference between you being dangerous and you being scared. The distinction matters more tonight because tomorrow you stop having an institution whose job includes noticing whether your hands shake after impact.",
         "The door opens softly. Maybe it is a medic. Maybe, if certain flags are live, it is one of the people who has learned the sound of your bad silence. Either way, the moment does not let you pretend your body is only an instrument. It is also the archive of every cost you chose and every cost you misjudged.",
-        "You look down at the printout again. Not with self-pity. With the steadier dread of understanding that power always asks for an accountant eventually. The thought should push you toward caution. Somehow it also makes you fiercer about not spending yourself stupidly on futures that do not deserve the bill.",
+        "You look down at the printout again. Not with self-pity. With the steadier dread of understanding that power always asks for an accountant eventually. The thought should push you toward caution. Somehow it also makes you fiercer about not spending yourself carelessly on futures that do not deserve the bill.",
         "When you dress again, slower than usual, it occurs to you that this is one of the last rooms in Aegis where nobody expects you to posture. There is a kind of mercy in that. There is also a kind of grief."
       ],
       "choices": [
@@ -10234,7 +10234,7 @@
         "\"You looked for me first,\" she says suddenly.",
         "\"You were at the exit.\"",
         "\"Deflection noted. Not accepted.\" Her voice softens before she can stop it. \"You looked for me first.\"",
-        "The sentence is not about logistics and both of you know it. Whatever has been building between you - friendship sharpened to loyalty, attraction sharpened to danger, the possibility of something steadier than either of you trusted early on - it is standing in the doorway with you now. Piper leans her head back against the frame and laughs once without humor. \"I hate being easy to read. You're rude for learning the language.\"",
+        "The sentence is not about logistics and both of you know it. Whatever has been building between you - friendship sharpened to loyalty, affinity sharpened to danger, the possibility of something steadier than either of you trusted early on - it is standing in the doorway with you now. Piper leans her head back against the frame and laughs once without humor. \"I hate being easy to read. You're rude for learning the language.\"",
         "You could keep this playful. You could keep it survivable. You could also decide that on the morning everything becomes official, she deserves an answer not built entirely out of evasive charm."
       ],
       "choices": [
@@ -10299,7 +10299,7 @@
         "She hears you before you stop beside her. \"You took longer than I expected,\" she says.",
         "\"Good morning to you too.\"",
         "\"That was good morning. My usual version has less patience and worse posture.\" She glances at you then, quick and exact, and the severity softens by a degree that would be invisible to anyone who has not spent months earning the right to notice it. \"You look awake. I didn't know whether to classify that as discipline or malpractice.\"",
-        "The ocean beyond the wall keeps throwing white light into the rail. Everything about the morning is brighter than the emotional reality deserves. Camille folds the paperwork once, aligning the corners with unnecessary precision, then sets it aside. That gesture by itself is intimate in her vocabulary. Choosing not to hold a task between herself and another person is practically a confession.",
+        "The ocean beyond the wall keeps throwing white light into the rail. Everything about the morning is brighter than the emotional reality deserves. Camille folds the paperwork once, aligning the corners with unnecessary precision, then sets it aside. That gesture by itself is private in her vocabulary. Choosing not to hold a task between herself and another person is practically a confession.",
         "\"I have revised three of the contractor clauses they plan to hand out after the speeches,\" she says. \"Two of the hero-track waivers. And one sponsorship packet that should probably be prosecuted on aesthetic grounds alone.\"",
         "\"You did legal triage before breakfast?\"",
         "\"No. During.\" The corner of her mouth threatens an expression and decides against it. \"You all keep mistaking graduation for release. It is negotiation. Some of you are going to need help remembering that when flattery gets expensive.\"",
@@ -10373,7 +10373,7 @@
         "People move around you in waves - parents, donors, lower-level staff, graduates trying to look unstartled by their own formal clothes. Julian barely notices any of them. Or rather: he notices all of them and dismisses them as nonessential in the same motion. The only social performance he is truly interested in right now is yours and his, stripped to the draft version before the day edits it.",
         "\"I dislike ceremonies,\" he says more quietly, straightening the stack without looking at it. \"Not because they're artificial. I love artificial things. Properly done, artifice is simply honesty with tailoring. I dislike ceremonies because they tempt people to confuse applause with witness.\"",
         "\"And you're worried about which one this is?\"",
-        "\"I am worried,\" he says, and then smiles because the naked admission seems to offend him less than expected, \"that once we all become very official in public, some things will become harder to say in private without sounding like delayed performance reviews.\" He takes the booklet back, folds it once, and lets it rest against his wrist. \"I would prefer not to become one of your tasteful regrets.\"",
+        "\"I am worried,\" he says, and then smiles because the plain admission seems to offend him less than expected, \"that once we all become very official in public, some things will become harder to say in private without sounding like delayed performance reviews.\" He takes the booklet back, folds it once, and lets it rest against his wrist. \"I would prefer not to become one of your tasteful regrets.\"",
         "The line is light on paper and devastating in person. Julian glances past you toward the hall and then back again, giving you the clean version of his attention. No stage lights. No audience he is playing to. Just the curated person and the uncurated feeling sharing a body a little too transparently for his comfort. There is something almost brave in the elegance of it. He is still himself. He is simply not hiding the risk.",
         "You remember how easy it would have been, early on, to mistake him for surface. That mistake is impossible now. Julian has always understood room tone, status tension, beauty, and shame better than most people in the building. What he asks for today is not to be admired for that. It is to be answered as a person rather than used as a mood.",
         "The admin lights are terrible. They flatten the air and make everyone look more tired than they meant to reveal. Somehow that helps. There is no glamour excuse here. If you answer him, you answer him without flattering conditions."
@@ -10438,7 +10438,7 @@
       "text": [
         "Theo is at the far edge of the courtyard overlook where the stone wall drops low enough for the sea to claim more of the horizon. His program is folded into his back pocket instead of being read, which is how you know he has already wrung every useful pattern out of it and found none capable of reducing the real problem. He is holding a paper cup of coffee with both hands, not because it is cold but because it gives his hands a job while his brain does too many of them at once.",
         "When you step beside him, he gives you the tiniest visible exhale. \"Good,\" he says. \"You exist in approximately the place I expected. That helps.\"",
-        "\"That's romantic.\"",
+        "\"That's precise.\"",
         "\"I'm having a vulnerable morning. Please don't weaponize sarcasm at me until I've had more caffeine.\" The dryness lands cleaner because he is not entirely joking. Theo looks more composed than he did in the first weeks, but graduation has a way of stripping people back to their original tells. His are all present: the careful stillness, the overworked honesty, the sense that every sentence has been considered against three likely futures before release.",
         "The ocean wind catches at the paper cup. He adjusts his grip and stares out at the water long enough that you could rescue him from the silence if you wanted. You don't. Theo notices and smiles in a way that is almost private. \"Thank you,\" he says.",
         "\"For what?\"",
@@ -10573,7 +10573,7 @@
       "background": "aegis",
       "focus": "Jordan",
       "text": [
-        "The admin balcony above the atrium is one of Jordan's preferred perches: enough height to read a room, enough distance that nobody can accuse them of causing the gossip they are clearly cataloging. They are leaning against the railing with a paper cup and an expression balanced perfectly between amused and merciful.",
+        "The admin balcony above the atrium is one of Jordan's preferred perches: enough height to read a room, enough distance that nobody can accuse them of causing the rumor they are clearly cataloging. They are leaning against the railing with a paper cup and an expression balanced perfectly between amused and merciful.",
         "\"You look like a person who just got assigned a future by committee,\" they say as you approach.",
         "\"You say that like it's visible.\"",
         "\"Everything is visible today. That's the problem with ceremonies. They lower the ambient noise and call it closure.\" Jordan glances down at the atrium, where graduates and families are already sorting into the social math that will decide who leaves with whom, who lingers, who pretends not to search for one person before anyone else. \"Relax. I'm not about to narrate your face back to you. I do, however, believe in quality assurance.\"",

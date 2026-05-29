@@ -104,7 +104,7 @@ window.AEGIS_STORY = {
       age: 25,
       pronouns: "they/them",
       power: "Social pattern reading",
-      role: "Selective-hearing gossip engine",
+      role: "Selective-hearing rumor engine",
       portrait: "assets/portraits/jordan.png"
     },
     Rina: {
@@ -567,7 +567,7 @@ window.AEGIS_STORY = {
           text: "\"Waiting for the post-test review, Lane?\"",
           effects: [
             { type: "relationship", key: "Piper", delta: 2 },
-            { type: "flag", key: "flirtPiperBaseline", value: true }
+            { type: "flag", key: "teasedPiperBaseline", value: true }
           ],
           next: "c02_lecture_choice"
         },
@@ -872,7 +872,7 @@ window.AEGIS_STORY = {
       text: [
         "The Rusty Anchor is weathered wood, salt air, local beer, and enough Aegis residents pretending they are normal adults to qualify as theater.",
         "Piper leans across the table. \"Tomorrow, Camille is going to push whatever instinct you trust most. What's the actual plan?\"",
-        "Jordan waits with the solemn curiosity of a man who knows the gossip value of a good answer."
+        "Jordan waits with the solemn curiosity of a man who knows the rumor value of a good answer."
       ],
       choices: [
         {
@@ -1198,11 +1198,11 @@ window.AEGIS_STORY = {
       focus: "Piper",
       text: [
         "Later, the campus is quiet enough that every footstep sounds like a decision. Piper walks beside you, electric energy tucked under warm honesty.",
-        "She is fun, yes. Chaos, yes. But her place in your life is not fixed by momentum alone. It will be shaped by what you choose to make true."
+        "She is fun, yes. Unpredictable, yes. But her place in your life is not fixed by momentum alone. It will be shaped by what you choose to make true."
       ],
       choices: [
         {
-          text: "Lean into the chemistry with Piper. No pretending it is casual.",
+          text: "Name the partnership with Piper instead of leaving it implied.",
           effects: [
             { type: "relationship", key: "Piper", delta: 3 },
             { type: "stat", key: "resolve", delta: 1 },
@@ -1353,7 +1353,7 @@ window.AEGIS_STORY = {
       ],
       choices: [
         {
-          text: "Call across the music: \"The hell do you want?\"",
+          text: "Call across the music: \"What do you want?\"",
           effects: [
             { type: "stat", key: "audacity", delta: 2 },
             { type: "stat", key: "exposure", delta: 1 },
@@ -1673,7 +1673,7 @@ window.AEGIS_STORY = {
         },
         {
           conditions: [{ type: "powerIs", value: "bio" }],
-          text: ["Her adaptations speak in pulse, nerve, blood, and pain. Your power answers in the same language, intimate enough to be terrifying."]
+          text: ["Her adaptations speak in pulse, nerve, blood, and pain. Your power answers in the same language, private enough to be terrifying."]
         },
         {
           conditions: [{ type: "powerIs", value: "tech" }],
@@ -1809,11 +1809,11 @@ window.AEGIS_STORY = {
       variants: [
         {
           conditions: [{ type: "relationshipAtLeast", key: "Ben", value: 3 }],
-          text: ["Ben is waiting outside medical with a steady look and no stupid questions. That kind of normal lands harder than applause."]
+          text: ["Ben is waiting outside medical with a steady look and no reckless questions. That kind of normal lands harder than applause."]
         },
         {
           conditions: [{ type: "relationshipAtLeast", key: "Jordan", value: 3 }],
-          text: ["Jordan catches one look at your face and stops three separate rumors before they grow teeth. For once, gossip works in your favor."]
+          text: ["Jordan catches one look at your face and stops three separate rumors before they grow teeth. For once, rumor works in your favor."]
         },
         {
           conditions: [{ type: "relationshipAtLeast", key: "Rina", value: 2 }],
@@ -1839,14 +1839,14 @@ window.AEGIS_STORY = {
           next: "c08_airbase"
         },
         {
-          text: "\"Don't fuck with us.\" Let the statement stand.",
+          text: "\"Do not mistake us for leverage.\" Let the statement stand.",
           effects: [
             { type: "relationship", key: "Piper", delta: 2 },
             { type: "relationship", key: "Julian", delta: 1 },
             { type: "stat", key: "exposure", delta: 1 },
             { type: "stat", key: "aegisFear", delta: 1 },
             { type: "stat", key: "independentPath", delta: 1 },
-            { type: "flag", key: "dontFuckWithUs", value: true }
+            { type: "flag", key: "stoodFirmTogether", value: true }
           ],
           next: "c08_airbase"
         },
@@ -1991,7 +1991,7 @@ window.AEGIS_STORY = {
         },
         {
           conditions: [{ type: "flag", key: "piperTrustedPartner" }],
-          text: ["Piper frames the airbase test as partnership, not romance: trust, velocity, and the frankly unreasonable confidence that you can hold still when physics tries to file a complaint."]
+          text: ["Piper frames the airbase test as partnership, not a label: trust, velocity, and the frankly unreasonable confidence that you can hold still when physics tries to file a complaint."]
         },
         {
           conditions: [{ type: "flag", key: "rheaErased" }],
@@ -2048,7 +2048,7 @@ window.AEGIS_STORY = {
       ],
       choices: [
         {
-          text: "Start at Mach 2. Prove the baseline before getting stupid.",
+          text: "Start at Mach 2. Prove the baseline before getting reckless.",
           effects: [
             { type: "stat", key: "control", delta: 1 },
             { type: "relationship", key: "Piper", delta: 1 },
@@ -2252,7 +2252,7 @@ window.AEGIS_STORY = {
       variants: [
         {
           conditions: [{ type: "flag", key: "piperRomance" }],
-          text: ["With Piper, the plan feels intimate before it feels strategic. She is not just in the getaway route. She is in the reason you keep testing exits at all."]
+          text: ["With Piper, the plan feels private before it feels strategic. She is not just in the getaway route. She is in the reason you keep testing exits at all."]
         },
         {
           conditions: [{ type: "flag", key: "piperSlowBurn" }],
@@ -2260,7 +2260,7 @@ window.AEGIS_STORY = {
         },
         {
           conditions: [{ type: "flag", key: "piperTrustedPartner" }],
-          text: ["With Piper, the plan feels like a pact between capable people. Trust does not have to be romantic to be dangerous."]
+          text: ["With Piper, the plan feels like a pact between capable people. Trust does not have to fit a label to be dangerous."]
         },
         {
           conditions: [
@@ -2282,7 +2282,7 @@ window.AEGIS_STORY = {
         },
         {
           conditions: [{ type: "flag", key: "julianCommitted" }],
-          text: ["Julian's goodbye lingers behind you like cologne and a dare. Piper notices, files the information for future blackmail, and keeps walking."]
+          text: ["Julian's goodbye lingers behind you like cologne and a dare. Piper notices, files the information for future leverage, and keeps walking."]
         },
         {
           conditions: [
@@ -2684,7 +2684,7 @@ window.AEGIS_STORY = {
             { type: "any", conditions: [
               { type: "statAtLeast", key: "villainPath", value: 3 },
               { type: "statAtLeast", key: "aegisFear", value: 5 },
-              { type: "flag", key: "dontFuckWithUs" }
+              { type: "flag", key: "stoodFirmTogether" }
             ] }
           ],
           effects: [
@@ -2756,7 +2756,7 @@ window.AEGIS_STORY = {
         },
         {
           conditions: [{ type: "flag", key: "piperRomance" }],
-          text: ["Relationship thread: Piper is not simply along for the future. She is emotionally in it with you, bright-eyed and all-in, and the city will learn to read that as either romance, weakness, or warning."]
+          text: ["Relationship thread: Piper is not simply along for the future. She is emotionally in it with you, bright-eyed and all-in, and the city will learn to read that as either commitment, weakness, or warning."]
         },
         {
           conditions: [{ type: "flag", key: "piperSlowBurn" }],
@@ -2813,7 +2813,7 @@ window.AEGIS_STORY = {
         },
         {
           conditions: [{ type: "flag", key: "romanceTension" }],
-          text: ["Romance consequence: More than one heart has a legitimate claim on the truth now. The future does not punish that automatically, but it will punish cowardice if you try to make honesty optional."]
+          text: ["Route consequence: More than one bond has a legitimate claim on the truth now. The future does not punish that automatically, but it will punish cowardice if you try to make honesty optional."]
         },
         {
           conditions: [{ type: "flag", key: "theoBoundaryAccepted" }],
@@ -2844,7 +2844,7 @@ window.AEGIS_STORY = {
           text: ["Known consequence: Rhea's containment proves your restraint is as dangerous as your force. Aegis has a living prisoner and a new reason to study you."]
         },
         {
-          conditions: [{ type: "flag", key: "dontFuckWithUs" }],
+          conditions: [{ type: "flag", key: "stoodFirmTogether" }],
           text: ["Reputation: In the halls of Aegis, your statement becomes shorter every time it is repeated. Do not touch what belongs to the energy sink."]
         }
       ],

@@ -15,18 +15,37 @@ const slotKey = (slot) => `aegis-choice-game:slot:${slot}`;
 const chromePath = findChrome();
 const port = 9300 + Math.floor(Math.random() * 400);
 const profileDir = path.join(buildDir, `chrome-smoke-${port}`);
+const SMOKE_TIMEOUT_MS = Number(process.env.BROWSER_SMOKE_TIMEOUT_MS || 120000);
+let activeChrome = null;
+let activeServer = null;
 
 fs.mkdirSync(buildDir, { recursive: true });
 fs.mkdirSync(profileDir, { recursive: true });
 
-main().catch((error) => {
+run().catch((error) => {
   console.error(error.stack || error.message || error);
   process.exitCode = 1;
 });
 
+async function run() {
+  const watchdog = setTimeout(() => {
+    console.error(`Browser smoke timed out after ${SMOKE_TIMEOUT_MS}ms.`);
+    cleanupRuntime();
+    process.exit(1);
+  }, SMOKE_TIMEOUT_MS);
+
+  try {
+    await main();
+  } finally {
+    clearTimeout(watchdog);
+    cleanupRuntime();
+  }
+}
+
 async function main() {
   if (!global.WebSocket) throw new Error("This smoke test needs a Node runtime with global WebSocket support.");
   const staticServer = await startStaticServer();
+  activeServer = staticServer;
   pageUrl = `http://127.0.0.1:${staticServer.address().port}/index.html`;
   const chrome = spawn(chromePath, [
     "--headless=new",
@@ -38,6 +57,7 @@ async function main() {
     `--user-data-dir=${profileDir}`,
     "about:blank"
   ], { stdio: ["ignore", "pipe", "pipe"] });
+  activeChrome = chrome;
 
   let stderr = "";
   chrome.stderr.on("data", (chunk) => {
@@ -47,18 +67,30 @@ async function main() {
   try {
     await waitForChrome();
     const results = [];
+    console.log("Browser smoke: running mobile viewport checks...");
     results.push(await smokeViewport({ name: "mobile", width: 390, height: 844, mobile: true, exerciseEngine: true }));
+    console.log("Browser smoke: running desktop viewport checks...");
     results.push(await smokeViewport({ name: "desktop", width: 1440, height: 900, mobile: false, exerciseEngine: false }));
     results.forEach((result) => {
       console.log(`${result.name}: viewport ${result.layout.width}x${result.layout.height}, overflow ${result.layout.overflow.length}, dark overflow ${result.dark.layout.overflow.length}, screenshot ${path.relative(root, result.screenshot)}`);
     });
     console.log("Browser smoke: hub vertical slice, old save normalization, autosave, manual save, training, and rest checks passed.");
   } finally {
-    chrome.kill();
-    staticServer.close();
+    cleanupRuntime();
     if (stderr.includes("FATAL")) {
       console.error(stderr.trim());
     }
+  }
+}
+
+function cleanupRuntime() {
+  if (activeChrome) {
+    if (activeChrome.exitCode === null) activeChrome.kill();
+    activeChrome = null;
+  }
+  if (activeServer) {
+    activeServer.close();
+    activeServer = null;
   }
 }
 
@@ -108,7 +140,7 @@ function contentType(filePath) {
 
 async function smokeViewport(viewport) {
   const target = await requestJson(`/json/new?${encodeURIComponent("about:blank")}`, { method: "PUT" });
-  const cdp = await Cdp.connect(target.webSocketDebuggerUrl);
+  const cdp = await withTimeout(Cdp.connect(target.webSocketDebuggerUrl), 10000, `Timed out connecting to ${viewport.name} Chrome target.`);
   const problems = [];
   cdp.onEvent((message) => {
     if (message.method === "Runtime.exceptionThrown") {
@@ -350,13 +382,16 @@ async function exerciseHubVerticalSlice(cdp) {
   }
 
   const hub = await evalValue(cdp, `(() => ({
-    assignmentVisible: !document.querySelector("#assignmentPanel").classList.contains("hidden"),
-    assignmentText: document.querySelector("#assignmentPanel").textContent,
+    assignmentPanelVisible: !document.querySelector("#assignmentPanel").classList.contains("hidden"),
+    assignmentPanelText: document.querySelector("#assignmentPanel").textContent,
+    taskBadgeVisible: !document.querySelector("#sceneTaskBadge").classList.contains("hidden"),
+    taskBadgeText: document.querySelector("#sceneTaskBadge").textContent,
     hubButtons: document.querySelectorAll(".hub-btn").length,
     scene: JSON.parse(localStorage.getItem(${JSON.stringify(autoKey)})).currentScene,
     hub: JSON.parse(localStorage.getItem(${JSON.stringify(autoKey)})).hub
   }))()`);
-  if (!hub.assignmentVisible || !hub.assignmentText.includes("Report To Orientation") || hub.hubButtons < 2 || hub.scene !== "c01_hub_orientation") {
+  const assignmentText = `${hub.assignmentPanelText} ${hub.taskBadgeText}`;
+  if (!assignmentText.includes("Report To Orientation") || hub.hubButtons < 2 || hub.scene !== "c01_hub_orientation") {
     throw new Error(`Hub orientation did not render: ${JSON.stringify(hub)}`);
   }
   const actionToggle = await evalValue(cdp, `(() => {
@@ -409,7 +444,7 @@ async function exerciseHubVerticalSlice(cdp) {
   await clickHubButton(cdp, "Attend orientation");
   await delay(200);
   auto = await readAutoSave(cdp);
-  if (auto.currentScene !== "c01_orientation" || auto.hub.active) {
+  if (auto.hub.active || auto.currentScene === "c01_hub_orientation" || !auto.hub.completedAssignments.c01_report_orientation) {
     throw new Error(`Hub assignment did not enter orientation cleanly: ${auto.currentScene} ${JSON.stringify(auto.hub)}`);
   }
 }
@@ -496,11 +531,20 @@ async function waitForChrome() {
 }
 
 async function requestJson(route, options = {}) {
-  const response = await fetch(`http://127.0.0.1:${port}${route}`, { method: options.method || "GET" });
-  if (!response.ok) {
-    throw new Error(`Chrome request failed ${response.status}: ${await response.text()}`);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+  try {
+    const response = await fetch(`http://127.0.0.1:${port}${route}`, {
+      method: options.method || "GET",
+      signal: controller.signal
+    });
+    if (!response.ok) {
+      throw new Error(`Chrome request failed ${response.status}: ${await response.text()}`);
+    }
+    return response.json();
+  } finally {
+    clearTimeout(timeout);
   }
-  return response.json();
 }
 
 function findChrome() {
@@ -516,6 +560,14 @@ function findChrome() {
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function withTimeout(promise, ms, message) {
+  let timeout;
+  const timer = new Promise((_, reject) => {
+    timeout = setTimeout(() => reject(new Error(message)), ms);
+  });
+  return Promise.race([promise, timer]).finally(() => clearTimeout(timeout));
 }
 
 function isHarshWhite(color) {

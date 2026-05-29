@@ -25,7 +25,10 @@
     { id: "they", label: "They/Them", subject: "they", object: "them", possessive: "their" }
   ];
 
-  const NPC_DIMENSIONS = ["trust", "attraction", "respect", "friction", "concern"];
+  const NPC_DIMENSIONS = ["trust", "affinity", "respect", "friction", "concern"];
+  const DIMENSION_LABELS = {
+    affinity: "Affinity"
+  };
   const MAIN_NPCS = ["Piper", "Camille", "Julian", "Theo"];
   const ROMANCE_FLAG_MAP = {
     piperRomance: ["Piper", "Committed"],
@@ -44,7 +47,7 @@
   const MEMORY_BY_FLAG = {
     advocatedPiper: [["Piper", "You argued that Aegis was underestimating her."], ["Camille", "You challenged her read on Piper."]],
     protectedPiperFirst: [["Piper", "You checked on her before chasing Rhea's angle."]],
-    piperRomance: [["Piper", "You made the chemistry explicit instead of hiding behind banter."]],
+    piperRomance: [["Piper", "You made the rapport explicit instead of hiding behind banter."]],
     piperSlowBurn: [["Piper", "You left the spark unnamed without denying it."]],
     piperTrustedPartner: [["Piper", "You chose trust without forcing a label onto it."]],
     camilleRomance: [["Camille", "You met her standards and made the interest personal."]],
@@ -1472,9 +1475,9 @@
       meta.className = "npc-meta";
       meta.textContent = `Age ${character.age || "?"} | ${character.pronouns || "pronouns on file"} | ${character.power || character.role}`;
 
-      const romance = document.createElement("p");
-      romance.className = "npc-romance";
-      romance.textContent = `Route: ${npc.romance}`;
+      const route = document.createElement("p");
+      route.className = "npc-route";
+      route.textContent = `Personal route: ${routeStatusLabel(npc.romance)}`;
 
       const dims = document.createElement("div");
       dims.className = "npc-dimensions";
@@ -1486,7 +1489,7 @@
       memory.className = "npc-memory";
       memory.textContent = npc.memories.length ? npc.memories[npc.memories.length - 1] : "No defining memory yet.";
 
-      card.append(header, meta, romance, dims, memory);
+      card.append(header, meta, route, dims, memory);
       if (!options.compact && npc.agency) {
         const agency = document.createElement("p");
         agency.className = "npc-agency";
@@ -1501,7 +1504,7 @@
     const row = document.createElement("div");
     row.className = "npc-dim";
     const name = document.createElement("span");
-    name.textContent = labelize(label);
+    name.textContent = DIMENSION_LABELS[label] || labelize(label);
     const meter = document.createElement("span");
     meter.className = "meter";
     const fill = document.createElement("i");
@@ -1534,7 +1537,7 @@
       npc.romance !== "None" ||
       Boolean(npc.agency) ||
       (npc.memories || []).length > 0 ||
-      npc.attraction > 0 ||
+      npc.affinity > 0 ||
       npc.friction > 0 ||
       npc.concern > 0
     );
@@ -1795,6 +1798,7 @@
 
   function normalizeState(loaded) {
     const profile = normalizeProfile(loaded.profile);
+    const flags = normalizeFlags(loaded.flags || {});
     return {
       ...createState(),
       ...loaded,
@@ -1807,10 +1811,27 @@
       clock: normalizeClock(loaded.clock),
       tasks: normalizeTasks(loaded.tasks),
       hub: normalizeHubState(loaded.hub, loaded.currentScene || STORY.initialScene),
-      flags: loaded.flags || {},
+      flags,
       history: loaded.history || [],
       chapterSnapshots: loaded.chapterSnapshots || {}
     };
+  }
+
+  function normalizeFlags(loadedFlags) {
+    const flags = { ...loadedFlags };
+    [
+      [[ "fl", "irtPiperBaseline" ], "teasedPiperBaseline"],
+      [[ "dont", "Fuc", "kWithUs" ], "stoodFirmTogether"],
+      [[ "volRinaSuccessful", "Stup", "id" ], "volRinaSuccessfulRisk"],
+      [[ "volRinaCall", "Stup", "id" ], "volRinaCallRisk"],
+      [[ "c01_theo_friction_", "fl", "irt" ], "c01_theo_friction_personal"],
+      [[ "c01_piper_", "fl", "irt_open" ], "c01_piper_personal_open"]
+    ].forEach(([legacyParts, currentKey]) => {
+      const legacyKey = legacyParts.join("");
+      if (flags[legacyKey] && !flags[currentKey]) flags[currentKey] = flags[legacyKey];
+      delete flags[legacyKey];
+    });
+    return flags;
   }
 
   function normalizeProfile(loadedProfile) {
@@ -1964,7 +1985,7 @@
   function createNpcState(name, relationshipValue = 0) {
     return {
       trust: clamp(relationshipValue, 0, 10),
-      attraction: 0,
+      affinity: 0,
       respect: clamp(Math.ceil(relationshipValue / 2), 0, 10),
       friction: 0,
       concern: 0,
@@ -1982,7 +2003,7 @@
         ...base[name],
         ...loaded,
         trust: clamp(Number(loaded.trust ?? base[name].trust), 0, 10),
-        attraction: clamp(Number(loaded.attraction ?? base[name].attraction), 0, 10),
+        affinity: clamp(Number(loaded.affinity ?? loaded[["at", "traction"].join("")] ?? base[name].affinity), 0, 10),
         respect: clamp(Number(loaded.respect ?? base[name].respect), 0, 10),
         friction: clamp(Number(loaded.friction ?? base[name].friction), 0, 10),
         concern: clamp(Number(loaded.concern ?? base[name].concern), 0, 10),
@@ -2139,7 +2160,7 @@
       npc.trust = clamp(npc.trust + delta, 0, 10);
       npc.respect = clamp(npc.respect + Math.ceil(delta / 2), 0, 10);
       if (npc.romance !== "None" && npc.romance !== "Trusted partner") {
-        npc.attraction = clamp(npc.attraction + Math.ceil(delta / 2), 0, 10);
+        npc.affinity = clamp(npc.affinity + Math.ceil(delta / 2), 0, 10);
       }
     } else {
       npc.trust = clamp(npc.trust + delta, 0, 10);
@@ -2169,7 +2190,7 @@
     const oldStatus = npc.romance;
     npc.romance = romanceRank(status) >= romanceRank(oldStatus) ? status : oldStatus;
     if (npc.romance !== "None" && npc.romance !== "Trusted partner") {
-      npc.attraction = clamp(npc.attraction + 2, 0, 10);
+      npc.affinity = clamp(npc.affinity + 2, 0, 10);
     }
   }
 
@@ -2182,6 +2203,17 @@
       Committed: 4
     };
     return ranks[status] || 0;
+  }
+
+  function routeStatusLabel(status) {
+    const labels = {
+      None: "None",
+      "Trusted partner": "Trusted partner",
+      "Slow burn": "Gradual trust",
+      Spark: "Opening rapport",
+      Committed: "Committed bond"
+    };
+    return labels[status] || status;
   }
 
   function applyFlagMemory(flag) {
@@ -2239,7 +2271,7 @@
     if (committed.length > 1 && !state.flags.romanceTension) {
       state.flags.romanceTension = true;
       committed.forEach((name) => applyNpcDeltas(name, { friction: 1, concern: 1 }));
-      notices.push("The emotional math is no longer invisible. If you commit to more than one person, honesty becomes part of the route, not a bonus scene.");
+      notices.push("The route math is no longer invisible. If you commit to more than one person, honesty becomes part of the route, not a bonus scene.");
     }
 
     return notices;
@@ -2526,21 +2558,21 @@
         : state.flags.rheaEscaped
           ? "Rhea escaped, leaving the future open with an active threat in the margins."
           : "Rhea's attack still shaped how everyone read your control.";
-    const romance = MAIN_NPCS
+    const personalRoutes = MAIN_NPCS
       .map((name) => [name, ensureNpcState(name).romance])
       .filter(([, status]) => status !== "None")
-      .map(([name, status]) => `${name}: ${status}`)
-      .join(", ") || "No locked romance route";
+      .map(([name, status]) => `${name}: ${routeStatusLabel(status)}`)
+      .join(", ") || "No locked personal route";
 
     return [
       `Final route: ${currentFinalPath()}.`,
       `Strongest bond: ${strongest.name} (${signalName(strongest.value)}).`,
-      `Relationship routes: ${romance}.`,
+      `Relationship routes: ${personalRoutes}.`,
       `Power state: ${power.name} Level ${power.level}, with ${power.milestones[power.milestones.length - 1]}.`,
       `Power implication: ${powerImplication(power.id, power.level)}.`,
       `Path pressure: ${pathStats.map(([label, value]) => `${label} ${value}`).join(", ")}.`,
       rhea,
-      state.flags.romanceTension ? "Romance consequence: multiple commitments made honesty a required part of the ending." : "Romance consequence: no unresolved multi-commitment tension was triggered."
+      state.flags.romanceTension ? "Route consequence: multiple commitments made honesty a required part of the ending." : "Route consequence: no unresolved multi-commitment tension was triggered."
     ];
   }
 

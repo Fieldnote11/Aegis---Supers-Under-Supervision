@@ -302,7 +302,7 @@
           text: "Trade them one honest fear for one honest rumor.",
           effects: [
             { type: "relationship", key: "Jordan", delta: 1 },
-            { type: "npc", key: "Jordan", trust: 1, concern: 1, memory: "You paid for gossip with truth instead of pretending you had none." },
+            { type: "npc", key: "Jordan", trust: 1, concern: 1, memory: "You paid for rumor with truth instead of pretending you had none." },
             { type: "flag", key: "metJordan", value: true },
             { type: "flag", key: "tradedJordanFear", value: true }
           ],
@@ -994,7 +994,7 @@
           "This is the kind of room where unofficial alliances start as jokes."
         ],
         returnDescription: [
-          "The common lounge has settled into its own gravity: couches, gossip, careful distance, and people deciding who is worth a second conversation."
+          "The common lounge has settled into its own gravity: couches, rumor, careful distance, and people deciding who is worth a second conversation."
         ],
         exits: [
           "intake_hall",
@@ -1954,7 +1954,7 @@
     {
       id: "c05-dock-checkin",
       label: "Talk before the dock goes loud",
-      detail: "The team is loose in the way people get before doing something stupid on purpose.",
+      detail: "The team is loose in the way people get before doing something reckless on purpose.",
       once: true,
       hidden: true,
       conditions: [{ type: "chapterAtLeast", value: 5 }, { type: "chapterBefore", value: 6 }],
@@ -2181,7 +2181,7 @@
   ], [
     hubChoice("Ask Piper what she does when the bad idea is also the right one.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", trust: 1, attraction: 1, memory: "At the dock, you asked Piper about the difference between reckless and necessary." },
+      { type: "npc", key: "Piper", trust: 1, affinity: 1, memory: "At the dock, you asked Piper about the difference between reckless and necessary." },
       { type: "stat", key: "independentPath", delta: 1 },
       { type: "flag", key: "c05PiperBadIdeaTalk", value: true }
     ], "c05_hub_dock"),
@@ -2205,7 +2205,7 @@
   ], [
     hubChoice("Ask Julian which mask he wears when everyone else is also performing.", [
       { type: "relationship", key: "Julian", delta: 1 },
-      { type: "npc", key: "Julian", trust: 1, attraction: 1, memory: "At Event Horizon, you asked Julian which performance was actually armor." },
+      { type: "npc", key: "Julian", trust: 1, affinity: 1, memory: "At Event Horizon, you asked Julian which performance was actually armor." },
       { type: "flag", key: "c06JulianMaskTalk", value: true }
     ], "c06_hub_event"),
     hubChoice("Ask Kaito what neutral ground costs when nobody calls it a price.", [
@@ -2251,7 +2251,7 @@
   ], [
     hubChoice("Ask Piper what she needs from you if the joke drops out from under her.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", trust: 1, attraction: 1, memory: "Before Mach Five, you asked Piper what she needed when humor stopped holding." },
+      { type: "npc", key: "Piper", trust: 1, affinity: 1, memory: "Before Mach Five, you asked Piper what she needed when humor stopped holding." },
       { type: "stat", key: "restraint", delta: 1 },
       { type: "flag", key: "c08PiperNeedsTalk", value: true }
     ], "c08_hub_airbase"),
@@ -2275,12 +2275,12 @@
   ], [
     hubChoice("Stop with Camille and ask what honesty costs after graduation.", [
       { type: "relationship", key: "Camille", delta: 1 },
-      { type: "npc", key: "Camille", trust: 1, attraction: 1, memory: "On the last night, you asked Camille what honesty would cost after Aegis." },
+      { type: "npc", key: "Camille", trust: 1, affinity: 1, memory: "On the last night, you asked Camille what honesty would cost after Aegis." },
       { type: "flag", key: "c09CamilleHonestyCost", value: true }
     ], "c09_hub_graduation_eve"),
     hubChoice("Let Julian turn the hallway into a joke until he says the real part.", [
       { type: "relationship", key: "Julian", delta: 1 },
-      { type: "npc", key: "Julian", trust: 1, attraction: 1, memory: "On the last night, you stayed through Julian's joke until the real answer arrived." },
+      { type: "npc", key: "Julian", trust: 1, affinity: 1, memory: "On the last night, you stayed through Julian's joke until the real answer arrived." },
       { type: "flag", key: "c09JulianRealPart", value: true }
     ], "c09_hub_graduation_eve"),
     hubChoice("Ask Theo which item on the checklist scares him most.", [
@@ -2478,7 +2478,7 @@
     { type: "status", key: "condition", value: "Banged up, furious" }
   ]);
 
-  addChoiceEffects("c08_airbase", "Start at Mach 2. Prove the baseline before getting stupid.", [
+  addChoiceEffects("c08_airbase", "Start at Mach 2. Prove the baseline before getting reckless.", [
     { type: "status", key: "condition", value: "Stable, impact sore" },
     { type: "status", key: "lastFight", value: "Mach 2 catch" }
   ]);
@@ -2539,7 +2539,7 @@
     ], "c03_hub_return_common"),
     hubChoice("Offer a bad joke with an exit built into it.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", attraction: 1, trust: 1, memory: "You gave Piper humor that did not trap her inside the performance." },
+      { type: "npc", key: "Piper", affinity: 1, trust: 1, memory: "You gave Piper humor that did not trap her inside the performance." },
       { type: "stat", key: "audacity", delta: 1 },
       { type: "flag", key: "c03PiperExitJoke", value: true }
     ], "c03_hub_return_common"),
@@ -2576,7 +2576,7 @@
 
   addChoiceScene("c03_chat_rina_scoreboard", 3, "Rina, Scoreboard Mercy", "Training Wing", "sim", "Rina", [
     "Rina stands under the training-wing scoreboard with her arms folded, studying numbers that are not hers with the intensity of someone planning to defeat them anyway.",
-    "\"They should not post half this data,\" she says. \"Unless the goal is making everyone stupid.\""
+    "\"They should not post half this data,\" she says. \"Unless the goal is making everyone reckless.\""
   ], [
     hubChoice("Ask what number she trusts least.", [
       { type: "relationship", key: "Rina", delta: 1 },
@@ -2606,9 +2606,9 @@
       { type: "stat", key: "exposure", delta: 1 },
       { type: "flag", key: "c03JordanPaperWeather", value: true }
     ], "c03_hub_return_admin"),
-    hubChoice("Ask Jordan what gossip should never be used for.", [
+    hubChoice("Ask Jordan what rumor should never be used for.", [
       { type: "relationship", key: "Jordan", delta: 1 },
-      { type: "npc", key: "Jordan", respect: 1, memory: "You asked Jordan about restraint inside the gossip network." },
+      { type: "npc", key: "Jordan", respect: 1, memory: "You asked Jordan about restraint inside the rumor network." },
       { type: "stat", key: "restraint", delta: 1 },
       { type: "flag", key: "c03JordanGossipEthics", value: true }
     ], "c03_hub_return_admin"),
@@ -2647,7 +2647,7 @@
   ], [
     hubChoice("Ask what she wants to stop for, not just stop before.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", trust: 1, attraction: 1, memory: "You asked Piper what was worth stopping for." },
+      { type: "npc", key: "Piper", trust: 1, affinity: 1, memory: "You asked Piper what was worth stopping for." },
       { type: "flag", key: "c04PiperStopFor", value: true }
     ], "c04_hub_return_courtyard"),
     hubChoice("Offer to time slow laps instead of fast ones.", [
@@ -2679,7 +2679,7 @@
     ], "c04_hub_return_common"),
     hubChoice("Help him turn the bad light into a room-wide bit.", [
       { type: "relationship", key: "Julian", delta: 1 },
-      { type: "npc", key: "Julian", attraction: 1, trust: 1, memory: "You helped Julian make a room laugh without demanding sincerity first." },
+      { type: "npc", key: "Julian", affinity: 1, trust: 1, memory: "You helped Julian make a room laugh without demanding sincerity first." },
       { type: "stat", key: "audacity", delta: 1 },
       { type: "flag", key: "c04JulianLightBit", value: true }
     ], "c04_hub_return_common")
@@ -2754,12 +2754,12 @@
   ]);
 
   addChoiceScene("c06_chat_piper_promenade", 6, "Piper, Dress Shoes And Escape Routes", "Blackwater Promenade", "city", "Piper", [
-    "Piper has dressed for the Event Horizon like someone dared her to prove tactical can flirt with expensive. She is still wearing shoes she could run in.",
+    "Piper has dressed for the Event Horizon like someone dared her to prove tactical can banter with expensive. She is still wearing shoes she could run in.",
     "\"Never trust an outfit you cannot flee in,\" she says. \"That is culture.\""
   ], [
     hubChoice("Ask whether she wants to flee tonight or stay for once.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", trust: 1, attraction: 1, memory: "Before Event Horizon, you asked Piper whether she wanted to flee or stay." },
+      { type: "npc", key: "Piper", trust: 1, affinity: 1, memory: "Before Event Horizon, you asked Piper whether she wanted to flee or stay." },
       { type: "flag", key: "c06PiperStayOrFlee", value: true }
     ], "c06_hub_return_prom"),
     hubChoice("Compliment the exit strategy, not the outfit.", [
@@ -2814,7 +2814,7 @@
       { type: "flag", key: "c06CamilleUsefulMyth", value: true }
     ], "c06_hub_return_anchor"),
     hubChoice("Ask whether she ever gets tired of seeing the weak point first.", [
-      { type: "npc", key: "Camille", trust: 1, attraction: 1, memory: "You asked Camille about the cost of always seeing the weak point first." },
+      { type: "npc", key: "Camille", trust: 1, affinity: 1, memory: "You asked Camille about the cost of always seeing the weak point first." },
       { type: "flag", key: "c06CamilleWeakPointCost", value: true }
     ], "c06_hub_return_anchor")
   ]);
@@ -2830,7 +2830,7 @@
     ], "c07_hub_return_medical"),
     hubChoice("Ask what she needs people to stop assuming.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", respect: 1, memory: "You asked Piper what assumption she wanted killed first." },
+      { type: "npc", key: "Piper", respect: 1, memory: "You asked Piper what assumption she wanted removed first." },
       { type: "stat", key: "resolve", delta: 1 },
       { type: "flag", key: "c07PiperBadAssumption", value: true }
     ], "c07_hub_return_medical"),
@@ -2904,7 +2904,7 @@
     ], "c08_hub_airbase"),
     hubChoice("Tell her specific apologies still need someone brave enough to make them.", [
       { type: "relationship", key: "Camille", delta: 1 },
-      { type: "npc", key: "Camille", attraction: 1, trust: 1, memory: "You told Camille her specific abort plans still needed brave execution." },
+      { type: "npc", key: "Camille", affinity: 1, trust: 1, memory: "You told Camille her specific abort plans still needed brave execution." },
       { type: "flag", key: "c08CamilleSpecificApology", value: true }
     ], "c08_hub_airbase")
   ]);
@@ -2984,7 +2984,7 @@
   ], [
     hubChoice("Ask what she wants the first step after Aegis to be.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", trust: 1, attraction: 1, memory: "On graduation eve, you asked Piper what her first step after Aegis should be." },
+      { type: "npc", key: "Piper", trust: 1, affinity: 1, memory: "On graduation eve, you asked Piper what her first step after Aegis should be." },
       { type: "flag", key: "c09PiperFirstStep", value: true }
     ], "c09_hub_return_rooftop"),
     hubChoice("Tell her cliffs are easier with someone calling distance.", [
@@ -3038,8 +3038,8 @@
       { type: "stat", key: "restraint", delta: 1 },
       { type: "flag", key: "c09JordanTiredStory", value: true }
     ], "c09_hub_return_lounge"),
-    hubChoice("Tell them memory is allowed to be messy.", [
-      { type: "npc", key: "Jordan", respect: 1, memory: "You told Jordan that messy memory was not failure." },
+    hubChoice("Tell them memory is allowed to be complicated.", [
+      { type: "npc", key: "Jordan", respect: 1, memory: "You told Jordan that complicated memory was not failure." },
       { type: "stat", key: "foundationPath", delta: 1 },
       { type: "flag", key: "c09JordanMessyMemory", value: true }
     ], "c09_hub_return_lounge")
@@ -3056,7 +3056,7 @@
     ], "c09_hub_graduation_eve"),
     hubChoice("Tell her a rival who learns is harder to beat.", [
       { type: "relationship", key: "Rina", delta: 1 },
-      { type: "npc", key: "Rina", attraction: 1, respect: 1, memory: "You told Rina that learning made her harder to beat." },
+      { type: "npc", key: "Rina", affinity: 1, respect: 1, memory: "You told Rina that learning made her harder to beat." },
       { type: "stat", key: "audacity", delta: 1 },
       { type: "flag", key: "c09RinaLearnsHarder", value: true }
     ], "c09_hub_graduation_eve"),
@@ -3073,7 +3073,7 @@
   ], [
     hubChoice("Ask what answer she would trust from you.", [
       { type: "relationship", key: "Camille", delta: 1 },
-      { type: "npc", key: "Camille", trust: 1, attraction: 1, memory: "Before graduation, you asked Camille what answer she would trust." },
+      { type: "npc", key: "Camille", trust: 1, affinity: 1, memory: "Before graduation, you asked Camille what answer she would trust." },
       { type: "flag", key: "c10CamilleTrustedAnswer", value: true }
     ], "c10_hub_return_courtyard"),
     hubChoice("Tell her becoming is still an active verb.", [
@@ -3106,7 +3106,7 @@
     ], "c10_hub_return_admin"),
     hubChoice("Help him vandalize the phrasing without changing the printout.", [
       { type: "relationship", key: "Julian", delta: 1 },
-      { type: "npc", key: "Julian", attraction: 1, trust: 1, memory: "You helped Julian reclaim the ceremony program without actually breaking anything." },
+      { type: "npc", key: "Julian", affinity: 1, trust: 1, memory: "You helped Julian reclaim the ceremony program without actually breaking anything." },
       { type: "stat", key: "audacity", delta: 1 },
       { type: "flag", key: "c10JulianProgramVandal", value: true }
     ], "c10_hub_return_admin")
@@ -3118,7 +3118,7 @@
   ], [
     hubChoice("Ask what he wants without letting him answer in percentages.", [
       { type: "relationship", key: "Theo", delta: 1 },
-      { type: "npc", key: "Theo", trust: 1, attraction: 1, memory: "Before graduation, you asked Theo what he wanted without percentages." },
+      { type: "npc", key: "Theo", trust: 1, affinity: 1, memory: "Before graduation, you asked Theo what he wanted without percentages." },
       { type: "flag", key: "c10TheoNoPercentages", value: true }
     ], "c10_hub_return_courtyard"),
     hubChoice("Tell him uncertainty is not a moral failure.", [
@@ -3140,7 +3140,7 @@
   ], [
     hubChoice("Ask if she wants the door open or just wants to know it could be.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", trust: 1, attraction: 1, memory: "Before graduation, you asked Piper whether she wanted the exit or the option." },
+      { type: "npc", key: "Piper", trust: 1, affinity: 1, memory: "Before graduation, you asked Piper whether she wanted the exit or the option." },
       { type: "flag", key: "c10PiperDoorOption", value: true }
     ], "c10_hub_return_hall"),
     hubChoice("Tell her you are staying through the speech, then deciding.", [
@@ -3151,7 +3151,7 @@
     ], "c10_hub_return_hall"),
     hubChoice("Offer to race her nowhere for ten seconds after this is over.", [
       { type: "relationship", key: "Piper", delta: 1 },
-      { type: "npc", key: "Piper", attraction: 1, trust: 1, memory: "You promised Piper a race with no destination after graduation." },
+      { type: "npc", key: "Piper", affinity: 1, trust: 1, memory: "You promised Piper a race with no destination after graduation." },
       { type: "stat", key: "independentPath", delta: 1 },
       { type: "flag", key: "c10PiperRaceNowhere", value: true }
     ], "c10_hub_return_hall")
@@ -3218,7 +3218,7 @@
     ], 2, 60, 2),
     trainingAction("c06-train-power-crowd-suppression", 6, "Train power: crowd-safe output", "Practice low-output control with noise, movement, and distraction layered in.", [
       "The training wing simulates crowd noise badly, which somehow makes it more irritating.",
-      "Your power wants clean conditions. You make it behave in messy ones."
+      "Your power wants clean conditions. You make it behave in complicated ones."
     ], [
       { type: "stat", key: "control", delta: 1 },
       { type: "powerXp", amount: 1 },

@@ -138,7 +138,7 @@ Common conditions:
 - `{ type: "powerLevelAtLeast", value: 4 }`
 - `{ type: "matureContent" }`
 
-`matureContent` gates optional mature presentation, not core plot access. Use it for closed-door romance implication, stronger combat/injury detail, and medical treatment detail; the non-mature route should still explain what happened without graphic body damage.
+`matureContent` is a legacy compatibility flag for optional expanded presentation, not core plot access. Use it for closed-door relationship implication, more detailed combat and recovery text, and medical treatment detail; the standard route should still explain what happened without graphic body damage.
 
 Use `any` when more than one route should unlock the same choice:
 
